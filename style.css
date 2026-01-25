@@ -55,9 +55,9 @@ body {
 .nav-links a {
     text-decoration: none;
     color: var(--dark);
-    margin-left: 24px;
-    font-weight: 600;
-    font-size: 15px; /* diperbesar */
+    margin-left: 18px;
+    font-weight: 500;
+    font-size: 13px; /* diperbesar */
     text-transform: uppercase;
     letter-spacing: 0.8px;
     transition: 0.3s;
@@ -190,9 +190,9 @@ footer {
     }
 
 	.nav-links a {
-		margin: 0 11px;
-		font-size: 11px;   /* sama dengan desktop */
-		font-weight: 400;
+		margin: 0 10px;
+		font-size: 12px;   /* sama dengan desktop */
+		font-weight: 500;
 	}
 
 
@@ -217,7 +217,7 @@ footer {
 /* HP KECIL → 2 KOLOM */
 @media (max-width: 480px) {
     .grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 6px;
     }
 
