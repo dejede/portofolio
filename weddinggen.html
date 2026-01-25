@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dejede — Wedding Post Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">DEJEDE</a>
+        <div class="nav-links">
+            <a href="index.html">Portfolio</a>
+            <a href="weddinggen.html">Weddinggen</a>
+            <a href="schedulegen.html">Schedulegen</a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
+
+<div class="container">
+    <h1>Wedding Post Generator</h1>
+
+    <div class="card">
+        <div class="grid">
+            <div>
+                <label>Format Post</label>
+                <select id="template">
+                    <option value="main">Single Post</option>
+                    <option value="carousel">Carousel (Swipe)</option>
+                    <option value="reels">Reels (Video)</option>
+                </select>
+            </div>
+            <div>
+                <label>Instagram Akun</label>
+                <input id="insta" type="text" value="@dejedephotography" />
+            </div>
+        </div>
+
+        <div class="grid">
+            <div><label>Pengantin 1</label><input id="name1" type="text" placeholder="Nama..." /></div>
+            <div><label>Pengantin 2</label><input id="name2" type="text" placeholder="Nama..." /></div>
+            <div><label>Lokasi</label><input id="location" type="text" placeholder="Lokasi..." /></div>
+            <div><label>Tanggal</label><input id="date" type="date" /></div>
+        </div>
+
+        <div class="vendor-section">
+            <div class="vendor-row"><div class="v-label">DEKORASI</div><div id="vendor_decor_list" class="v-options"></div></div>
+            <div class="vendor-row"><div class="v-label">MUA</div><div id="vendor_mua_list" class="v-options"></div></div>
+            <div class="vendor-row"><div class="v-label">HENNA</div><div id="vendor_henna_list" class="v-options"></div></div>
+            <div class="vendor-row"><div class="v-label">HAIRDOO</div><div id="vendor_hairdoo_list" class="v-options"></div></div>
+            <div class="vendor-row"><div class="v-label">MC</div><div id="vendor_mc_list" class="v-options"></div></div>
+            <div class="vendor-row"><div class="v-label">SUPPORT</div><div id="vendor_support_list" class="v-options"></div></div>
+        </div>
+
+        <div class="grid">
+            <div><label>Kalimat Buka</label><select id="open_custom"><option value="">(Acak)</option></select></div>
+            <div><label>Kalimat Tutup</label><select id="close_custom"><option value="">(Acak)</option></select></div>
+        </div>
+
+        <div class="actions">
+            <button id="generate" class="btn">GENERATE</button>
+            <button id="copy" class="btn btn-alt">COPY</button>
+            <button id="randomize" class="btn btn-alt">SHUFFLE</button>
+            <button id="download" class="btn btn-alt">SAVE TXT</button>
+        </div>
+
+        <label>Preview Caption</label>
+        <div class="preview-area" id="preview">Tekan Generate untuk hasil...</div>
+    </div>
+</div>
+
+<footer>
+    Dejede Photography & Videography • Lumajang • 085236578999
+</footer>
+
+<script>
+const vendorData = {
+  decor: ["@brontosenorusticdecoration","@nafcraft_decoration","@riidwan_ak"],
+  mua: ["@qinabride","@beauty_yoja","@marchel_makeup","@afrilia.istiaris","@rimba_salon","@salonndewi"],
+  henna: ["@sisilliamonica","@zeera_amoora"],
+  hairdoo: ["@mawarmua_hairdo","@fairusbey"],
+  mc: ["@prena.prena.3591","@ramafadholi.official"],
+  support: ["@rafaelbudhy"]
+};
+
+const opens = [
+  "Cinta adalah bahasa sunyi yang hanya dimengerti oleh dua hati.", "Di antara jutaan langkah, takdir menuntun mereka ke arah yang sama.", "Semesta berkonspirasi, mempertemukan dua jiwa dalam satu rasa.", "Setiap detik bersama adalah puisi yang ditulis oleh waktu.", "Ketika dua hati saling memilih, dunia seakan berhenti sejenak.", "Ada senyum yang lahir dari doa panjang dan kesabaran cinta.", "Di matanya, aku melihat masa depan yang tak lagi menakutkan.", "Dalam genggamannya, aku menemukan pulang yang selama ini kucari.", "Cinta tak pernah tergesa, ia datang tepat pada waktunya.", "Hari ini, dua hati bersaksi pada semesta tentang janji yang suci.", "Bukan kebetulan, ini adalah takdir yang diperjuangkan.", "Cinta menjadikan hal sederhana terasa begitu istimewa.", "Dalam diam, cinta tumbuh dan menguat.", "Dua jiwa bertemu, bukan untuk saling melengkapi kekurangan, tapi saling menerima.", "Hari ini adalah perayaan dari perjalanan panjang bernama cinta.", "Ada doa dalam setiap tatapan yang saling menemukan.", "Cinta bukan hanya rasa, tapi keberanian untuk memilih selamanya.", "Saat hati bertemu hati, kata-kata menjadi tak lagi perlu.", "Cinta mengajarkan bahwa rumah bisa berbentuk seseorang.", "Di antara banyak cerita, mereka memilih menulis kisah bersama.", "Hari ini, cinta menemukan namanya.", "Langkah ini bukan awal biasa, tapi awal yang bermakna.", "Dalam pelukan ini, ada janji yang tak terucap namun terasa.", "Cinta datang perlahan, lalu menetap selamanya.", "Dua hati, satu arah, satu tujuan.", "Hari ini, semesta menjadi saksi bisu dari janji abadi.", "Cinta sejati tak berisik, tapi terasa dalam.", "Dalam setiap senyum, tersimpan keyakinan akan masa depan.", "Ini bukan akhir pencarian, ini adalah awal perjalanan.", "Cinta memilih mereka, dan mereka memilih satu sama lain."
+];
+
+const closes = [
+  "Bersama selamanya bukan tentang waktu, tapi tentang komitmen.", "Cinta ini akan dijaga, bahkan saat dunia tak lagi ramah.", "Kita bukan sempurna, tapi kita saling memilih setiap hari.", "Bersamamu, aku belajar arti pulang.", "Janji ini bukan hanya diucapkan, tapi dihidupi.", "Cinta kita akan tumbuh, seiring bertambahnya usia dan doa.", "Dalam setiap musim hidup, aku ingin tetap bersamamu.", "Bahagia adalah namamu yang kusebut dalam doa.", "Cinta ini akan tetap hangat, meski waktu terus berjalan.", "Kita adalah dua jiwa yang Tuhan titipkan satu sama lain.", "Selamanya adalah keputusan yang kita ambil hari ini.", "Bersamamu, dunia terasa cukup.", "Tak ada jarak bagi dua hati yang saling menjaga.", "Cinta ini adalah perjalanan tanpa garis akhir.", "Denganmu, aku tak lagi takut akan esok hari.", "Setiap langkah ke depan, akan kita tempuh bersama.", "Cinta ini adalah doa yang hidup.", "Bersamamu, hidup menemukan maknanya.", "Kita menua bersama, dalam cinta yang sama.", "Tak ada kata akhir untuk kisah yang ditulis dengan doa.", "Hari ini kita memulai, selamanya kita menjaga.", "Cinta ini akan tetap tinggal, meski waktu berlalu.", "Bersamamu adalah rumah yang tak pernah ingin kutinggalkan.", "Kita adalah cerita yang ingin Tuhan lanjutkan.", "Selamanya bukan janji kosong, tapi kesetiaan yang dipilih.", "Cinta ini akan terus belajar dan bertumbuh.", "Denganmu, aku memilih selamanya.", "Ini bukan penutup, ini kelanjutan dari doa panjang.", "Cinta kita akan selalu menemukan jalannya.", "Hari ini, besok, and nanti—aku memilihmu."
+];
+
+function setup() {
+  const populate = (id, list) => {
+    const el = document.getElementById(id);
+    list.forEach(v => {
+      const label = document.createElement('label');
+      label.className = 'v-item';
+      label.innerHTML = `<input type="checkbox" value="${v}"> ${v}`;
+      el.appendChild(label);
+    });
+  };
+  populate('vendor_decor_list', vendorData.decor);
+  populate('vendor_mua_list', vendorData.mua);
+  populate('vendor_henna_list', vendorData.henna);
+  populate('vendor_hairdoo_list', vendorData.hairdoo);
+  populate('vendor_mc_list', vendorData.mc);
+  populate('vendor_support_list', vendorData.support);
+
+  opens.forEach(l => document.getElementById('open_custom').add(new Option(l, l)));
+  closes.forEach(l => document.getElementById('close_custom').add(new Option(l, l)));
+}
+
+function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function generate() {
+  const n1 = document.getElementById('name1').value || '[Nama]';
+  const n2 = document.getElementById('name2').value || '[Nama]';
+  const loc = document.getElementById('location').value || '[Lokasi]';
+  const tpl = document.getElementById('template').value;
+  const insta = document.getElementById('insta').value;
+  const dRaw = document.getElementById('date').value;
+  const dStr = dRaw ? new Date(dRaw).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'}) : '[Tanggal]';
+
+  const getV = (id) => Array.from(document.getElementById(id).querySelectorAll('input:checked')).map(c => c.value).join(', ');
+  
+  const vList = [
+    {l: 'Dekorasi', v: getV('vendor_decor_list')},
+    {l: 'MUA', v: getV('vendor_mua_list')},
+    {l: 'Henna', v: getV('vendor_henna_list')},
+    {l: 'Hairdoo', v: getV('vendor_hairdoo_list')},
+    {l: 'MC', v: getV('vendor_mc_list')},
+    {l: 'Support', v: getV('vendor_support_list')}
+  ].filter(x => x.v !== "").map(x => `${x.l}: ${x.v}`);
+
+  const vBlock = vList.length > 0 ? `\nVendor:\n${vList.join('\n')}` : "";
+  const op = document.getElementById('open_custom').value || rand(opens);
+  const cl = document.getElementById('close_custom').value || rand(closes);
+
+  let msg = (tpl === 'carousel') ? "\nSwipe untuk momen penuh cinta.\n" : (tpl === 'reels' ? "\nWedding Highlight Video.\n" : "\n");
+  
+  const res = `${op}\n\nPernikahan ${n1} & ${n2}\n📍 ${loc} | 📅 ${dStr}\n${msg}\nCaptured by ${insta}\nJl. Kampung Renteng - Purorejo - Tempursari - Lumajang | 085236578999\n${vBlock}\n\n${cl}`;
+  
+  document.getElementById('preview').textContent = res.replace(/\n\n\n/g, '\n\n').trim();
+}
+
+setup();
+document.getElementById('generate').onclick = generate;
+document.getElementById('copy').onclick = () => {
+  navigator.clipboard.writeText(document.getElementById('preview').textContent);
+  alert('Tersalin!');
+};
+document.getElementById('randomize').onclick = () => {
+  document.getElementById('open_custom').value = "";
+  document.getElementById('close_custom').value = "";
+  generate();
+};
+document.getElementById('download').onclick = () => {
+  const blob = new Blob([document.getElementById('preview').textContent], {type: 'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'caption.txt';
+  a.click();
+};
+</script>
+</body>
+</html>
