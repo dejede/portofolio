@@ -365,10 +365,12 @@ footer {
         gap: 0;
     }
 
-    .nav-links a {
-        margin: 0 10px;
-        font-size: 11px;
-    }
+	.nav-links a {
+		margin: 0 12px;
+		font-size: 14px;   /* lebih besar & nyaman */
+		font-weight: 600;
+	}
+
 
     .container {
         margin: 20px auto;
