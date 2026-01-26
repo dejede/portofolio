@@ -2,12 +2,12 @@
    ROOT VARIABLES
    ================================================= */
 :root {
-    --sage: #9caf9a;
-    --sage-dark: #6f8f7a;
-    --dark: #2f3e3a;
-    --light: #f4f7f5;
+    --sage: #798e6d;            /* Sage medium untuk aksen */
+    --sage-dark: #3e5241;       /* Sage gelap untuk kontras tinggi */
+    --dark: #1e2421;            /* Hampir hitam (deep forest) untuk teks */
+    --light: #c3d5ba;           /* Background sage sangat redup */
     --white: #ffffff;
-    --border: #ced4ce;
+    --border: #c5cdc5;          /* Border lebih menyatu dengan sage */
 }
 
 /* =================================================
@@ -34,12 +34,12 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 8%;
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95); /* Sedikit transparan modern */
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 2px solid var(--sage-dark);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border-bottom: 3px solid var(--sage-dark);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
 /* LOGO */
@@ -51,7 +51,7 @@ body {
     font-weight: 800;
     color: var(--sage-dark);
     text-decoration: none;
-    letter-spacing: 3px;
+    letter-spacing: 2px; /* Lebih rapat dan modern */
     transition: color 0.25s ease;
 }
 
@@ -71,7 +71,7 @@ body {
 }
 
 .logo:hover::before {
-    transform: scale(1.08);
+    transform: scale(1.1) rotate(5deg); /* Animasi lebih dinamis */
     filter: brightness(1.15);
 }
 
@@ -85,7 +85,7 @@ body {
     text-decoration: none;
     color: var(--dark);
     margin-left: 18px;
-    font-weight: 500;
+    font-weight: 600; /* Lebih tebal */
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.8px;
@@ -99,7 +99,7 @@ body {
     left: 0;
     bottom: -6px;
     width: 0;
-    height: 2px;
+    height: 3px; /* Lebih tebal */
     background: var(--sage);
     transition: width 0.3s ease;
 }
@@ -146,7 +146,7 @@ h1 {
 .card {
     background: var(--white);
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 20px; /* Lebih bulat modern */
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
@@ -187,7 +187,7 @@ input, select, textarea {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 2px solid #e1e8e1; /* Border lebih soft sage */
     font-size: 15px;
 }
 
