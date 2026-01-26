@@ -426,9 +426,24 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        gap: 12px;
-        padding: 13px 5%;
+        align-items: center;     /* CENTER */
+        gap: 8px;                /* LEBIH RAPAT */
+        padding: 10px 12px;      /* DIPERKETAT */
+        text-align: center;
     }
+
+    .nav-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .nav-links a {
+        margin: 0;
+        font-size: 12px;
+    }
+}
 
     .grid {
         grid-template-columns: repeat(3, 1fr);
@@ -449,3 +464,4 @@ footer {
         padding: 23px 13px;
     }
 }
+
