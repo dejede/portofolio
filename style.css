@@ -495,3 +495,44 @@ footer {
         padding: 23px 13px;
     }
 }
+
+/* Gaya Tombol WA Melayang */
+.floating-wa {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white !important; /* Tambahkan !important agar warna teks tetap putih */
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.floating-wa:hover {
+    background-color: #128c7e;
+    transform: scale(1.05);
+    color: white !important;
+}
+
+.wa-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+@media (max-width: 480px) {
+    .floating-wa span {
+        display: none;
+    }
+    .floating-wa {
+        padding: 12px;
+        border-radius: 50%;
+    }
+}
