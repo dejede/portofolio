@@ -506,7 +506,7 @@ footer {
 /* Mengecilkan navigasi dejede */
     .nav-links a {
         margin: 1;
-        font-size: 9px;
+        font-size: 10px;
     }
 }
 
@@ -883,3 +883,4 @@ footer {
 .navbar a.active:not(.nav-highlight) {
     color: inherit;
 }
+
