@@ -47,20 +47,31 @@
 <input type="text" id="clientName" placeholder="Nama lengkap/panggilan">
 
             <label>Pilih Paket</label>
-            <select id="package">
-			    <option value="1100000">Paket Wedding Photo Standart – 1100K</option>
-				<option value="2500000">Wedding Photo Magazine – 2500K</option>
-				<option value="1700000">Paket Wedding Photo & Video Basic – 1700K</option>
-				<option value="750000">Wedding Photo Akad Basic Limit - 750k</option>
-				<option value="1500000">Video Cynematic – 1500K</option>
-				<option value="700000">Video Basic – 700K</option>
-                <option value="1200000">Engagement Photo & Video Teaser – 1200K</option>
-                <option value="700000">Engagement Photo Only – 700K</option>
-				<option value="600000">Prewedding Studio NON-PAKET – 600K</option>
-				<option value="800000">Prewedding Outdor NON-PAKET – 800K</option>
-				<option value="600000">Tendak Sinten Photo Only – 600K</option>
-				<option value="600000">Ulang Tahun Photo Only – 600K</option>
-            </select>
+<select id="package" name="package">
+    <option value="" disabled selected>-- Pilih Paket --</option>
+
+    <!-- WEDDING PHOTO -->
+	<option value="2500000">Wedding Photo Gold (Magazine)</option>
+    <option value="1100000">Wedding Photo Silver</option>
+<option value="1700000">Wedding Photo & Video Silver 🔥 PROMO (Best Seller)</option>
+    <option value="750000">Wedding Photo Akad Basic</option>
+
+    <!-- ENGAGEMENT -->
+    <option value="1300000">Engagement Photo & Video Teaser</option>
+
+    <!-- VIDEO -->
+    <option value="1500000">Cinematic Video Wedding</option>
+    <option value="700000">Video Dokumentasi Basic</option>
+
+    <!-- PREWEDDING -->
+    <option value="600000">Prewedding Studio (Non-Paket)</option>
+    <option value="800000">Prewedding Outdoor (Non-Paket)</option>
+
+    <!-- EVENT -->
+    <option value="600000">Tedak Sinten Photo</option>
+    <option value="600000">Ulang Tahun Photo</option>
+</select>
+
 
             <label>Tanggal Booking</label>
             <input type="date" id="bookingDate">
@@ -70,6 +81,7 @@
                 <option value="0">Dalam Daerah (lokal Free)</option>
 				<option value="50000">Kaliuling (+50K)</option>
 				<option value="50000">Iburaja (+50K)</option>
+				<option value="50000">Pucungsari (+50K)</option>
                 <option value="50000">Licin (+50K)</option>
 				<option value="100000">Lebakharjo (+100K)</option>
 				<option value="300000">Pronojiwo (+300K)</option>
