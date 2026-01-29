@@ -24,23 +24,24 @@
 
     <div class="container">
         <h1>Dejede Portofolio</h1>
-        <div class="grid">
-            <img src="images/foto1.jpg">
-            <img src="images/foto2.jpg">
-            <img src="images/foto3.jpg">
-            <img src="images/foto4.jpg">
-            <img src="images/foto5.jpg">
-            <img src="images/foto6.jpg">
-			<img src="images/foto7.jpg">
-            <img src="images/foto8.jpg">
-            <img src="images/foto9.jpg">
-            <img src="images/foto10.jpg">
-            <img src="images/foto11.jpg">
-            <img src="images/foto12.jpg">
-			<img src="images/foto13.jpg">
-            <img src="images/foto14.jpg">
-            <img src="images/foto15.jpg">
-        </div>
+<div class="grid">
+    <img src="images/foto1.jpg"  alt="Portfolio 1"  loading="lazy" decoding="async">
+    <img src="images/foto2.jpg"  alt="Portfolio 2"  loading="lazy" decoding="async">
+    <img src="images/foto3.jpg"  alt="Portfolio 3"  loading="lazy" decoding="async">
+    <img src="images/foto4.jpg"  alt="Portfolio 4"  loading="lazy" decoding="async">
+    <img src="images/foto5.jpg"  alt="Portfolio 5"  loading="lazy" decoding="async">
+    <img src="images/foto6.jpg"  alt="Portfolio 6"  loading="lazy" decoding="async">
+    <img src="images/foto7.jpg"  alt="Portfolio 7"  loading="lazy" decoding="async">
+    <img src="images/foto8.jpg"  alt="Portfolio 8"  loading="lazy" decoding="async">
+    <img src="images/foto9.jpg"  alt="Portfolio 9"  loading="lazy" decoding="async">
+    <img src="images/foto10.jpg" alt="Portfolio 10" loading="lazy" decoding="async">
+    <img src="images/foto11.jpg" alt="Portfolio 11" loading="lazy" decoding="async">
+    <img src="images/foto12.jpg" alt="Portfolio 12" loading="lazy" decoding="async">
+    <img src="images/foto13.jpg" alt="Portfolio 13" loading="lazy" decoding="async">
+    <img src="images/foto14.jpg" alt="Portfolio 14" loading="lazy" decoding="async">
+    <img src="images/foto15.jpg" alt="Portfolio 15" loading="lazy" decoding="async">
+</div>
+
     </div>
 <footer>
     Dejede Photography & Videography • Lumajang • 085236578999
@@ -54,6 +55,14 @@ document.querySelectorAll(".has-submenu > a").forEach(link => {
             this.parentElement.classList.toggle("open");
         }
     });
+});
+// percepat loading images
+document.querySelectorAll('.grid img').forEach(img => {
+    if (img.complete) {
+        img.classList.add('loaded');
+    } else {
+        img.addEventListener('load', () => img.classList.add('loaded'));
+    }
 });
 </script>
 
