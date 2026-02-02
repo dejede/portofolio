@@ -3,36 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rundown Acara — Dejede</title>
+  <title>Rundown Generator — Dejede</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-    <!-- FAVICON -->
-  <link rel="icon" href="./favicon/favicon.ico" sizes="any">
-  <!-- (opsional tapi direkomendasikan) -->
-  <link rel="icon" type="favicon/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-  <link rel="icon" type="favicon/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-  <link rel="dejede-icon" href="./favicon/favicon-32x32.png">
-  <!-- Theme color (mobile browser) -->
-  <meta name="theme-color" content="#3e5241">
+  <style>
+    .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+    #previewArea { display: flex; justify-content: center; margin-top: 30px; padding: 20px; background: #d1d1d1; border-radius: 12px; overflow-x: auto; }
+    .table-container { overflow-x: auto; margin-bottom: 20px; }
+    #rundownTable { width: 100%; border-collapse: collapse; background: white; }
+    #rundownTable td, #rundownTable th { border: 1px solid #ddd; padding: 10px; }
+    [contenteditable="true"]:focus { background: #fffbe6; outline: 2px solid #798e6d; }
+    .btn-del { background: #ffeded; color: #b23a3a; border: 1px solid #ffcccc; cursor: pointer; padding: 5px 10px; border-radius: 4px; }
+    .btn-wa { background: #25D366 !important; color: white !important; border: none !important; }
+  </style>
 </head>
 <body>
 
-<!-- NAVBAR- DEJEDE -->
 <nav class="navbar">
     <a href="index.html" class="logo">DEJEDE</a>
     <div class="nav-links">
         <a href="index.html">Home</a>
-		<a href="pristlist.html">pristlist</a>
+        <a href="pricelist.html">Pricelist</a>
         <a href="booking.html">Booking</a>
-		<a href="weddinggen.html" class="nav-highlight">Weddinggen</a>
-		<a href="schedulegen.html" class="nav-highlight active">Schedulegen</a>
-        <a href="about.html">About</a>
+        <a href="weddinggen.html" class="nav-highlight">Weddinggen</a>
+        <a href="schedulegen.html" class="nav-highlight active">Schedulegen</a>
     </div>
 </nav>
 
-
 <div class="container">
-  <h1>Generator Rundown</h1>
+  <h1>Generator Rundown Final</h1>
 
   <div class="card">
     <div class="grid-form">
@@ -42,15 +41,14 @@
           <option value="Pernikahan">Pernikahan</option>
           <option value="Pertunangan">Pertunangan</option>
           <option value="Syukuran">Syukuran</option>
-          <option value="Lainnya">Lainnya</option>
         </select>
       </div>
       <div>
-        <label>Nama Klient</label>
-        <input id="pengantin" type="text" placeholder="Adi & Nina">
+        <label>Nama Klien</label>
+        <input id="pengantin" type="text" placeholder="Contoh: Adi & Nina">
       </div>
       <div>
-        <label>Instagram Klient</label>
+        <label>Instagram Klien</label>
         <input id="igSubject" type="text" placeholder="@id_instagram">
       </div>
     </div>
@@ -62,73 +60,60 @@
       </div>
       <div>
         <label>Lokasi Utama</label>
-        <input id="lokasi" type="text" placeholder="Gedung / Rumah">
+        <input id="lokasi" type="text" placeholder="Contoh: Graha Narawita Agung">
       </div>
     </div>
 
-    <label>Susunan Acara (Klik teks untuk edit)</label>
+    <label>Susunan Acara</label>
     <div class="table-container">
       <table id="rundownTable">
         <thead>
-          <tr>
-            <th style="width: 25%;">Waktu</th>
-            <th>Kegiatan</th>
-            <th style="width: 50px;">Aksi</th>
-          </tr>
+          <tr><th style="width: 25%;">Waktu</th><th>Kegiatan</th><th style="width: 50px;">Aksi</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td contenteditable="true">08.00 WIB</td>
-            <td contenteditable="true">Akad Nikah / Pemberkatan</td>
-            <td><button class="btn-del" onclick="deleteRow(this)">×</button></td>
-          </tr>
-          <tr>
-            <td contenteditable="true">13.00 WIB</td>
-            <td contenteditable="true">Temu Manten / Resepsi</td>
-            <td><button class="btn-del" onclick="deleteRow(this)">×</button></td>
-          </tr>
+          <tr><td contenteditable="true">08.00 WIB</td><td contenteditable="true">Akad Nikah / Pemberkatan</td><td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td></tr>
+          <tr><td contenteditable="true">13.00 WIB</td><td contenteditable="true">Temu Manten</td><td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td></tr>
+          <tr><td contenteditable="true">18.00 WIB</td><td contenteditable="true">Resepsi Pernikahan</td><td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td></tr>
         </tbody>
       </table>
-      <button class="btn btn-alt" style="padding: 8px; font-size: 12px; margin-top: 10px;" onclick="addRow()">+ Tambah Kegiatan</button>
+      <button class="btn btn-alt" style="margin-top:10px; font-size: 12px;" onclick="addRow()">+ Tambah Baris</button>
     </div>
 
     <div class="vendor-section">
-      <div class="vendor-row" id="v_decor"><div class="v-label">DEKORASI</div><div class="v-options"></div></div>
-      <div class="vendor-row" id="v_mua"><div class="v-label">MUA</div><div class="v-options"></div></div>
-      <div class="vendor-row" id="v_henna"><div class="v-label">HENNA</div><div class="v-options"></div></div>
-      <div class="vendor-row" id="v_hairdo"><div class="v-label">HAIRDO</div><div class="v-options"></div></div>
-      <div class="vendor-row" id="v_mc"><div class="v-label">MC</div><div class="v-options"></div></div>
+        <div class="vendor-row" id="v_decor"><div class="v-label">DEKOR</div><div class="v-options"></div></div>
+        <div class="vendor-row" id="v_mua"><div class="v-label">MUA</div><div class="v-options"></div></div>
+        <div class="vendor-row" id="v_mc"><div class="v-label">MC</div><div class="v-options"></div></div>
     </div>
 
-    <div class="actions">
-      <button class="btn" onclick="generate()">Preview Rundown</button>
-      <button class="btn btn-alt" onclick="downloadJPEG()">Save JPG</button>
-      <button class="btn btn-alt" onclick="downloadTXT()">Copy Text</button>
+    <div class="actions" style="margin-top:25px; display: flex; flex-wrap: wrap; gap: 10px;">
+      <button class="btn" onclick="generate()">Lihat Preview</button>
+      <button class="btn btn-alt" onclick="downloadJPEG()">Simpan JPG</button>
+      <button class="btn btn-alt" onclick="copyText()">Salin Teks</button>
+      <button class="btn btn-wa" onclick="shareWA()">Share ke WhatsApp</button>
     </div>
 
-    <div id="previewArea" class="preview-card">
-        <div style="text-align: center; color: #7f8c8d; padding: 20px;">Hasil pratinjau rundown akan muncul di sini...</div>
-    </div>
+    <div id="previewArea"></div>
   </div>
 </div>
-
-<footer>
-    Dejede Photography & Videography • Lumajang • 085236578999
-</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
   const vendorData = {
-    decor: ["@brontosenorusticdecoration", "@nafcraft_decoration", "@riidwan_ak"],
-    mua: ["@qinabride", "@beauty_yoja", "@marchel_makeup", "@afrilia.istiaris", "@rimba_salon", "@salonndewi"],
-    henna: ["@sisilliamonica", "@zeera_amoora"],
-    hairdo: ["@mawarmua_hairdo", "@fairusbey"],
-    mc: ["@prena.prena.3591", "@ramafadholi.official", "@radensyahroni"]
+    decor: ["@nafcraft_decoration", "@riidwan_ak", "@brontosenorusticdecoration"],
+    mua: ["@qinabride", "@beauty_yoja", "@marchel_makeup", "@afrilia.istiaris"],
+    mc: ["@prena.prena.3591", "@ramafadholi.official", "@ahmadsyahroni"]
   };
 
+  // Fungsi Format Tanggal Indonesia
+  function formatTanggalIndo(dateStr) {
+    if (!dateStr) return "-";
+    const date = new Date(dateStr);
+    const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    return date.toLocaleDateString('id-ID', options);
+  }
+
   function initVendors() {
-    const categories = ['decor', 'mua', 'henna', 'hairdo', 'mc'];
-    categories.forEach(cat => {
+    Object.keys(vendorData).forEach(cat => {
         const container = document.querySelector(`#v_${cat} .v-options`);
         vendorData[cat].forEach(name => {
             const item = document.createElement('div');
@@ -146,78 +131,97 @@
 
   function addRow() {
     const tbody = document.querySelector('#rundownTable tbody');
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td contenteditable="true">--.-- WIB</td>
-      <td contenteditable="true">Nama Kegiatan</td>
-      <td><button class="btn-del" onclick="deleteRow(this)">×</button></td>
-    `;
-    tbody.appendChild(row);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td contenteditable="true">--.-- WIB</td><td contenteditable="true">...</td><td><button class="btn-del" onclick="this.closest('tr').remove()">×</button></td>`;
+    tbody.appendChild(tr);
   }
 
-  function deleteRow(btn) { btn.closest('tr').remove(); }
-
-  function getSelected(containerId) {
-    return Array.from(document.querySelectorAll(`#${containerId} input:checked`))
-      .map(cb => cb.value).join(', ') || '-';
+  function getSelected(id) {
+    return Array.from(document.querySelectorAll(`#${id} input:checked`)).map(c => c.value).join(', ') || '-';
   }
 
   function generate() {
     const jenis = document.getElementById('jenisAcara').value;
     const nama = document.getElementById('pengantin').value || 'Subject';
+    const loc = document.getElementById('lokasi').value || 'Lokasi';
     const ig = document.getElementById('igSubject').value;
-    const tgl = document.getElementById('tanggal').value || '-';
-    const loc = document.getElementById('lokasi').value || '-';
-    
-    let rundown = "";
+    const tglRaw = document.getElementById('tanggal').value;
+    const tglIndo = formatTanggalIndo(tglRaw);
+
+    let items = "";
     document.querySelectorAll('#rundownTable tbody tr').forEach(tr => {
       const tds = tr.querySelectorAll('td');
-      if(tds.length >= 2) {
-        rundown += `${tds[0].innerText} : ${tds[1].innerText}\n`;
-      }
+      items += `<div style="display:flex; margin-bottom:8px; border-bottom:1px solid #f2f2f2; padding-bottom:5px;">
+                  <b style="min-width:90px; color:#3e5241;">${tds[0].innerText}</b>
+                  <span>: ${tds[1].innerText}</span>
+                </div>`;
     });
 
-    const html = `
-      <h2 class="preview-title">Rundown Acara ${jenis}</h2>
-      <div class="preview-meta">
-        <b class="preview-name">${nama}</b>
+    document.getElementById('previewArea').innerHTML = `
+      <div id="captureArea" style="display: inline-block; width: 500px; padding: 30px; background: #f4f7f2;">
+        <div style="background: white; padding: 40px; border: 1px solid #798e6d; position: relative;">
+          <div style="position:absolute; top:12px; left:12px; right:12px; bottom:12px; border:1px solid #c3d5ba; pointer-events:none;"></div>
+          <div style="text-align:center; margin-bottom:20px;">
+            <h2 style="color:#3e5241; border-bottom:2px solid #798e6d; display:inline-block; padding-bottom:5px;">RUNDOWN ${jenis.toUpperCase()}</h2>
+            <div style="font-size:24px; font-weight:800; margin-top:10px;">${nama}</div>
+            ${ig ? `<div style="color:#798e6d; font-size:14px;">📸 ${ig}</div>` : ''}
+            <div style="margin-top:12px; font-size:14px; color:#444;">📅 ${tglIndo} | 📍 ${loc}</div>
+          </div>
+          <div style="margin: 30px 0; font-size: 14px; line-height: 1.6;">${items}</div>
+          <div style="border-top: 1px solid #798e6d; padding-top:15px; font-size: 11px; color:#555;">
+            <b>VENDOR:</b> DEKOR: ${getSelected('v_decor')} | MUA: ${getSelected('v_mua')} | MC: ${getSelected('v_mc')}
+          </div>
+        </div>
+      </div>`;
+  }
 
-        ${ig ? `<br>📸 ${ig}` : ''}<br>
-        📅 ${tgl} | 📍 ${loc}
-      </div>
-      <div style="white-space: pre-wrap; margin: 15px 0;">${rundown}</div>
-      <div class="preview-vendor">
-        <b>OFFICIAL VENDOR:</b><br>
-        Dekor: ${getSelected('v_decor')}<br>
-        MUA: ${getSelected('v_mua')}<br>
-        Henna: ${getSelected('v_henna')}<br>
-        Hairdo: ${getSelected('v_hairdo')}<br>
-        MC: ${getSelected('v_mc')}
-      </div>
-    `;
-    document.getElementById('previewArea').innerHTML = html;
+  function getWAContent() {
+    const jenis = document.getElementById('jenisAcara').value;
+    const nama = document.getElementById('pengantin').value || 'Subject';
+    const ig = document.getElementById('igSubject').value || '-';
+    const tglRaw = document.getElementById('tanggal').value;
+    const tglIndo = formatTanggalIndo(tglRaw);
+    const loc = document.getElementById('lokasi').value || 'Lokasi';
+    
+    const decor = getSelected('v_decor');
+    const mua = getSelected('v_mua');
+    const mc = getSelected('v_mc');
+    const mapLink = `http://google.com/maps/search/${encodeURIComponent(loc)}`;
+    
+    let list = "";
+    document.querySelectorAll('#rundownTable tbody tr').forEach(tr => {
+      const tds = tr.querySelectorAll('td');
+      list += `* ${tds[0].innerText} : ${tds[1].innerText}\n`;
+    });
+
+    return `*RUNDOWN ${jenis.toUpperCase()}*\n*${nama}*\n📸 IG: ${ig}\n\n📅 Tanggal: ${tglIndo}\n📍 Lokasi: ${loc}\n🔗 Map: ${mapLink}\n\n*JADWAL ACARA:*\n${list}\n*VENDORS:*\n- DEKOR: ${decor}\n- MUA: ${mua}\n- MC: ${mc}\n\nBy Dejede | 085236578999`;
+  }
+
+  function copyText() {
+    navigator.clipboard.writeText(getWAContent()).then(() => alert("Teks Rundown Berhasil Disalin!"));
+  }
+
+  function shareWA() {
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(getWAContent())}`, '_blank');
   }
 
   function downloadJPEG() {
-    const area = document.getElementById('previewArea');
-    html2canvas(area, { backgroundColor: '#2f3e3a', scale: 2 }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = `rundown-${document.getElementById('pengantin').value || 'dejede'}.jpg`;
-      link.href = canvas.toDataURL('image/jpeg', 0.9);
-      link.click();
-    });
-  }
+    const original = document.getElementById('captureArea');
+    if(!original) return alert("Preview dulu!");
+    const clone = original.cloneNode(true);
+    clone.style.position = "fixed"; clone.style.top = "0"; clone.style.left = "0"; clone.style.zIndex = "-1";
+    document.body.appendChild(clone);
 
-  function downloadTXT() {
-    const text = document.getElementById('previewArea').innerText;
-    navigator.clipboard.writeText(text).then(() => alert('Teks Rundown berhasil disalin!'));
+    html2canvas(clone, { scale: 2, width: 500, windowWidth: 500, backgroundColor: "#f4f7f2" }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `Rundown-Dejede.jpg`;
+      link.href = canvas.toDataURL('image/jpeg', 0.95);
+      link.click();
+      document.body.removeChild(clone);
+    });
   }
 
   initVendors();
 </script>
-
 </body>
 </html>
-
-
-
