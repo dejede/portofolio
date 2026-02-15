@@ -59,19 +59,27 @@
 </footer>
 
 <script>
-(function(){
-var _0xdata="PHNjcmlwdD4KZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgiLmhhcy1zdWJtZW51ID4gYSIpLmZvckVhY2gobGluayA9PiB7CiAgICBsaW5rLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwgZnVuY3Rpb24gKGUpIHsKICAgICAgICBpZiAod2luZG93LmlubmVyV2lkdGggPD0gNzY4KSB7CiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTsKICAgICAgICAgICAgdGhpcy5wYXJlbnRFbGVtZW50LmNsYXNzTGlzdC50b2dnbGUoIm9wZW4iKTsKICAgICAgICB9CiAgICB9KTsKfSk7Ci8vIHBlcmNlcGF0IGxvYWRpbmcgaW1hZ2VzCmRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5ncmlkIGltZycpLmZvckVhY2goaW1nID0+IHsKICAgIGlmIChpbWcuY29tcGxldGUpIHsKICAgICAgICBpbWcuY2xhc3NMaXN0LmFkZCgnbG9hZGVkJyk7CiAgICB9IGVsc2UgewogICAgICAgIGltZy5hZGRFdmVudExpc3RlbmVyKCdsb2FkJywgKCkgPT4gaW1nLmNsYXNzTGlzdC5hZGQoJ2xvYWRlZCcpKTsKICAgIH0KfSk7Cjwvc2NyaXB0Pg==";
-var _0xdec=decodeURIComponent(escape(atob(_0xdata)));
-document.open();
-document.write(_0xdec);
-document.close();
-})();
+document.querySelectorAll(".has-submenu > a").forEach(link => {
+    link.addEventListener("click", function (e) {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            this.parentElement.classList.toggle("open");
+        }
+    });
+});
+// percepat loading images
+document.querySelectorAll('.grid img').forEach(img => {
+    if (img.complete) {
+        img.classList.add('loaded');
+    } else {
+        img.addEventListener('load', () => img.classList.add('loaded'));
+    }
+});
 </script>
-
 <!-- Code by Dejede | 085236578999 -->
-
 </body>
 </html>
+
 
 
 
