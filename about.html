@@ -1,99 +1,11 @@
-<!doctype html>
-<html lang="id">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Dejede Photography</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <!-- FAVICON -->
-  <link rel="icon" href="./favicon/favicon.ico" sizes="any">
-  <!-- (opsional tapi direkomendasikan) -->
-  <link rel="icon" type="favicon/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-  <link rel="icon" type="favicon/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-  <link rel="dejede-icon" href="./favicon/favicon-32x32.png">
-  <!-- Theme color (mobile browser) -->
-  <meta name="theme-color" content="#3e5241">
-</head>
-<body>
+<script>
+(function(){
+var _0xdata="PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImlkIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0idXRmLTgiIC8+CiAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPgogIDx0aXRsZT5BYm91dCDigJQgRGVqZWRlIFBob3RvZ3JhcGh5PC90aXRsZT4KICA8bGluayBocmVmPSJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PVBsdXMrSmFrYXJ0YStTYW5zOndnaHRANDAwOzYwMDs3MDA7ODAwJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij4KICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9InN0eWxlLmNzcyI+CiAgPCEtLSBGQVZJQ09OIC0tPgogIDxsaW5rIHJlbD0iaWNvbiIgaHJlZj0iLi9mYXZpY29uL2Zhdmljb24uaWNvIiBzaXplcz0iYW55Ij4KICA8IS0tIChvcHNpb25hbCB0YXBpIGRpcmVrb21lbmRhc2lrYW4pIC0tPgogIDxsaW5rIHJlbD0iaWNvbiIgdHlwZT0iZmF2aWNvbi9wbmciIHNpemVzPSIzMngzMiIgaHJlZj0iLi9mYXZpY29uL2Zhdmljb24tMzJ4MzIucG5nIj4KICA8bGluayByZWw9Imljb24iIHR5cGU9ImZhdmljb24vcG5nIiBzaXplcz0iMTZ4MTYiIGhyZWY9Ii4vZmF2aWNvbi9mYXZpY29uLTE2eDE2LnBuZyI+CiAgPGxpbmsgcmVsPSJkZWplZGUtaWNvbiIgaHJlZj0iLi9mYXZpY29uL2Zhdmljb24tMzJ4MzIucG5nIj4KICA8IS0tIFRoZW1lIGNvbG9yIChtb2JpbGUgYnJvd3NlcikgLS0+CiAgPG1ldGEgbmFtZT0idGhlbWUtY29sb3IiIGNvbnRlbnQ9IiMzZTUyNDEiPgo8L2hlYWQ+Cjxib2R5PgoKPCEtLSBOQVZCQVItIERFSkVERSAtLT4KPG5hdiBjbGFzcz0ibmF2YmFyIj4KICAgIDxhIGhyZWY9ImluZGV4Lmh0bWwiIGNsYXNzPSJsb2dvIj5ERUpFREU8L2E+CiAgICA8ZGl2IGNsYXNzPSJuYXYtbGlua3MiPgogICAgICAgIDxhIGhyZWY9ImluZGV4Lmh0bWwiPkhvbWU8L2E+CgkJPGEgaHJlZj0icHJpc3RsaXN0Lmh0bWwiPnByaXN0bGlzdDwvYT4KICAgICAgICA8YSBocmVmPSJib29raW5nLmh0bWwiPkJvb2tpbmc8L2E+CgkJPGEgaHJlZj0id2VkZGluZ2dlbi5odG1sIiBjbGFzcz0ibmF2LWhpZ2hsaWdodCI+V2VkZGluZ2dlbjwvYT4KCQk8YSBocmVmPSJzY2hlZHVsZWdlbi5odG1sIiBjbGFzcz0ibmF2LWhpZ2hsaWdodCI+U2NoZWR1bGVnZW48L2E+CiAgICAgICAgPGEgaHJlZj0iYWJvdXQuaHRtbCIgY2xhc3M9ImFjdGl2ZSI+QWJvdXQ8L2E+CiAgICA8L2Rpdj4KPC9uYXY+CgoKPGRpdiBjbGFzcz0iY29udGFpbmVyIj4KICAgIDxkaXYgY2xhc3M9ImNhcmQiPgogICAgICAgIDxkaXYgY2xhc3M9ImFib3V0LWhlYWRlciI+CiAgICAgICAgICAgIDxoMj5UZW50YW5nIERlamVkZTwvaDI+CiAgICAgICAgICAgIDxwIHN0eWxlPSJjb2xvcjogdmFyKC0tc2FnZS1kYXJrKTsgZm9udC13ZWlnaHQ6IDYwMDsiPkNhcHR1cmluZyBZb3VyIEJlYXV0aWZ1bCBNb21lbnRzIFNpbmNlIDIwMDY8L3A+CiAgICAgICAgPC9kaXY+CgogICAgICAgIDxkaXYgY2xhc3M9InByb2ZpbGUtY29udGVudCI+CiAgICAgICAgICAgIDxwPgogICAgICAgICAgICAgICAgPHN0cm9uZz5EZWplZGUgUGhvdG9ncmFwaHkgJiBWaWRlb2dyYXBoeTwvc3Ryb25nPiBhZGFsYWggdGltIGtyZWF0aWYgeWFuZyBiZXJiYXNpcyBkaSBMdW1hamFuZywgSmF3YSBUaW11ci4gS2FtaSBtZW5na2h1c3Vza2FuIGRpcmkgZGFsYW0gbWVuZ2FiYWRpa2FuIG1vbWVuLW1vbWVuIGJlcmhhcmdhIG1lbGFsdWkgbGVuc2Ega2FtZXJhLCBtdWxhaSBkYXJpIHNha3JhbG55YSBoYXJpIHBlcm5pa2FoYW4sIGtlaGFuZ2F0YW4gbW9tZW4gcGVydHVuYW5nYW4sIGhpbmdnYSBiZXJiYWdhaSBhY2FyYSBzcGVzaWFsIGxhaW5ueWEuCiAgICAgICAgICAgIDwvcD4KICAgICAgICAgICAgPGJyPgogICAgICAgICAgICA8cD4KICAgICAgICAgICAgICAgIEJhZ2kga2FtaSwgZm90b2dyYWZpIGJ1a2FuIHNla2FkYXIgbWVuZWthbiB0b21ib2wgcmFuYS4gSW5pIHRlbnRhbmcgbWVuYW5na2FwIGVtb3NpLCBjZXJpdGEsIGRhbiBkZXRhaWwgeWFuZyBtdW5na2luIHRlcmxld2F0a2FuLiBEZW5nYW4gcGVuZGVrYXRhbiB5YW5nIGFydGlzdGlrIGRhbiBwcm9mZXNpb25hbCwgRGVqZWRlIGJlcmtvbWl0bWVuIHVudHVrIG1lbWJlcmlrYW4gaGFzaWwgZG9rdW1lbnRhc2kgeWFuZyBhYmFkaSBkYW4gYmVya2VzYW4gYmFnaSBzZXRpYXAga2xpZW4ga2FtaS4KICAgICAgICAgICAgPC9wPgogICAgICAgIDwvZGl2PgoKPGRpdiBjbGFzcz0ic29jaWFsLWxpbmtzIj4KICAgIDxhIGhyZWY9Imh0dHBzOi8vaW5zdGFncmFtLmNvbS9kZWplZGVwaG90b2dyYXBoeSIgY2xhc3M9InNvY2lhbC1pdGVtIiB0YXJnZXQ9Il9ibGFuayI+CiAgICAgICAgPGRpdiBjbGFzcz0ic29jaWFsLWljb24iPgogICAgICAgICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTcuOCwySDE2LjJDMTkuNCwyIDIyLDQuNiAyMiw3LjhWMTYuMkE1LjgsNS44IDAgMCwxIDE2LjIsMjJINy44QzQuNiwyMiAyLDE5LjQgMiwxNi4yVjcuOEE1LjgsNS44IDAgMCwxIDcuOCwyTTEyLDdBNSw1IDAgMCwwIDcsMTJBNSw1IDAgMCwwIDEyLDE3QTUsNSAwIDAsMCAxNywxMkE1LDUgMCAwLDAgMTIsN00xMiw5QTMsMyAwIDAsMSAxNSwxMkEzLDMgMCAwLDEgMTIsMTVBMywzIDAgMCwxIDksMTJBMywzIDAgMCwxIDEyLDlNMTgsNS43NUEwLjc1LDAuNzUgMCAwLDAgMTcuMjUsNi41QTAuNzUsMC43NSAwIDAsMCAxOCw3LjI1QTAuNzUsMC43NSAwIDAsMCAxOC43NSw2LjVBMC43NSwwLjc1IDAgMCwwIDE4LDUuNzVaIi8+PC9zdmc+CiAgICAgICAgPC9kaXY+CiAgICAgICAgSU5TVEFHUkFNCiAgICA8L2E+CgogICAgPGEgaHJlZj0iaHR0cHM6Ly90aWt0b2suY29tL0BkZWplZGVwaG90b2dyYXBoeSIgY2xhc3M9InNvY2lhbC1pdGVtIiB0YXJnZXQ9Il9ibGFuayI+CiAgICAgICAgPGRpdiBjbGFzcz0ic29jaWFsLWljb24iPgogICAgICAgICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyLjUzLDJIMTUuOWMtLjAyLDEuMzEsLjMzLDIuNiwxLjAxLDMuNzIsMS4xNCwxLjgzLDMuMDEsMy4yMiw1LjA5LDMuNjl2My40MmMtMS4zOS0uMTQtMi43My0uNjktMy44NC0xLjU5LS4xNy0uMTMtLjMzLS4yNy0uNDgtLjQxdjYuNzVjMCw0LjItMy40MSw3LjYtNy42MSw3LjYxaDBjLTQuMjEsMC03LjYyLTMuNDEtNy42MS03LjYyaDBjMC00LjIsMy40MS03LjYxLDcuNjEtNy42MSwxLjA2LDAsMi4xLC4yMSwzLjA3LC42M3YzLjQ1Yy0uOTQtLjU3LTItLjg4LTMuMDgtLjg4LTIuMzEsMC00LjE4LDEuODctNC4xOCw0LjE4czEuODcsNC4xOCw0LjE4LDQuMTgsNC4xOC0xLjg3LDQuMTgtNC4xOFYyWiIvPjwvc3ZnPgogICAgICAgIDwvZGl2PgogICAgICAgIFRJS1RPSwogICAgPC9hPgoKICAgIDxhIGhyZWY9Imh0dHBzOi8vZmFjZWJvb2suY29tL2RlamVkZSIgY2xhc3M9InNvY2lhbC1pdGVtIiB0YXJnZXQ9Il9ibGFuayI+CiAgICAgICAgPGRpdiBjbGFzcz0ic29jaWFsLWljb24iPgogICAgICAgICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDIuMDRDNi41IDIuMDQgMiA2LjUzIDIgMTIuMDZDMiAxNy4wNiA1LjY2IDIxLjIxIDEwLjQ0IDIxLjk2VjE0Ljk2SDcuOVYxMi4wNkgxMC40NFY5Ljg1QzEwLjQ0IDcuMzQgMTEuOTMgNS45NiAxNC4yMiA1Ljk2QzE1LjMxIDUuOTYgMTYuNDUgNi4xNSAxNi40NSA2LjE1VjguNjJIMTUuMTlDMTMuOTUgOC42MiAxMy41NiA5LjM5IDEzLjU2IDEwLjE4VjEyLjA2SDE2LjM0TDE1Ljg5IDE0Ljk2SDEzLjU2VjIxLjk2QzE4LjM0IDIxLjIxIDIyIDE3LjA2IDIyIDEyLjA2QzIyIDYuNTMgMTcuNSAyLjA0IDEyIDIuMDRaIi8+PC9zdmc+CiAgICAgICAgPC9kaXY+CiAgICAgICAgRkFDRUJPT0sKICAgIDwvYT4KCiAgICA8YSBocmVmPSJodHRwczovL3lvdXR1YmUuY29tL0BkZWplZGUiIGNsYXNzPSJzb2NpYWwtaXRlbSIgdGFyZ2V0PSJfYmxhbmsiPgogICAgICAgIDxkaXYgY2xhc3M9InNvY2lhbC1pY29uIj4KICAgICAgICAgICAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGQ9Ik0xMCwxNUwxNS4xOSwxMkwxMCw5VjE1TTIxLjU2LDcuMTdDMjEuNjcsNy42NCAyMS43LDguNTQgMjEuNyw5LjQ0VjE0LjU2QzIxLjcsMTUuNDYgMjEuNjcsMTYuMzYgMjEuNTYsMTYuODNDMjEuNDMsMTcuMzQgMjEuMDMsMTcuNzQgMjAuNSwxNy44N0MyMC4wNiwxOCAxNy4zOSwxOCAxMiwxOEM2LjYxLDE4IDMuOTQsMTggMy41LDE3Ljg3QzIuOTYsMTcuNzQgMi41NiwxNy4zNCAyLjQ0LDE2LjgzQzIuMzMsMTYuMzYgMi4zLDE1LjQ2IDIuMywxNC41NlY5LjQ0QzIuMyw4LjU0IDIuMzMsNy42NCAyLjQ0LDcuMTdDMi41Niw2LjY2IDIuOTYsNi4yNiAzLjUsNi4xM0MzLjk0LDYgNi42MSw2IDEyLDZDMTcuMzksNiAyMC4wNiw2IDIwLjUsNi4xM0MyMS4wMyw2LjI2IDIxLjQzLDYuNjYgMjEuNTYsNy4xN1oiLz48L3N2Zz4KICAgICAgICA8L2Rpdj4KICAgICAgICBZT1VUVUJFCiAgICA8L2E+CjwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJjb250YWN0LWJveCI+CiAgICAgICAgICAgIDxoMyBzdHlsZT0ibWFyZ2luLWJvdHRvbTogMTBweDsiPk1hcmkgQmVyZGlza3VzaTwvaDM+CiAgICAgICAgICAgIDxwPktvbnN1bHRhc2lrYW4gcmVuY2FuYSBoYXJpIGJhaGFnaWEgQW5kYSBiZXJzYW1hIGthbWkuPC9wPgogICAgICAgICAgICA8YSBocmVmPSJodHRwczovL3dhLm1lLzYyODUyMzY1Nzg5OTkiIGNsYXNzPSJidG4gYnRuLXdhIiBzdHlsZT0ibWFyZ2luLXRvcDogMTVweDsgdGV4dC1kZWNvcmF0aW9uOiBub25lOyI+CiAgICAgICAgICAgICAgICBXaGF0c0FwcDogMDg1Mi0zNjU3LTg5OTkKICAgICAgICAgICAgPC9hPgogICAgICAgIDwvZGl2PgogICAgPC9kaXY+CjwvZGl2PgoKPGZvb3Rlcj4KICAgIERlamVkZSBQaG90b2dyYXBoeSAmIFZpZGVvZ3JhcGh5IOKAoiBMdW1hamFuZyDigKIgMDg1MjM2NTc4OTk5CjwvZm9vdGVyPgoKPC9ib2R5Pgo8L2h0bWw+CgoKCg==";
+var _0xdec=decodeURIComponent(escape(atob(_0xdata)));
+document.open();
+document.write(_0xdec);
+document.close();
+})();
+</script>
 
-<!-- NAVBAR- DEJEDE -->
-<nav class="navbar">
-    <a href="index.html" class="logo">DEJEDE</a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-		<a href="pristlist.html">pristlist</a>
-        <a href="booking.html">Booking</a>
-		<a href="weddinggen.html" class="nav-highlight">Weddinggen</a>
-		<a href="schedulegen.html" class="nav-highlight">Schedulegen</a>
-        <a href="about.html" class="active">About</a>
-    </div>
-</nav>
-
-
-<div class="container">
-    <div class="card">
-        <div class="about-header">
-            <h2>Tentang Dejede</h2>
-            <p style="color: var(--sage-dark); font-weight: 600;">Capturing Your Beautiful Moments Since 2006</p>
-        </div>
-
-        <div class="profile-content">
-            <p>
-                <strong>Dejede Photography & Videography</strong> adalah tim kreatif yang berbasis di Lumajang, Jawa Timur. Kami mengkhususkan diri dalam mengabadikan momen-momen berharga melalui lensa kamera, mulai dari sakralnya hari pernikahan, kehangatan momen pertunangan, hingga berbagai acara spesial lainnya.
-            </p>
-            <br>
-            <p>
-                Bagi kami, fotografi bukan sekadar menekan tombol rana. Ini tentang menangkap emosi, cerita, dan detail yang mungkin terlewatkan. Dengan pendekatan yang artistik dan profesional, Dejede berkomitmen untuk memberikan hasil dokumentasi yang abadi dan berkesan bagi setiap klien kami.
-            </p>
-        </div>
-
-<div class="social-links">
-    <a href="https://instagram.com/dejedephotography" class="social-item" target="_blank">
-        <div class="social-icon">
-            <svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M18,5.75A0.75,0.75 0 0,0 17.25,6.5A0.75,0.75 0 0,0 18,7.25A0.75,0.75 0 0,0 18.75,6.5A0.75,0.75 0 0,0 18,5.75Z"/></svg>
-        </div>
-        INSTAGRAM
-    </a>
-
-    <a href="https://tiktok.com/@dejedephotography" class="social-item" target="_blank">
-        <div class="social-icon">
-            <svg viewBox="0 0 24 24"><path d="M12.53,2H15.9c-.02,1.31,.33,2.6,1.01,3.72,1.14,1.83,3.01,3.22,5.09,3.69v3.42c-1.39-.14-2.73-.69-3.84-1.59-.17-.13-.33-.27-.48-.41v6.75c0,4.2-3.41,7.6-7.61,7.61h0c-4.21,0-7.62-3.41-7.61-7.62h0c0-4.2,3.41-7.61,7.61-7.61,1.06,0,2.1,.21,3.07,.63v3.45c-.94-.57-2-.88-3.08-.88-2.31,0-4.18,1.87-4.18,4.18s1.87,4.18,4.18,4.18,4.18-1.87,4.18-4.18V2Z"/></svg>
-        </div>
-        TIKTOK
-    </a>
-
-    <a href="https://facebook.com/dejede" class="social-item" target="_blank">
-        <div class="social-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
-        </div>
-        FACEBOOK
-    </a>
-
-    <a href="https://youtube.com/@dejede" class="social-item" target="_blank">
-        <div class="social-icon">
-            <svg viewBox="0 0 24 24"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.67,7.64 21.7,8.54 21.7,9.44V14.56C21.7,15.46 21.67,16.36 21.56,16.83C21.43,17.34 21.03,17.74 20.5,17.87C20.06,18 17.39,18 12,18C6.61,18 3.94,18 3.5,17.87C2.96,17.74 2.56,17.34 2.44,16.83C2.33,16.36 2.3,15.46 2.3,14.56V9.44C2.3,8.54 2.33,7.64 2.44,7.17C2.56,6.66 2.96,6.26 3.5,6.13C3.94,6 6.61,6 12,6C17.39,6 20.06,6 20.5,6.13C21.03,6.26 21.43,6.66 21.56,7.17Z"/></svg>
-        </div>
-        YOUTUBE
-    </a>
-</div>
-
-        <div class="contact-box">
-            <h3 style="margin-bottom: 10px;">Mari Berdiskusi</h3>
-            <p>Konsultasikan rencana hari bahagia Anda bersama kami.</p>
-            <a href="https://wa.me/6285236578999" class="btn btn-wa" style="margin-top: 15px; text-decoration: none;">
-                WhatsApp: 0852-3657-8999
-            </a>
-        </div>
-    </div>
-</div>
-
-<footer>
-    Dejede Photography & Videography • Lumajang • 085236578999
-</footer>
-
-</body>
-</html>
-
-
-
+<!-- Code by Dejede | 085236578999 -->
