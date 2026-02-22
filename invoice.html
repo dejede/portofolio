@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Portfolio - Dejede Photography</title>
+<!-- SEO Basic -->
+<meta name="description" content="Jasa Foto & Video Profesional | Wedding • Event • Prewedding | 085236578999">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="📷 Portofolio - Dejede">
+<meta property="og:description" content="Jasa Foto & Video Profesional | Wedding • Event • Prewedding | 085236578999">
+<meta property="og:image" content="https://dejede.github.io/dejedephotography/images/dejede_main.jpg">
+<meta property="og:url" content="https://dejede.github.io/dejedephotography/">
+<meta property="og:site_name" content="DEJEDE">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" href="style-2.css">
+<!-- Favicon -->
+<link rel="icon" href="./favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- Theme Color -->
+<meta name="theme-color" content="#3e5241">
+<!-- Preload Hero Image -->
+</head>
+
+<body>
+
+    <div class="no-print">
+        <button class="btn btn-save" onclick="saveAsJpeg()">💾 Simpan JPG</button>
+        <button class="btn btn-wa" onclick="sendWhatsApp()">📱 WhatsApp</button>
+        <button class="btn btn-add" onclick="addRow()">➕ Tambah Paket</button>
+        <button class="btn" onclick="window.print()">🖨️ Cetak</button>
+    </div>
+
+    <div id="invoice-container">
+        <div id="paidWatermark">LUNAS</div>
+
+        <div class="header">
+            <div class="brand-box">
+                <img src="https://raw.githubusercontent.com/dejede/dejedephotography/main/images/logo.png" crossorigin="anonymous">
+                <div class="brand-text">
+                    <h1>DEJEDE</h1>
+                    <p>Capturing Your Story</p>
+                </div>
+            </div>
+            <div class="inv-meta">
+                <h2>INVOICE</h2>
+                <input type="text" id="invoiceNum">
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div>
+                <div class="info-group">
+                    <label>Nama Klien</label>
+                    <input type="text" id="clientName" placeholder="Masukkan nama klien">
+                </div>
+                <div class="info-group">
+                    <label>WhatsApp</label>
+                    <input type="text" id="clientPhone" placeholder="62812xxx">
+                </div>
+            </div>
+            <div>
+<div class="info-group" id="eventDateGroup">
+    <label>Tanggal Acara</label>
+                    <input type="date" id="currentDate" onchange="updateInvoice()">
+                </div>
+<div class="info-group" id="locationGroup">
+    <label>Lokasi & Durasi</label>
+                    <div style="display:flex; gap:10px;">
+                        <select id="area" onchange="calculate()" style="width:60%">
+                            <option value="0">Dalam Kota (Free)</option>
+                            <option value="300000">Pucungsari (+300rb)</option>
+                            <option value="100000">Lebakharjo (+100rb)</option>
+                            <option value="50000">Kaliuling (+50rb)</option>
+                        </select>
+                        <select id="days" onchange="calculate()" style="width:40%">
+                            <option value="0">1 Hari</option>
+                            <option value="200000">2 Hari</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table id="itemTable">
+            <thead>
+    <tr>
+        <th width="40" class="no-print"></th>
+        <th width="50">No</th>
+        <th>Deskripsi Jasa</th>
+        <th width="180" style="text-align:right">Harga (IDR)</th>
+    </tr>
+</thead>
+            <tbody>
+               <tr>
+    <td class="no-print">
+        <button class="btn-delete" onclick="removeRow(this)">✕</button>
+    </td>
+    <td style="font-weight:700">1</td>
+    <td>
+        <select class="paket-select" onchange="updateRowPrice(this)"></select>
+    </td>
+    <td>
+        <input type="number" class="price-input" value="0" oninput="calculate()">
+    </td>
+</tr>
+            </tbody>
+        </table>
+
+        <div class="summary-wrapper">
+<div style="padding-top: 20px;">
+    <p style="font-size:12px; color:#888; font-weight:600; margin-bottom: 5px;">CATATAN:</p>
+    <p style="font-size:11px; color:#aaa; line-height:1.6; margin-bottom: 10px;">
+        Pembayaran DP minimal 30% dari Grand Total. Pelunasan dilakukan maksimal H-1 atau saat hari H acara. File akan diserahkan setelah pelunasan.
+    </p>
+    
+    <div style="background: #fdfdfd; border-left: 3px solid var(--accent); padding: 10px 15px; border-radius: 4px;">
+        <p style="font-size:11px; color: var(--brand); margin: 0; font-weight: 600;">INFO PEMBAYARAN:</p>
+        <p style="font-size:11px; color:#555; margin: 3px 0 0 0;">
+            <strong style="color: var(--brand);">BRI:</strong> 6320-0100-3835-533 <br>
+            <strong style="color: var(--brand);">DANA/ShopeePay:</strong> 6285236578999
+        </p>
+    </div>
+</div>
+            
+            <div class="total-card">
+                <div class="total-row"><span>Sub-total</span><span id="sub">Rp 0</span></div>
+                <div class="total-row"><span>Tambahan Operasional</span><span id="extra">Rp 0</span></div>
+                <div class="total-row">
+                    <span>Diskon Khusus</span>
+                    <input type="number" id="discount" value="0" oninput="calculate()" style="width:80px; background:rgba(255,255,255,0.1); border:none; color:white; border-radius:4px; text-align:right; font-weight:700;">
+                </div>
+                
+                <div class="total-row grand">
+                    <span>GRAND TOTAL</span>
+                    <span id="grand">Rp 0</span>
+                </div>
+
+                <div class="balance-row">
+                    <div class="total-row" style="margin-bottom:5px;">
+                        <span>Uang Muka (DP)</span>
+                        <input type="number" id="dp" value="0" oninput="calculate()" style="width:100px; background:white; border:none; border-radius:4px; text-align:right; font-weight:700;">
+                    </div>
+                    <div class="total-row" style="margin:0; font-weight:800; font-size:16px;">
+                        <span>SISA BAYAR</span>
+                        <span id="balance">Rp 0</span>
+                    </div>
+                    <div id="paymentStatus" style="font-size:10px; text-align:right; margin-top:5px; font-weight:700; letter-spacing:1px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-banner">
+            <h3 style="margin:0; font-size:18px; color:var(--brand)">Terima Kasih Atas Kepercayaan Anda</h3>
+            <p style="font-size:12px; color:#666; margin:10px 0 20px 0;">Semoga momen indah Anda abadi bersama layanan kami.</p>
+            <div style="font-weight:800; color:var(--accent); font-size:14px; letter-spacing:2px;">DEJEDE MANAGEMENT</div>
+        </div>
+    </div>
+
+<script>
+// ================= PAKET ADD =================
+// ================= 1. DATA PAKET =================
+const paketData = [
+    {
+        label: "WEDDING PACKAGE",
+        items: [
+            {nama: "Wedding Photo Gold", harga: 2500000},
+            {nama: "Wedding Photo Silver", harga: 1100000},
+            {nama: "Wedding Photo & Video Silver", harga: 1700000},
+            {nama: "Wedding Photo Akad Basic", harga: 750000},
+            {nama: "Engagement Photo & Video Teaser", harga: 1300000},
+            {nama: "Engagement Photo Basic", harga: 750000},
+            {nama: "Cinematic Video Wedding", harga: 1500000},
+            {nama: "Video Dokumentasi", harga: 700000}
+        ]
+    },
+    {
+        label: "NON-WEDDING / PREWED",
+        items: [
+            {nama: "Engagement Photo & Video", harga: 1300000},
+            {nama: "Prewedding Studio", harga: 600000},
+            {nama: "Prewedding Outdoor", harga: 800000},
+            {nama: "Family Photo Studio", harga: 300000},
+            {nama: "Tedak Sinten Photo", harga: 600000},
+            {nama: "Ulang Tahun Photo", harga: 600000}
+        ]
+    },
+    {
+        label: "CETAK FOTO",
+        items: [
+            {nama: "Cetak photo 10rs + Pigura", harga: 55000},
+            {nama: "Cetak photo 12rs + Pigura", harga: 150000},
+            {nama: "Cetak photo 16rs + Pigura", harga: 285000},
+            {nama: "Cetak photo 20rs + Pigura", harga: 400000},
+            {nama: "Cetak photo 24rs + Pigura", harga: 500000}
+        ]
+    },
+    {
+        label: "EDITING",
+        items: [
+            {nama: "Editing Standart", harga: 20000},
+            {nama: "Editing Semifull", harga: 30000},
+            {nama: "Editing Full", harga: 50000}
+        ]
+    }
+];
+
+// ================= 2. INITIALIZE =================
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("currentDate").valueAsDate = new Date();
+    updateInvoice();
+    renderAllDropdown();
+    toggleEventFields();
+});
+
+// ================= 3. CORE FUNCTIONS =================
+function renderDropdown(select) {
+    select.innerHTML = `<option value="0" data-price="0">-- Pilih Layanan --</option>`;
+    paketData.forEach(group => {
+        const optGroup = document.createElement("optgroup");
+        optGroup.label = group.label;
+        group.items.forEach(item => {
+            const opt = document.createElement("option");
+            opt.textContent = item.nama;
+            opt.setAttribute("data-price", item.harga);
+            optGroup.appendChild(opt);
+        });
+        select.appendChild(optGroup);
+    });
+}
+
+function renderAllDropdown() {
+    document.querySelectorAll(".paket-select").forEach(s => renderDropdown(s));
+}
+
+function updateInvoice() {
+    const d = new Date(document.getElementById("currentDate").value);
+    const f = v => String(v).padStart(2, '0');
+    const day = f(d.getDate());
+    const month = f(d.getMonth() + 1);
+    const year = String(d.getFullYear()).slice(-2);
+    document.getElementById("invoiceNum").value = `INV/DEJEDE/${day}${month}${year}`;
+}
+
+function updateRowPrice(select) {
+    const price = select.options[select.selectedIndex].getAttribute("data-price") || 0;
+    select.closest("tr").querySelector(".price-input").value = price;
+    calculate();
+    toggleEventFields();
+}
+
+function calculate() {
+    let sub = 0;
+    document.querySelectorAll(".price-input").forEach(input => {
+        sub += parseFloat(input.value) || 0;
+    });
+
+    const extra = (parseFloat(document.getElementById("area").value) || 0) +
+                  (parseFloat(document.getElementById("days").value) || 0);
+
+    const disc = parseFloat(document.getElementById("discount").value) || 0;
+    const dp = parseFloat(document.getElementById("dp").value) || 0;
+
+    const grand = Math.max(0, sub + extra - disc);
+    const balance = Math.max(0, grand - dp);
+
+    const fmt = n => "Rp " + n.toLocaleString("id-ID");
+
+    document.getElementById("sub").innerText = fmt(sub);
+    document.getElementById("extra").innerText = fmt(extra);
+    document.getElementById("grand").innerText = fmt(grand);
+    document.getElementById("balance").innerText = fmt(balance);
+
+    const wm = document.getElementById("paidWatermark");
+    const st = document.getElementById("paymentStatus");
+
+    if(grand > 0 && balance === 0) {
+        wm.style.opacity = "0.1"; // Watermark Muncul
+        st.innerText = "LUNAS / PAID";
+        st.style.color = "#2ecc71";
+    } else {
+        wm.style.opacity = "0";
+        st.innerText = balance > 0 ? "MENUNGGU PELUNASAN" : "";
+        st.style.color = "#f1c40f";
+    }
+}
+
+function addRow() {
+    const tbody = document.querySelector("#itemTable tbody");
+    const row = tbody.insertRow();
+    row.innerHTML = `
+        <td class="no-print"><button class="btn-delete" onclick="removeRow(this)">✕</button></td>
+        <td style="font-weight:700">${tbody.rows.length}</td>
+        <td><select class="paket-select" onchange="updateRowPrice(this)"></select></td>
+        <td><input type="number" class="price-input" value="0" oninput="calculate()"></td>
+    `;
+    renderDropdown(row.querySelector(".paket-select"));
+}
+
+function removeRow(btn) {
+    btn.closest("tr").remove();
+    document.querySelectorAll("#itemTable tbody tr").forEach((row, i) => {
+        row.cells[1].innerText = i + 1;
+    });
+    calculate();
+}
+
+function toggleEventFields() {
+    const selects = document.querySelectorAll(".paket-select");
+    let allNoEvent = true;
+    const noEventCategories = ["CETAK FOTO", "EDITING"];
+
+    selects.forEach(select => {
+        const selectedOption = select.options[select.selectedIndex];
+        if (selectedOption && selectedOption.parentElement.label) {
+            const groupLabel = selectedOption.parentElement.label;
+            if (!noEventCategories.includes(groupLabel) && selectedOption.value !== "0") {
+                allNoEvent = false;
+            }
+        }
+    });
+
+    const eventDate = document.getElementById("eventDateGroup");
+    const location = document.getElementById("locationGroup");
+    
+    if (allNoEvent) {
+        eventDate.style.display = "none";
+        location.style.display = "none";
+    } else {
+        eventDate.style.display = "block";
+        location.style.display = "block";
+    }
+}
+
+// ================= 4. WHATSAPP FUNCTION (KOREKSI TOTAL) =================
+function sendWhatsApp() {
+    const name = document.getElementById("clientName").value || "Pelanggan";
+    const phone = document.getElementById("clientPhone").value;
+    const inv = document.getElementById("invoiceNum").value;
+    const grand = document.getElementById("grand").innerText;
+    const balance = document.getElementById("balance").innerText;
+    
+    if(!phone) { alert("Isi nomor WhatsApp klien dulu, Bos!"); return; }
+
+    let detail = "";
+    document.querySelectorAll("#itemTable tbody tr").forEach((row, i) => {
+        const sel = row.querySelector(".paket-select");
+        const txt = sel.options[sel.selectedIndex].text;
+        const prc = row.querySelector(".price-input").value;
+        if(txt.indexOf("--") === -1) {
+            detail += `${i+1}. ${txt} (Rp ${parseFloat(prc).toLocaleString('id-ID')})\n`;
+        }
+    });
+
+    // SUSUNAN PESAN (Sudah termasuk Info Pembayaran Rekening)
+    const msg = `*INVOICE DEJEDE PHOTOGRAPHY*
+
+Halo *${name}*,
+Berikut detail pesanan Anda:
+
+📌 No: ${inv}
+📋 Layanan:
+${detail}
+💰 *TOTAL: ${grand}*
+💳 *SISA BAYAR: ${balance}*
+
+--------------------------------------------
+🏦 *INFO PEMBAYARAN:*
+• *BRI:* 6320-0100-3835-533
+• *DANA/ShopeePay:* 6285236578999
+--------------------------------------------
+
+Mohon lakukan konfirmasi jika sudah melakukan pembayaran atau pelunasan. Terima kasih! 🙏`;
+    
+    // Perbaikan nomor: buang karakter selain angka & pastikan diawali 62
+    let cleanPhone = phone.replace(/\D/g, '');
+    if(cleanPhone.startsWith('0')) cleanPhone = '62' + cleanPhone.slice(1);
+
+    window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ================= 5. SAVE JPG =================
+function saveAsJpeg() {
+    const container = document.getElementById("invoice-container");
+    html2canvas(container, { scale: 2, useCORS: true }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `Invoice-${document.getElementById("clientName").value || 'Dejede'}.jpg`;
+        link.href = canvas.toDataURL("image/jpeg", 0.9);
+        link.click();
+    });
+}
+</script>
+
+</body>
+</html>
