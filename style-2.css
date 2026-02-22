@@ -1,0 +1,707 @@
+/* =================================================
+   ROOT VARIABLES - DEJEDE CODE 2026
+   ================================================= */
+:root {
+    --brand: #2d3e30;
+    --brand-light: #eef6f1;
+    --accent: #c5a059;
+    --danger: #e74c3c;
+    --wa: #25d366;
+    --text-main: #2c3e50;
+    --bg-soft: #f8fafc;
+}
+
+* { 
+    box-sizing: border-box; 
+    transition: all 0.2s ease; 
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-soft);
+    color: var(--text-main);
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Container & Card Style */
+#invoice-container {
+    width: 850px;
+    background: white;
+    padding: 60px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: visible;
+}
+
+/* Floating Controls */
+.no-print {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 12px;
+    padding: 15px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+}
+
+/* Elegant Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 30px;
+}
+
+.brand-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand-box img { width: 75px; filter: grayscale(0.2); }
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--brand);
+}
+
+.brand-text p {
+    margin: 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.inv-meta { text-align: right; }
+.inv-meta h2 {
+    font-size: 45px;
+    margin: 0;
+    line-height: 1;
+    color: #f1f1f1;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+#invoiceNum {
+    background: transparent;
+    border: none;
+    text-align: right;
+    font-weight: 700;
+    color: var(--brand);
+    font-size: 14px;
+    width: 250px;
+    outline: none;
+    height: 30px;
+}
+
+/* Info Section */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.info-group label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.info-group input, .info-group select {
+    border: none;
+    border-bottom: 1.5px solid #eee;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand);
+    outline: none;
+    background: transparent;
+    min-height: 40px;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.info-group input:focus { border-color: var(--accent); }
+/* Hilangkan garis header di kolom X */
+#itemTable th.no-print {
+    border-bottom: none !important;
+}
+#itemTable th:first-child {
+    border-bottom: none !important;
+}
+
+/* Table Design */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+
+th {
+    text-align: left;
+    padding: 15px 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    border-bottom: 2px solid var(--brand);
+}
+
+td { 
+	padding: 18px 10px; 
+	border-bottom: 1px solid #f9f9f9; 
+	vertical-align: middle; }
+
+.price-input {
+    border: none;
+    background: #fdfdfd;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    width: 140px;
+    text-align: right;
+    min-height: 38px;
+    font-family: inherit;
+}
+
+.paket-select {
+    width: 100%;
+    border: none;
+    font-weight: 600;
+    color: var(--brand);
+    cursor: pointer;
+    background: transparent;
+    min-height: 38px;
+    padding: 5px 0;
+}
+
+/* Summary Box */
+.summary-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    margin-top: 40px;
+    gap: 40px;
+}
+
+.total-card {
+    background: var(--brand);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.total-row.grand {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 20px;
+    font-weight: 800;
+    opacity: 1;
+}
+
+.balance-row {
+    margin-top: 15px;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.total-row input { height: 30px; padding: 5px; font-family: inherit; }
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-save { background: var(--brand); color: white; }
+.btn-wa { background: var(--wa); color: white; }
+.btn-add { background: var(--bg-soft); color: var(--brand); border: 1px solid #ddd; }
+
+
+/* Watermark */
+#paidWatermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(-25deg);
+    font-size: 120px;
+    font-weight: 900;
+    color: #27ae60;
+    opacity: 0;
+    pointer-events: none;
+    border: 10px solid #27ae60;
+    padding: 10px 30px;
+    border-radius: 20px;
+    z-index: 10;
+}
+/* ================================
+   TABLE ALIGNMENT FIX (DESKTOP)
+   ================================ */
+
+/* Kolom X */
+#itemTable td:nth-child(1),
+#itemTable th:nth-child(1) {
+    width: 10px;
+    text-align: center;
+    padding-left: 5px;
+}
+
+/* Kolom Nomor */
+#itemTable td:nth-child(2),
+#itemTable th:nth-child(2) {
+    width: 20px;
+    text-align: center;
+}
+
+/* Kolom Deskripsi */
+#itemTable td:nth-child(3) {
+    padding-right: 40px;
+}
+
+/* Kolom Harga */
+#itemTable td:nth-child(4),
+#itemTable th:nth-child(4) {
+    width: 60px;
+    text-align: right;
+}
+
+/* Tombol delete lebih proporsional */
+.btn-delete {
+    font-size: 14px;
+    padding: 4px;
+    opacity: 0.6;
+}
+
+.btn-delete:hover {
+    opacity: 1;
+}
+
+/* Select lebih elegan */
+.paket-select {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+/* Input harga lebih sejajar */
+.price-input {
+    width: 120px;
+}
+/* Footer */
+.footer-banner {
+    margin-top: 80px;
+    text-align: center;
+    padding: 40px;
+    background: var(--brand-light);
+    border-radius: 20px;
+}
+
+/* =================================================
+   EXPORT CLEAN MODE - JPEG FINAL
+   ================================================= */
+
+.is-exporting .no-print,
+.is-exporting .btn-delete {
+    display: none !important;
+}
+
+/* Container jadi flat */
+.is-exporting #invoice-container {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 800px !important;
+    margin: 0 !important;
+    padding: 40px !important;
+}
+
+/* Semua input & select jadi teks polos */
+.is-exporting .info-group input,
+.is-exporting .info-group select,
+.is-exporting .price-input,
+.is-exporting #discount,
+.is-exporting #dp {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    outline: none !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+/* Hilangkan warna abu di mobile mode */
+.is-exporting .paket-select {
+    background: transparent !important;
+}
+
+/* Hilangkan kolom delete sepenuhnya */
+.is-exporting td:nth-child(1),
+.is-exporting th:nth-child(1) {
+    display: none !important;
+}
+
+/* Rapikan ulang spacing tabel */
+.is-exporting td {
+    padding: 12px 10px !important;
+}
+
+/* Pastikan tidak ada background abu tersisa */
+.is-exporting input[type="number"] {
+    background: transparent !important;
+}
+/* Khusus no-print dalam tabel jangan jadi floating */
+table .no-print {
+    position: static !important;
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+/* =================================================
+   RESPONSIVE MOBILE - COMPACT FIT 2026
+   ================================================= */
+@media (max-width: 768px) {
+
+    body { 
+        padding: 8px 4px;
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    #invoice-container { 
+        width: 100% !important;
+        max-width: 100vw;
+        padding: 12px;
+        border-radius: 14px;
+        box-shadow: none;
+    }
+
+    /* Floating Controls Bottom */
+    .no-print { 
+        width: 95%;
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        margin-bottom: 0;
+        border-radius: 18px;
+        padding: 6px;
+        justify-content: center;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(5px);
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .btn { 
+        padding: 5px 10px; 
+        font-size: 10px; 
+    }
+
+    /* HEADER COMPACT */
+.header {
+    display: flex !important;
+    flex-direction: row !important;
+	margin-bottom: 15px !important;
+    padding-bottom: 10px !important;
+    justify-content: space-between !important;
+	padding-left: 0 !important;
+    align-items: flex-start !important;
+    gap: 10px;
+}
+
+.brand-box {
+    display: flex;
+    align-items: center;
+	margin-left: -5px !important;   /* geser sedikit ke kiri */
+    gap: 10px;
+}
+
+.brand-box img {
+    width: 45px !important;
+	margin-left: 0 !important;
+}
+
+.brand-text h1 {
+    font-size: 16px !important;
+    letter-spacing: 2px !important;
+}
+
+.brand-text p {
+    font-size: 9px !important;
+}
+
+.inv-meta {
+    text-align: right !important;
+}
+
+/* Perbesar tulisan INVOICE di mobile */
+.inv-meta h2 {
+    font-size: 26px !important;   /* bisa ubah 24–32 sesuai selera */
+    font-weight: 900 !important;
+    letter-spacing: 1px !important;
+    margin: 0 !important;
+    color: var(--brand) !important; /* supaya lebih tegas */
+}
+
+#invoiceNum {
+    width: auto !important;
+    text-align: right !important;
+    font-size: 12px !important;
+    font-weight: 700;
+}
+
+    /* INFO GRID */
+    .info-grid { 
+        grid-template-columns: 1fr 1fr; 
+        gap: 8px; 
+        margin-bottom: 15px;
+    }
+
+    .info-group { margin-bottom: 8px; }
+
+    .info-group label { 
+        font-size: 8px; 
+        margin-bottom: 3px;
+    }
+
+    .info-group input, 
+    .info-group select { 
+        font-size: 11px; 
+        padding: 4px 0;
+        min-height: 28px;
+    }
+
+    /* TABLE ONE LINE MODE */
+    table thead { display: none; }
+
+    tr { 
+        display: flex !important;
+        align-items: left;
+        gap: 30px;
+        padding: 6px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    td { 
+        display: block;
+        padding: 0 !important;
+        border: none;
+    }
+
+td:nth-child(1) { 
+    width: 28px; 
+    flex-shrink: 0;
+    text-align: center;
+}
+
+td:nth-child(2) { 
+    width: 20px; 
+    flex-shrink: 0;
+    font-size: 10px;
+}
+
+td:nth-child(3) { 
+    flex: 3; 
+    min-width: 0;
+}
+
+td:nth-child(4) { 
+    flex: 2; 
+    min-width: 0;
+}
+
+    .paket-select { 
+        font-size: 10px;
+        padding: 4px;
+        background: #f9f9f9;
+    }
+
+    .price-input { 
+        font-size: 10px;
+        padding: 4px;
+        text-align: right;
+        background: #f0f0f0;
+    }
+
+    .btn-delete { 
+        font-size: 13px;
+        padding: 2px;
+    }
+
+    /* SUMMARY COMPACT */
+    .summary-wrapper { 
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .summary-wrapper p {
+        font-size: 10px !important;
+        line-height: 1.4;
+    }
+
+    .total-card { 
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .total-row {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .total-row.grand {
+        font-size: 16px;
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+
+    .balance-row {
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    /* FOOTER COMPACT */
+.footer-banner {
+    padding: 18px !important;
+    margin-top: 25px !important;
+    border-radius: 16px !important;
+}
+
+.footer-banner h3 {
+    font-size: 13px !important;
+    margin-bottom: 6px !important;
+}
+
+.footer-banner p {
+    font-size: 9px !important;
+    margin: 5px 0 12px 0 !important;
+    line-height: 1.4 !important;
+}
+
+.footer-banner div {
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+}
+
+@media (max-width: 768px) {
+
+td:nth-child(2) {
+    width: 25px !important;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+}
+.is-exporting .price-input {
+    border: none !important;
+    background: transparent !important;
+    text-align: right !important;
+}
+
+.is-exporting .price-input::before {
+    content: "Rp ";
+}
+
+@media (max-width: 768px) {
+
+table thead {
+    display: table-header-group;
+}
+
+th {
+    font-size: 9px;
+    padding: 8px 5px;
+    letter-spacing: 1px;
+}
+
+}
+
+@media (max-width: 768px) {
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    display: table-header-group;
+}
+
+th {
+    font-size: 9px;
+    padding: 6px 4px;
+    text-align: left;
+}
+
+th:nth-child(1) {
+    width: 30px;
+}
+
+th:nth-child(2) {
+    width: 30px;
+}
+
+th:nth-child(4) {
+    text-align: right;
+}
+
+td {
+    padding: 8px 4px;
+    font-size: 12px;
+}
+
+.price-input {
+    width: 100%;
+    text-align: right;
+}
+
+.paket-select {
+    width: 100%;
+}
+
+}
