@@ -672,28 +672,43 @@ Terima kasih! 🙏
  * Save invoice as JPEG
  */
 function saveAsJpeg() {
-
     const container = $('invoice-container');
     const clientName = $('clientName').value || 'Dejede';
+    
+    // Show loading
     const loader = $('loadingIndicator');
-
     loader.style.display = 'flex';
+
+    // Enable export mode
+    container.classList.add("is-exporting");
 
     html2canvas(container, {
         scale: 2,
         useCORS: true,
+        logging: false,
         backgroundColor: '#ffffff',
-        ignoreElements: (el) => el.id === 'loadingIndicator'
-    }).then(canvas => {
+        allowTaint: true,
 
+        // 🔥 TAMBAHAN INI SAJA
+        ignoreElements: function(element) {
+            return element.id === 'loadingIndicator';
+        }
+
+    }).then(canvas => {
         const link = document.createElement("a");
-        link.download = `Invoice-${clientName}.jpg`;
+        link.download = `Invoice-${clientName}-${new Date().toISOString().split('T')[0]}.jpg`;
         link.href = canvas.toDataURL("image/jpeg", 0.92);
         link.click();
 
+        container.classList.remove("is-exporting");
+        loader.style.display = 'none';
+    }).catch(err => {
+        console.error("Error saving image:", err);
+        alert("⚠️ Gagal menyimpan gambar. Silahkan coba lagi.");
+        container.classList.remove("is-exporting");
         loader.style.display = 'none';
     });
-}		
+}	
 
 // ================= AUTO FORMAT RUPIAH (GLOBAL & STABLE) =================
 document.addEventListener("input", function(e) {
