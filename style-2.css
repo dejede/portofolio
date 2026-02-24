@@ -462,6 +462,24 @@ td {
     margin: 1px 0;       /* rapat antar baris */
 }
 
+/* ================= DISCOUNT & DP INPUT ================= */
+.input-discount,
+.input-dp {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;          /* ukuran font */
+    font-weight: 700;         /* tebal */
+    color: #9e991b;           /* warna angka */
+    text-align: right;        /* rata kanan */
+    padding: 6px 8px;
+    border: 1px solid #dcdcdc;
+	width: 90px;        /* 🔥 atur panjang di sini */
+    border-radius: 6px;
+    background: #fff;
+}
+.total-row.grand #grand {
+    color: #f14b4b;
+    font-weight: 800;
+}
 
 /* Summary Box */
 .summary-wrapper {
@@ -668,7 +686,7 @@ table .no-print {
         padding-bottom: 10px !important;
         justify-content: space-between !important;
         padding-left: 0 !important;
-        align-items: flex-start !important;
+        align-items: center !important;   /* 🔥 ini yang bikin tengah */
         gap: 10px;
     }
 
@@ -676,16 +694,16 @@ table .no-print {
         display: flex;
         align-items: center;
         margin-left: -5px !important;
-        gap: 10px;
+        gap: 2px;
     }
 
     .brand-box img {
-        width: 45px !important;
+        width: 80px !important;
         margin-left: 0 !important;
     }
 
     .brand-text h1 {
-        font-size: 16px !important;
+        font-size: 20px !important;
         letter-spacing: 2px !important;
     }
 
@@ -693,44 +711,55 @@ table .no-print {
         font-size: 9px !important;
     }
 
-    .inv-meta {
-        text-align: right !important;
-    }
+	.inv-meta {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;   /* vertikal tengah */
+		align-items: flex-end;     /* tetap rata kanan */
+	}
 
     .inv-meta h2 {
         font-size: 26px !important;
         font-weight: 900 !important;
         letter-spacing: 1px !important;
         margin: 0 !important;
-        color: var(--brand) !important;
+        color: #cbcbcb; !important;
     }
 
-    #invoiceNum {
-        width: auto !important;
-        text-align: right !important;
-        font-size: 12px !important;
-        font-weight: 700;
-    }
+	#invoiceNum {
+		display: block;
+		margin: 0 auto !important;
+		width: 120px;                /* tentukan lebar supaya bisa center */
+		text-align: right !important;/* teks tetap rata kanan */
+		font-size: 12px !important;
+		font-weight: 700;
+}
 
     /* INFO GRID */
-    .info-grid { 
-        grid-template-columns: 1fr 1fr; 
-        gap: 8px; 
-        margin-bottom: 15px;
+    .info-grid {
+        display: flex !important;
+        flex-direction: column !important;  /* 🔥 jadi 1 ke bawah */
+        gap: 2px;
+    }
+	
+    .info-group {
+        margin-bottom: 2px !important;  /* kecilkan jarak antar field */
     }
 
-    .info-group { margin-bottom: 8px; }
-
-    .info-group label { 
-        font-size: 8px; 
-        margin-bottom: 3px;
+    .info-group label {
+        font-size: 8px;
+        margin-bottom: 2px;
     }
 
-    .info-group input, 
-    .info-group select { 
-        font-size: 11px; 
-        padding: 4px 0;
-        min-height: 28px;
+    .info-group input,
+    .info-group select {
+        padding: 4px 6px !important;   /* lebih tipis */
+        font-size: 12px;
+    }
+
+    .select-group {
+        flex-direction: column !important;
+        gap: 2px;   /* lebih rapat */
     }
 
     /* ================================
