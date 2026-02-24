@@ -155,9 +155,13 @@
 </section>
                 
 <div class="payment-info">
-    <p class="payment-info-title">INFO PEMBAYARAN</p>
+    <p class="payment-info-title">INFO PEMBAYARAN :</p>
+	  <span class="account-name"> A/N Adi Sofianto/Dejede</span>
     <div class="payment-methods">
-        <p><strong>BRI:</strong> 6320-0100-3835-533</p>
+<p class="rekening-line">
+  <strong>BRI:</strong> 6320-0100-3835-533  
+
+</p>
         <p><strong>DANA/ShopeePay:</strong> 6285236578999</p>
     </div>
 </div>
@@ -624,7 +628,8 @@ function sendWhatsApp() {
 
         if (txt && !txt.includes("--")) {
             hasItem = true;
-            const formattedPrice = parseFloat(prc).toLocaleString('id-ID');
+            const cleanNumber = prc.replace(/\D/g, '') || 0;
+			const formattedPrice = Number(cleanNumber).toLocaleString('id-ID');
             detail += `${i + 1}. ${txt}\n    Rp ${formattedPrice}\n\n`;
         }
     });
@@ -651,7 +656,7 @@ ${detail}
 💳 *SISA BAYAR: ${balance}*
 
 🏦 *INFO PEMBAYARAN*
-• BRI: 6320-0100-3835-533
+• BRI: 6320-0100-3835-533 A/N Adi Sofianto
 • DANA/ShopeePay: 6285236578999
 
 Mohon konfirmasi jika sudah melakukan pembayaran.
