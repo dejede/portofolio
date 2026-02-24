@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Portfolio - Dejede Photography</title>
-<!-- SEO Basic -->
-<meta name="description" content="Jasa Foto & Video Profesional | Wedding • Event • Prewedding | 085236578999">
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="📷 Portofolio - Dejede">
-<meta property="og:description" content="Jasa Foto & Video Profesional | Wedding • Event • Prewedding | 085236578999">
-<meta property="og:image" content="https://dejede.github.io/dejedephotography/images/dejede_main.jpg">
-<meta property="og:url" content="https://dejede.github.io/dejedephotography/">
-<meta property="og:site_name" content="DEJEDE">
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<!-- CSS -->
-<link rel="stylesheet" href="style-2.css">
-<!-- Favicon -->
-<link rel="icon" href="./favicon/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- Theme Color -->
-<meta name="theme-color" content="#3e5241">
-<!-- Preload Hero Image -->
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Invoice - Dejede Photography</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="Invoice Generator | Dejede Photography">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Invoice - Dejede">
+    <meta property="og:image" content="https://raw.githubusercontent.com/dejede/dejedephotography/main/images/logo.png">
+    <meta property="og:url" content="https://dejede.github.io/dejedephotography/">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style-2.css">
+    <link rel="icon" href="./favicon/favicon.ico">
+    <meta name="theme-color" content="#3e5241">
 </head>
 
 <body>
-
-    <div class="no-print">
-        <button class="btn btn-save" onclick="saveAsJpeg()">💾 Simpan JPG</button>
-        <button class="btn btn-wa" onclick="sendWhatsApp()">📱 WhatsApp</button>
-        <button class="btn btn-add" onclick="addRow()">➕ Tambah Paket</button>
-        <button class="btn" onclick="window.print()">🖨️ Cetak</button>
+<!-- FLOATING CONTROLS - IMPROVED -->
+<div class="controls-wrapper no-print">
+    <div class="controls-container">
+        <button class="btn btn-save" aria-label="Simpan sebagai JPG" data-action="save" title="Simpan JPG">
+            <span class="btn-icon">💾</span>
+            <span class="btn-text">Simpan</span>
+        </button>
+        <button class="btn btn-wa" aria-label="Kirim ke WhatsApp" data-action="whatsapp" title="Kirim WhatsApp">
+            <span class="btn-icon">📱</span>
+            <span class="btn-text">WhatsApp</span>
+        </button>
+        <button class="btn btn-add" aria-label="Tambah paket layanan" data-action="add-row" title="Tambah Paket">
+            <span class="btn-icon">➕</span>
+            <span class="btn-text">Tambah</span>
+        </button>
+        <button class="btn btn-print" aria-label="Cetak dokumen" data-action="print" title="Cetak">
+            <span class="btn-icon">🖨️</span>
+            <span class="btn-text">Cetak</span>
+        </button>
     </div>
+</div>
 
+    <!-- INVOICE CONTAINER -->
     <div id="invoice-container">
-        <div id="paidWatermark">LUNAS</div>
+        <!-- WATERMARK LUNAS -->
+        <div id="paidWatermark" aria-hidden="true"></div>
 
-        <div class="header">
+        <!-- HEADER SECTION -->
+        <header class="header">
             <div class="brand-box">
-                <img src="https://raw.githubusercontent.com/dejede/dejedephotography/main/images/logo.png" crossorigin="anonymous">
+                <img src="https://raw.githubusercontent.com/dejede/dejedephotography/main/images/logo.png" 
+                     alt="Dejede Photography Logo" crossorigin="anonymous">
                 <div class="brand-text">
                     <h1>DEJEDE</h1>
                     <p>Capturing Your Story</p>
@@ -49,122 +62,159 @@
             </div>
             <div class="inv-meta">
                 <h2>INVOICE</h2>
-                <input type="text" id="invoiceNum">
+                <input type="text" id="invoiceNum" readonly aria-label="Nomor Invoice" 
+                       placeholder="INV/DEJEDE/000000">
             </div>
-        </div>
+        </header>
 
-        <div class="info-grid">
-            <div>
+        <!-- CLIENT INFO SECTION -->
+        <section class="info-grid">
+            <div class="info-column">
                 <div class="info-group">
-                    <label>Nama Klien</label>
-                    <input type="text" id="clientName" placeholder="Masukkan nama klien">
+                    <label for="clientName">Nama Klient</label>
+                    <input type="text" id="clientName" placeholder="Masukkan nama klient" 
+                           data-field="client">
                 </div>
                 <div class="info-group">
-                    <label>WhatsApp</label>
-                    <input type="text" id="clientPhone" placeholder="62812xxx">
+                    <label for="clientPhone">WhatsApp</label>
+                    <input type="tel" id="clientPhone" placeholder="62812xxxxxxx" 
+                           inputmode="numeric" maxlength="15" data-field="phone">
                 </div>
             </div>
-            <div>
-<div class="info-group" id="eventDateGroup">
-    <label>Tanggal Acara</label>
-                    <input type="date" id="currentDate" onchange="updateInvoice()">
+            <div class="info-column">
+                <div class="info-group" id="eventDateGroup">
+                    <label for="currentDate">Tanggal Acara</label>
+                    <input type="date" id="currentDate" data-field="date">
                 </div>
-<div class="info-group" id="locationGroup">
-    <label>Lokasi & Durasi</label>
-                    <div style="display:flex; gap:10px;">
-                        <select id="area" onchange="calculate()" style="width:60%">
-                            <option value="0">Dalam Kota (Free)</option>
+                <div class="info-group" id="locationGroup">
+                    <label for="area">Lokasi & Durasi</label>
+                    <div class="select-group">
+                        <select id="area" aria-label="Area lokasi" data-field="area">
+                            <option value="0">Dalam Wilayah (Free)</option>
                             <option value="300000">Pucungsari (+300rb)</option>
                             <option value="100000">Lebakharjo (+100rb)</option>
                             <option value="50000">Kaliuling (+50rb)</option>
                         </select>
-                        <select id="days" onchange="calculate()" style="width:40%">
+                        <select id="days" aria-label="Durasi event" data-field="days">
                             <option value="0">1 Hari</option>
                             <option value="200000">2 Hari</option>
                         </select>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <table id="itemTable">
-            <thead>
-    <tr>
-        <th width="40" class="no-print"></th>
-        <th width="50">No</th>
-        <th>Deskripsi Jasa</th>
-        <th width="180" style="text-align:right">Harga (IDR)</th>
-    </tr>
-</thead>
-            <tbody>
-               <tr>
-    <td class="no-print">
-        <button class="btn-delete" onclick="removeRow(this)">✕</button>
-    </td>
-    <td style="font-weight:700">1</td>
-    <td>
-        <select class="paket-select" onchange="updateRowPrice(this)"></select>
-    </td>
-    <td>
-        <input type="number" class="price-input" value="0" oninput="calculate()">
-    </td>
-</tr>
-            </tbody>
-        </table>
+        <!-- ITEMS TABLE -->
+        <section class="table-wrapper">
+            <table id="itemTable" role="grid">
+                <thead>
+                    <tr>
+                        <th width="50" style="text-align:center;">No</th>
+                        <th>Deskripsi Jasa</th>
+                        <th width="120" style="text-align:right; padding-right:15px;">Harga (IDR)</th>
+                        <th width="40" class="no-print" style="text-align:center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align:center; font-weight:700;">1</td>
+                        <td>
+                            <select class="paket-select" aria-label="Pilih layanan" data-field="service">
+                                <option value="0">-- Pilih Layanan --</option>
+                            </select>
+                        </td>
+<td>
+    <input 
+        type="text" 
+        class="price-input" 
+        inputmode="numeric"
+        value="0"
+        aria-label="Harga layanan"
+        min="0"
+        step="1000">
+</td>
+                        <td class="col-action no-print" style="text-align:center;">
+                            <button class="btn-delete" aria-label="Hapus baris" 
+                                    type="button" title="Hapus">✕</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-        <div class="summary-wrapper">
-<div style="padding-top: 20px;">
-    <p style="font-size:12px; color:#888; font-weight:600; margin-bottom: 5px;">CATATAN:</p>
-    <p style="font-size:11px; color:#aaa; line-height:1.6; margin-bottom: 10px;">
-        Pembayaran DP minimal 30% dari Grand Total. Pelunasan dilakukan maksimal H-1 atau saat hari H acara. File akan diserahkan setelah pelunasan.
-    </p>
-    
-    <div style="background: #fdfdfd; border-left: 3px solid var(--accent); padding: 10px 15px; border-radius: 4px;">
-        <p style="font-size:11px; color: var(--brand); margin: 0; font-weight: 600;">INFO PEMBAYARAN:</p>
-        <p style="font-size:11px; color:#555; margin: 3px 0 0 0;">
-            <strong style="color: var(--brand);">BRI:</strong> 6320-0100-3835-533 <br>
-            <strong style="color: var(--brand);">DANA/ShopeePay:</strong> 6285236578999
+        <!-- SUMMARY & PAYMENT SECTION -->
+<section class="summary-wrapper">
+    <div class="notes-box">
+        <h3 class="notes-title">Catatan</h3>
+        <p class="notes-text">
+            DP minimal 30% dari Grand Total atau sesuai kesepakatan.
+            Pelunasan maksimal H+3 setelah acara.
+            File diserahkan setelah pelunasan.
         </p>
     </div>
+</section>
+                
+<div class="payment-info">
+    <p class="payment-info-title">INFO PEMBAYARAN</p>
+    <div class="payment-methods">
+        <p><strong>BRI:</strong> 6320-0100-3835-533</p>
+        <p><strong>DANA/ShopeePay:</strong> 6285236578999</p>
+    </div>
 </div>
-            
+
             <div class="total-card">
-                <div class="total-row"><span>Sub-total</span><span id="sub">Rp 0</span></div>
-                <div class="total-row"><span>Tambahan Operasional</span><span id="extra">Rp 0</span></div>
+                <div class="total-row">
+                    <span>Sub-total</span>
+                    <span id="sub" class="amount">Rp 0</span>
+                </div>
+                <div class="total-row">
+                    <span>Tambahan Operasional</span>
+                    <span id="extra" class="amount">Rp 0</span>
+                </div>
                 <div class="total-row">
                     <span>Diskon Khusus</span>
-                    <input type="number" id="discount" value="0" oninput="calculate()" style="width:80px; background:rgba(255,255,255,0.1); border:none; color:white; border-radius:4px; text-align:right; font-weight:700;">
+                    <input type="number" id="discount" value="0" min="0" step="1000" 
+                           aria-label="Diskon" class="input-discount">
                 </div>
                 
                 <div class="total-row grand">
                     <span>GRAND TOTAL</span>
-                    <span id="grand">Rp 0</span>
+                    <span id="grand" class="amount">Rp 0</span>
                 </div>
 
-                <div class="balance-row">
-                    <div class="total-row" style="margin-bottom:5px;">
+                <div class="balance-section">
+                    <div class="total-row">
                         <span>Uang Muka (DP)</span>
-                        <input type="number" id="dp" value="0" oninput="calculate()" style="width:100px; background:white; border:none; border-radius:4px; text-align:right; font-weight:700;">
+                        <input type="number" id="dp" value="0" min="0" step="1000" 
+                               aria-label="Uang Muka" class="input-dp">
                     </div>
-                    <div class="total-row" style="margin:0; font-weight:800; font-size:16px;">
+                    <div class="total-row balance">
                         <span>SISA BAYAR</span>
-                        <span id="balance">Rp 0</span>
+                        <span id="balance" class="amount">Rp 0</span>
                     </div>
-                    <div id="paymentStatus" style="font-size:10px; text-align:right; margin-top:5px; font-weight:700; letter-spacing:1px;"></div>
+                    <div id="paymentStatus" class="payment-status"></div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="footer-banner">
-            <h3 style="margin:0; font-size:18px; color:var(--brand)">Terima Kasih Atas Kepercayaan Anda</h3>
-            <p style="font-size:12px; color:#666; margin:10px 0 20px 0;">Semoga momen indah Anda abadi bersama layanan kami.</p>
-            <div style="font-weight:800; color:var(--accent); font-size:14px; letter-spacing:2px;">DEJEDE MANAGEMENT</div>
-        </div>
+        <!-- FOOTER -->
+<footer class="footer-banner">
+    <div class="footer-content">
+        <h3>Terima Kasih Atas Kepercayaan Anda</h3>
+        <p>Semoga momen indah Anda abadi bersama layanan kami.</p>
+        <div class="footer-branding">DEJEDE MANAGEMENT</div>
+    </div>
+</footer>
+
+    <!-- LOADING INDICATOR (Hidden by default) -->
+    <div id="loadingIndicator" class="loading-indicator" style="display:none;">
+        <div class="spinner"></div>
+        <p>Mengolah gambar...</p>
     </div>
 
 <script>
-// ================= PAKET ADD =================
-// ================= 1. DATA PAKET =================
+
+// ================= DATA PAKET =================
 const paketData = [
     {
         label: "WEDDING PACKAGE",
@@ -210,106 +260,263 @@ const paketData = [
     }
 ];
 
-// ================= 2. INITIALIZE =================
+// ================= UTILITIES =================
+
+/**
+ * Format number to Indonesian currency
+ */
+function formatCurrency(value) {
+    const num = parseFloat(value) || 0;
+    return "Rp " + num.toLocaleString("id-ID");
+}
+
+/**
+ * Format phone number
+ */
+function formatPhone(input) {
+    let value = input.value.replace(/\D/g, '');
+    
+    // Batas max 15 digit
+    if (value.length > 15) value = value.slice(0, 15);
+    
+    // Tambahkan formatting visual (opsional)
+    if (value.length > 4) {
+        value = value.slice(0, 4) + '-' + value.slice(4);
+    }
+    
+    input.value = value;
+}
+
+/**
+ * Validate phone number
+ */
+function validatePhone(phone) {
+    const cleaned = phone.replace(/\D/g, '');
+    return cleaned.length >= 10 && cleaned.length <= 15;
+}
+
+/**
+ * Parse phone number to WhatsApp format
+ */
+function parsePhoneToWA(phone) {
+    let cleaned = phone.replace(/\D/g, '');
+    
+    if (cleaned.startsWith('0')) {
+        cleaned = '62' + cleaned.slice(1);
+    } else if (!cleaned.startsWith('62')) {
+        cleaned = '62' + cleaned;
+    }
+    
+    return cleaned;
+}
+
+/**
+ * Get element by ID safely
+ */
+const $ = (id) => document.getElementById(id);
+
+// ================= INITIALIZE =================
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("currentDate").valueAsDate = new Date();
+    $('currentDate').valueAsDate = new Date();
     updateInvoice();
     renderAllDropdown();
     toggleEventFields();
+    attachEventListeners();
+
+    // 🔥 TAMBAHKAN INI
+    document.querySelectorAll(".price-input").forEach(input => {
+        let angka = input.value.replace(/\D/g, "");
+        if (angka !== "") {
+            input.value = "Rp. " + Number(angka).toLocaleString("id-ID");
+        }
+    });
 });
 
-// ================= 3. CORE FUNCTIONS =================
+// ================= EVENT LISTENERS =================
+function attachEventListeners() {
+    // Control buttons
+    document.querySelectorAll('.controls-wrapper .btn').forEach(btn => {
+        btn.addEventListener('click', handleButtonClick);
+    });
+
+    // Form inputs - Auto calculate & update
+    $('currentDate').addEventListener('change', updateInvoice);
+    $('area').addEventListener('change', () => {
+        calculate();
+        toggleEventFields();
+    });
+    $('days').addEventListener('change', () => {
+        calculate();
+        toggleEventFields();
+    });
+    $('discount').addEventListener('input', calculate);
+    $('dp').addEventListener('input', calculate);
+
+    // Phone format
+    $('clientPhone').addEventListener('input', function() {
+        formatPhone(this);
+    });
+
+    // Table: Dynamic row changes
+    document.addEventListener('change', (e) => {
+        if (e.target.classList.contains('paket-select')) {
+            updateRowPrice(e.target);
+        }
+    });
+}
+
+/**
+ * Handle control button clicks
+ */
+function handleButtonClick(e) {
+    const action = e.currentTarget.getAttribute('data-action');
+    
+    switch(action) {
+        case 'save':
+            saveAsJpeg();
+            break;
+        case 'whatsapp':
+            sendWhatsApp();
+            break;
+        case 'add-row':
+            addRow();
+            break;
+        case 'print':
+            window.print();
+            break;
+    }
+}
+
+// ================= RENDER FUNCTIONS =================
+
+/**
+ * Render dropdown with package options
+ */
 function renderDropdown(select) {
     select.innerHTML = `<option value="0" data-price="0">-- Pilih Layanan --</option>`;
+    
     paketData.forEach(group => {
         const optGroup = document.createElement("optgroup");
         optGroup.label = group.label;
+        
         group.items.forEach(item => {
             const opt = document.createElement("option");
             opt.textContent = item.nama;
             opt.setAttribute("data-price", item.harga);
             optGroup.appendChild(opt);
         });
+        
         select.appendChild(optGroup);
     });
 }
 
+/**
+ * Render all dropdowns in table
+ */
 function renderAllDropdown() {
     document.querySelectorAll(".paket-select").forEach(s => renderDropdown(s));
 }
 
+// ================= CALCULATION & UPDATE FUNCTIONS =================
+
+/**
+ * Update invoice number based on date
+ */
 function updateInvoice() {
-    const d = new Date(document.getElementById("currentDate").value);
+    const d = new Date($('currentDate').value);
     const f = v => String(v).padStart(2, '0');
     const day = f(d.getDate());
     const month = f(d.getMonth() + 1);
     const year = String(d.getFullYear()).slice(-2);
-    document.getElementById("invoiceNum").value = `INV/DEJEDE/${day}${month}${year}`;
+    $('invoiceNum').value = `INV/DEJEDE/${day}${month}${year}`;
 }
 
+/**
+ * Update row price when package selected
+ */
 function updateRowPrice(select) {
+
     const price = select.options[select.selectedIndex].getAttribute("data-price") || 0;
-    select.closest("tr").querySelector(".price-input").value = price;
+
+    const input = select.closest("tr").querySelector(".price-input");
+
+    input.value = price;
+
+    formatInput(input);   // 🔥 panggil formatter langsung
     calculate();
     toggleEventFields();
 }
 
+function formatInput(input) {
+
+    let angka = input.value.replace(/\D/g, "");
+
+    if (angka === "") {
+        input.value = "";
+    } else {
+        input.value = "Rp. " + Number(angka).toLocaleString("id-ID");
+    }
+}
+
+/**
+ * Calculate all totals
+ */
 function calculate() {
+    // Calculate subtotal
     let sub = 0;
     document.querySelectorAll(".price-input").forEach(input => {
-        sub += parseFloat(input.value) || 0;
+        sub += parseFloat(input.value.replace(/\D/g, '')) || 0;
     });
 
-    const extra = (parseFloat(document.getElementById("area").value) || 0) +
-                  (parseFloat(document.getElementById("days").value) || 0);
+    // Calculate extra (area + days)
+    const extra = (parseFloat($('area').value) || 0) +
+                  (parseFloat($('days').value) || 0);
 
-    const disc = parseFloat(document.getElementById("discount").value) || 0;
-    const dp = parseFloat(document.getElementById("dp").value) || 0;
+    // Get discount & DP
+    const disc = parseFloat($('discount').value) || 0;
+    const dp = parseFloat($('dp').value) || 0;
 
+    // Calculate grand total & balance
     const grand = Math.max(0, sub + extra - disc);
     const balance = Math.max(0, grand - dp);
 
-    const fmt = n => "Rp " + n.toLocaleString("id-ID");
+    // Update display
+    $('sub').innerText = formatCurrency(sub);
+    $('extra').innerText = formatCurrency(extra);
+    $('grand').innerText = formatCurrency(grand);
+    $('balance').innerText = formatCurrency(balance);
 
-    document.getElementById("sub").innerText = fmt(sub);
-    document.getElementById("extra").innerText = fmt(extra);
-    document.getElementById("grand").innerText = fmt(grand);
-    document.getElementById("balance").innerText = fmt(balance);
+    // Update watermark & payment status
+    updatePaymentStatus(grand, balance);
+}
 
-    const wm = document.getElementById("paidWatermark");
-    const st = document.getElementById("paymentStatus");
+/**
+ * WATERMARK - LUNAS 
+ */
+function updatePaymentStatus(grand, balance) {
 
-    if(grand > 0 && balance === 0) {
-        wm.style.opacity = "0.1"; // Watermark Muncul
-        st.innerText = "LUNAS / PAID";
+    const wm = $('paidWatermark');
+    const st = $('paymentStatus');
+
+    if (grand > 0 && balance === 0) {
+
+        wm.style.opacity = "0.12";
+        wm.innerText = "LUNAS";
+
+        st.innerText = "✓ LUNAS / PAID";
         st.style.color = "#2ecc71";
+
     } else {
+
         wm.style.opacity = "0";
-        st.innerText = balance > 0 ? "MENUNGGU PELUNASAN" : "";
+        st.innerText = balance > 0 ? "⏳ MENUNGGU PELUNASAN" : "";
         st.style.color = "#f1c40f";
     }
 }
 
-function addRow() {
-    const tbody = document.querySelector("#itemTable tbody");
-    const row = tbody.insertRow();
-    row.innerHTML = `
-        <td class="no-print"><button class="btn-delete" onclick="removeRow(this)">✕</button></td>
-        <td style="font-weight:700">${tbody.rows.length}</td>
-        <td><select class="paket-select" onchange="updateRowPrice(this)"></select></td>
-        <td><input type="number" class="price-input" value="0" oninput="calculate()"></td>
-    `;
-    renderDropdown(row.querySelector(".paket-select"));
-}
-
-function removeRow(btn) {
-    btn.closest("tr").remove();
-    document.querySelectorAll("#itemTable tbody tr").forEach((row, i) => {
-        row.cells[1].innerText = i + 1;
-    });
-    calculate();
-}
-
+/**
+ * Toggle event date & location fields based on selected services
+ */
 function toggleEventFields() {
     const selects = document.querySelectorAll(".paket-select");
     let allNoEvent = true;
@@ -325,76 +532,179 @@ function toggleEventFields() {
         }
     });
 
-    const eventDate = document.getElementById("eventDateGroup");
-    const location = document.getElementById("locationGroup");
+    const eventDate = $('eventDateGroup');
+    const location = $('locationGroup');
     
-    if (allNoEvent) {
-        eventDate.style.display = "none";
-        location.style.display = "none";
-    } else {
-        eventDate.style.display = "block";
-        location.style.display = "block";
-    }
+    eventDate.style.display = allNoEvent ? "none" : "block";
+    location.style.display = allNoEvent ? "none" : "block";
 }
 
-// ================= 4. WHATSAPP FUNCTION (KOREKSI TOTAL) =================
-function sendWhatsApp() {
-    const name = document.getElementById("clientName").value || "Pelanggan";
-    const phone = document.getElementById("clientPhone").value;
-    const inv = document.getElementById("invoiceNum").value;
-    const grand = document.getElementById("grand").innerText;
-    const balance = document.getElementById("balance").innerText;
-    
-    if(!phone) { alert("Isi nomor WhatsApp klien dulu, Bos!"); return; }
+// ================= ROW MANAGEMENT =================
 
+/**
+ * Add new row to table
+ */
+function addRow() {
+    const tbody = document.querySelector("#itemTable tbody");
+    const rowNum = tbody.rows.length + 1;
+    
+    const row = tbody.insertRow();
+    row.innerHTML = `
+        <td style="text-align:center; font-weight:700;">${rowNum}</td>
+        <td>
+            <select class="paket-select" aria-label="Pilih layanan" data-field="service">
+                <option value="0">-- Pilih Layanan --</option>
+            </select>
+        </td>
+        <td>
+				<input type="text" class="price-input" inputmode="numeric" value="0"
+					aria-label="Harga layanan">
+        </td>
+        <td class="col-action no-print" style="text-align:center;">
+            <button class="btn-delete" aria-label="Hapus baris" type="button">✕</button>
+        </td>
+    `;
+    
+    renderDropdown(row.querySelector(".paket-select"));
+    
+    // Attach listener to delete button
+    row.querySelector(".btn-delete").addEventListener('click', function() {
+        removeRow(this);
+    });
+}
+
+/**
+ * Remove row from table
+ */
+function removeRow(btn) {
+    // Confirm deletion
+    if (!confirm('Yakin ingin menghapus baris ini?')) return;
+    
+    btn.closest("tr").remove();
+    
+    // Update row numbers
+    document.querySelectorAll("#itemTable tbody tr").forEach((row, i) => {
+        row.cells[0].innerText = i + 1;
+    });
+    
+    calculate();
+}
+
+// ================= WHATSAPP FUNCTION =================
+
+/**
+ * Send invoice via WhatsApp
+ */
+function sendWhatsApp() {
+    const name = $('clientName').value || "Pelanggan";
+    const phone = $('clientPhone').value;
+    const inv = $('invoiceNum').value;
+    const grand = $('grand').innerText;
+    const balance = $('balance').innerText;
+
+    // Validate phone
+    if (!phone) {
+        alert("⚠️ Isi nomor WhatsApp klien dulu, Bos!");
+        return;
+    }
+
+    if (!validatePhone(phone)) {
+        alert("⚠️ Nomor WhatsApp tidak valid!");
+        return;
+    }
+
+    // Build service list
     let detail = "";
+    let hasItem = false;
+
     document.querySelectorAll("#itemTable tbody tr").forEach((row, i) => {
         const sel = row.querySelector(".paket-select");
         const txt = sel.options[sel.selectedIndex].text;
         const prc = row.querySelector(".price-input").value;
-        if(txt.indexOf("--") === -1) {
-            detail += `${i+1}. ${txt} (Rp ${parseFloat(prc).toLocaleString('id-ID')})\n`;
+
+        if (txt && !txt.includes("--")) {
+            hasItem = true;
+            const formattedPrice = parseFloat(prc).toLocaleString('id-ID');
+            detail += `${i + 1}. ${txt}\n    Rp ${formattedPrice}\n\n`;
         }
     });
 
-    // SUSUNAN PESAN (Sudah termasuk Info Pembayaran Rekening)
-    const msg = `*INVOICE DEJEDE PHOTOGRAPHY*
+    if (!hasItem) {
+        alert("⚠️ Belum ada layanan yang dipilih, Bos!");
+        return;
+    }
 
-Halo *${name}*,
+    // Construct message
+    const msg = `*📷 INVOICE DEJEDE PHOTOGRAPHY*
+
+Halo *${name}* 👋
+
 Berikut detail pesanan Anda:
 
-📌 No: ${inv}
-📋 Layanan:
+━━━━━━━━━━━━━━━━━━━━━━
+📌 *No Invoice:* ${inv}
+
+📋 *Layanan:*
 ${detail}
+━━━━━━━━━━━━━━━━━━━━━━
 💰 *TOTAL: ${grand}*
 💳 *SISA BAYAR: ${balance}*
 
---------------------------------------------
-🏦 *INFO PEMBAYARAN:*
-• *BRI:* 6320-0100-3835-533
-• *DANA/ShopeePay:* 6285236578999
---------------------------------------------
+🏦 *INFO PEMBAYARAN*
+• BRI: 6320-0100-3835-533
+• DANA/ShopeePay: 6285236578999
 
-Mohon lakukan konfirmasi jika sudah melakukan pembayaran atau pelunasan. Terima kasih! 🙏`;
-    
-    // Perbaikan nomor: buang karakter selain angka & pastikan diawali 62
-    let cleanPhone = phone.replace(/\D/g, '');
-    if(cleanPhone.startsWith('0')) cleanPhone = '62' + cleanPhone.slice(1);
+Mohon konfirmasi jika sudah melakukan pembayaran.
+Terima kasih! 🙏
 
+#DejedePhotography`;
+
+    const cleanPhone = parsePhoneToWA(phone);
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// ================= 5. SAVE JPG =================
+
+
+
+// ================= EXPORT JPG FUNCTION =================
+
+/**
+ * Save invoice as JPEG
+ */
 function saveAsJpeg() {
-    const container = document.getElementById("invoice-container");
-    html2canvas(container, { scale: 2, useCORS: true }).then(canvas => {
+
+    const container = $('invoice-container');
+    const clientName = $('clientName').value || 'Dejede';
+    const loader = $('loadingIndicator');
+
+    loader.style.display = 'flex';
+
+    html2canvas(container, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        ignoreElements: (el) => el.id === 'loadingIndicator'
+    }).then(canvas => {
+
         const link = document.createElement("a");
-        link.download = `Invoice-${document.getElementById("clientName").value || 'Dejede'}.jpg`;
-        link.href = canvas.toDataURL("image/jpeg", 0.9);
+        link.download = `Invoice-${clientName}.jpg`;
+        link.href = canvas.toDataURL("image/jpeg", 0.92);
         link.click();
+
+        loader.style.display = 'none';
     });
-}
+}		
+
+// ================= AUTO FORMAT RUPIAH (GLOBAL & STABLE) =================
+document.addEventListener("input", function(e) {
+
+    if (!e.target.classList.contains("price-input")) return;
+
+    formatInput(e.target);
+    calculate();
+});
 </script>
+
 
 </body>
 </html>
