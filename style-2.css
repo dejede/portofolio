@@ -52,23 +52,32 @@ body {
 .no-print {
     margin-bottom: 30px;
     display: flex;
-    flex-direction: row;
-    gap: 12px;
-    padding: 14px 24px;
-    background: rgba(255, 255, 255, 0.98);
+    gap: 14px;
+    padding: 12px 22px;
+
+    /* 🔥 Hampir tidak terlihat */
+    background: rgba(255, 255, 255, 0.08);
+
+    /* 🔥 Blur lembut */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
     border-radius: 50px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    /* 🔥 Shadow sangat soft */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
     position: sticky;
     top: 20px;
     z-index: 100;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+
     align-items: center;
     justify-content: center;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    animation: slideDown 0.4s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 @keyframes slideDown {
@@ -81,7 +90,15 @@ body {
         transform: translateY(0);
     }
 }
-
+/* FLOATING BUTTON HORIZONTAL */
+.controls-container {
+    display: flex;
+    gap: 10px;
+    background: transparent;   /* 🔥 hilangkan background */
+    box-shadow: none;          /* 🔥 hilangkan bayangan */
+    padding: 0;                /* 🔥 hilangkan ruang dalam */
+    border-radius: 0;
+}
 /* Button Styling */
 .btn {
     display: flex;
@@ -474,7 +491,11 @@ td {
 .payment-methods p {
     margin: 1px 0;       /* rapat antar baris */
 }
-
+.btn-icon svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
 /* ================= DISCOUNT & DP INPUT ================= */
 .input-discount,
 .input-dp {
@@ -658,6 +679,11 @@ table .no-print {
         overflow-x: hidden;
         width: 100%;
     }
+    .controls-container {
+        width: 100%;
+        justify-content: space-around;
+        padding: 12px 8px;
+    }
 
     #invoice-container { 
         width: 100% !important;
@@ -668,28 +694,45 @@ table .no-print {
     }
 
     /* Floating Controls - MEMANJANG HORIZONTAL DI ATAS */
-    .no-print { 
-        position: sticky;
-        top: 10px;
-        left: 0;
-        right: 0;
-        width: calc(100% - 16px);
-        margin: 8px 8px 20px 8px;
-        padding: 8px 10px;
-        border-radius: 20px;
-        gap: 6px;
-        flex-wrap: wrap;
-        justify-content: center;
-        background: rgba(255,255,255,0.98);
-    }
+	.no-print { 
+    position: sticky;
+    top: 10px;
 
-    .btn { 
-        padding: 8px 12px; 
-        font-size: 10px;
-        gap: 4px;
-        flex: 0 1 auto;
-        min-width: 65px;
-    }
+    width: 100%;
+    margin: 8px 8px 16px 8px;
+    padding: 8px 12px;
+
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    /* 🔥 Ultra Transparent */
+    background: rgba(255, 255, 255, 0.08);
+
+    /* 🔥 Glass Blur */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-radius: 22px;
+
+    /* 🔥 Soft shadow */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+	.btn { 
+		padding: 5px 5px;        /* lebih proporsional */
+		font-size: 10px;          /* jangan terlalu kecil */
+		gap: 2px;
+		flex: 0 0 auto;
+		min-width: auto;
+		border-radius: 10px;      /* sedikit lebih halus */
+		font-weight: 600;         /* tidak terlalu tebal */
+		letter-spacing: 0.3px;
+	}
 
     /* HEADER COMPACT */
     .header {
