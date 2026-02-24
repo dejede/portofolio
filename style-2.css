@@ -634,7 +634,7 @@ td {
     box-shadow: none !important;
     padding: 0 !important;
     outline: none !important;
-    font-size: 16px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
     appearance: none !important;
     -webkit-appearance: none !important;
@@ -668,6 +668,10 @@ table .no-print {
     box-shadow: none !important;
     padding: 0 !important;
 }
+.is-exporting #itemTable td:nth-child(3) {
+    width: 230px !important;
+    padding-right: 15px !important;
+}
 
 /* =================================================
    RESPONSIVE MOBILE - MEMANJANG HORIZONTAL KECIL
@@ -693,7 +697,9 @@ table .no-print {
         box-shadow: none;
     }
 
+
     /* Floating Controls - MEMANJANG HORIZONTAL DI ATAS */
+	
 	.no-print { 
     position: sticky;
     top: 10px;
@@ -786,8 +792,8 @@ table .no-print {
 		display: block;
 		margin: 0 auto !important;
 		width: 120px;                /* tentukan lebar supaya bisa center */
-		text-align: right !important;/* teks tetap rata kanan */
-		font-size: 11px !important;
+		text-align: left !important;/* teks tetap rata kanan */
+		font-size: 10.5px !important;
 		font-weight: 700;
 }
 
