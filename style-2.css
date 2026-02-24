@@ -224,6 +224,19 @@ body {
     font-weight: 700;
 }
 
+.rekening-line {
+    display: flex;
+    align-items: center;
+}
+
+.account-name {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    color: #3e5241; /* warna brand */
+    text-transform: uppercase;
+}
+
 .inv-meta { text-align: right; }
 .inv-meta h2 {
     font-size: 45px;
