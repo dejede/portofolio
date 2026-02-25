@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dejede - Premium Frame Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Playfair+Display:ital,wght@0,800;1,800&display=swap" rel="stylesheet">
+
+<style>
+/* ================= VARIABLES ================= */
+:root {
+    --sage-dark: #2d4739;
+    --sage-medium: #3a5a40;
+    --sage-light: #4f6f52;
+    --gold: #ffd700;
+    --white: #ffffff;
+    --danger: #e74c3c;
+}
+
+/* ================= BACKGROUND & LIGHTING ================= */
+body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: radial-gradient(circle at 50% 0%, #4f6f52 0%, #2d4739 100%);
+    background-attachment: fixed;
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 50% -10%, rgba(255,255,255,0.18) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ================= LOGO ================= */
+.logo { position: absolute; top: 40px; right: 40px; width: 100px; z-index: 100; }
+.logo img { width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); }
+
+/* ================= FLOATING CART ================= */
+.cart {
+    position: fixed; bottom: 30px; right: 30px; background: var(--gold); color: #1a2e23;
+    padding: 16px 25px; border-radius: 50px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4); z-index: 1000; display: flex; align-items: center;
+}
+.cart-count { background: var(--danger); color: white; border-radius: 50%; padding: 2px 8px; font-size: 12px; margin-left: 10px; }
+
+/* ================= MODAL CART ================= */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+    display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px;
+}
+.modal-content {
+    background: var(--white); color: var(--sage-dark); width: 100%; max-width: 500px;
+    border-radius: 24px; padding: 30px; position: relative; max-height: 80vh; overflow-y: auto;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+.remove-item { color: var(--danger); cursor: pointer; font-weight: 800; }
+
+/* ================= BADGE MENYALA ================= */
+.badge {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    background: linear-gradient(135deg, var(--gold), #fff700);
+    color: #1a2e23;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 800;
+    z-index: 20;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 5px 15px rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255,255,255,0.5);
+    pointer-events: none;
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); transform: scale(1); }
+    50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.9); transform: scale(1.05); }
+    100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); transform: scale(1); }
+}
+
+/* ================= PRICELIST CONTENT ================= */
+.pricelist-section { padding: 120px 20px 100px; text-align: center; position: relative; z-index: 2; }
+.title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 56px); margin-bottom: 10px; font-style: italic; }
+.subtitle { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; opacity: 0.7; }
+
+.category-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+.category-tabs button {
+    padding: 12px 28px; border-radius: 30px; border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05); color: white; cursor: pointer; font-weight: 800; transition: 0.4s;
+    letter-spacing: 1px;
+}
+.category-tabs button.active { 
+    background: var(--gold); 
+    color: var(--sage-dark); 
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    transform: scale(1.05);
+}
+
+/* ================= FIX SELECTOR TATA LETAK ================= */
+.frame-selector { 
+    margin-bottom: 50px; 
+    display: flex; 
+    justify-content: center; /* Tombol tetap di tengah */
+    flex-wrap: wrap; 
+    gap: 12px; 
+    width: 100%;
+}
+
+.frame-selector button {
+    padding: 12px 24px; 
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px; 
+    background: rgba(255,255,255,0.1); 
+    color: white; 
+    cursor: pointer; 
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.frame-selector button.active { 
+    background: var(--white); 
+    color: var(--sage-dark); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.frame-grid { display: flex; justify-content: center; align-items: flex-end; gap: 60px; flex-wrap: wrap; perspective: 1500px; }
+.frame-item { position: relative; display: none; flex-direction: column; align-items: center; }
+.frame-item.active { display: flex; }
+
+.frame { position: relative; transform-style: preserve-3d; transition: 0.2s ease; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.5)); }
+.frame.large { width: 320px; }
+.frame.medium { width: 260px; }
+.frame.small { width: 220px; }
+.frame.xsmall { width: 180px; } 
+.frame.xxsmall { width: 150px; }
+
+.photo { position: absolute; top: 8%; left: 9%; right: 9%; bottom: 8%; overflow: hidden; z-index: 1; }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.frame-outer { width: 100%; display: block; z-index: 3; position: relative; }
+.inner-shadow { position: absolute; top: 8%; left: 9%; right: 9%; bottom: 8%; box-shadow: inset 0 0 50px rgba(0,0,0,0.7); z-index: 2; }
+.glass-reflection { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4), transparent 70%); mix-blend-mode: screen; opacity: 0; z-index: 5; }
+
+.price { margin-top: 25px; font-size: 32px; font-weight: 800; color: var(--gold); }
+.size-info { font-size: 12px; opacity: 0.7; margin-bottom: 15px; }
+
+.add-btn {
+    padding: 10px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: 800;
+    background: var(--white); color: var(--sage-dark); transition: 0.3s;
+}
+.add-btn:hover { background: var(--gold); transform: scale(1.1); }
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .pricelist-section { padding: 60px 10px 60px; }
+    .logo { left: 50%; transform: translateX(-50%); top: 15px; width: 70px; }
+    .frame.large { width: 260px; } 
+    .frame.medium { width: 220px; }
+    .frame.small { width: 185px; }
+    .frame.xsmall { width: 155px; }
+    .frame.xxsmall { width: 130px; }
+    .cart { bottom: 15px; right: 15px; padding: 12px 20px; }
+    .badge { font-size: 12px; padding: 6px 12px; top: -10px; left: -5px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo"><img src="images/logo.png" alt="Logo"></div>
+
+<div class="cart" id="openCart">🛒 <span class="cart-count" id="count">0</span></div>
+
+<div class="modal-overlay" id="modalCart">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Daftar Pesanan</h3>
+            <span class="close-modal" id="closeCart" style="cursor:pointer; font-size:24px;">&times;</span>
+        </div>
+        <div id="cartList"></div>
+        <button id="sendWA" style="width:100%; background:#25d366; color:white; border:none; padding:15px; border-radius:12px; font-weight:800; margin-top:20px; cursor:pointer;">Kirim ke WhatsApp</button>
+    </div>
+</div>
+
+<section class="pricelist-section">
+    <h1 class="title">Exclusive Gallery</h1>
+    <p class="subtitle">Premium Frame & Printing Collections</p>
+
+    <div class="category-tabs">
+        <button class="tab-btn active" onclick="switchCategory('premium', this)">PREMIUM</button>
+        <button class="tab-btn" onclick="switchCategory('minimalis', this)">MINIMALIS</button>
+    </div>
+
+    <div id="selector-premium" class="frame-selector">
+        <button data-frame="premium-gold.png" class="active">Gold Premium</button>
+        <button data-frame="premium-silver.png">Silver Premium</button>
+        <button data-frame="premium-black.png">Black Premium</button>
+        <button data-frame="premium-white.png">White Premium</button>
+    </div>
+
+    <div id="selector-minimalis" class="frame-selector" style="display:none;">
+        <button data-frame="min-white.png" class="active">White Min</button>
+        <button data-frame="min-black.png">Black Min</button>
+        <button data-frame="min-gold.png">Gold Min</button>
+        <button data-frame="min-silver.png">Silver Min</button>
+        <button data-frame="min-wood.png">Wood Min</button>
+    </div>
+
+    <div class="frame-grid">
+        <div class="frame-item active" data-category="premium" data-name="Premium 24 RS (60x90)" data-price="750K">
+            <div class="badge">24 RS SIGNATURE</div>
+            <div class="frame large">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <div class="inner-shadow"></div>
+                <img src="images/premium-gold.png" class="frame-outer">
+            </div>
+            <div class="price">750K</div>
+            <div class="size-info">PREMIUM | 60 x 90 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item active" data-category="premium" data-name="Premium 20 RS (50x75)" data-price="600K">
+            <div class="badge">20 RS</div>
+            <div class="frame medium">
+                <div class="photo"><img src="images/frame-2.jpg"><div class="glass-reflection"></div></div>
+                <div class="inner-shadow"></div>
+                <img src="images/premium-gold.png" class="frame-outer">
+            </div>
+            <div class="price">600K</div>
+            <div class="size-info">PREMIUM | 50 x 75 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item active" data-category="premium" data-name="Premium 16 RS (40x60)" data-price="485K">
+            <div class="badge">16 RS</div>
+            <div class="frame small">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <div class="inner-shadow"></div>
+                <img src="images/premium-gold.png" class="frame-outer">
+            </div>
+            <div class="price">485K</div>
+            <div class="size-info">PREMIUM | 40 x 60 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item active" data-category="premium" data-name="Premium 12 RS (30x45)" data-price="200K">
+            <div class="badge">12 RS</div>
+            <div class="frame xsmall">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <div class="inner-shadow"></div>
+                <img src="images/premium-gold.png" class="frame-outer">
+            </div>
+            <div class="price">200K</div>
+            <div class="size-info">PREMIUM | 30 x 45 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item" data-category="minimalis" data-name="Minimalis 24 RS (60x90)" data-price="500K">
+            <div class="badge">24 RS</div>
+            <div class="frame large">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <img src="images/min-white.png" class="frame-outer">
+            </div>
+            <div class="price">500K</div>
+            <div class="size-info">MINIMALIS | 60 x 90 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item" data-category="minimalis" data-name="Minimalis 20 RS (50x75)" data-price="400K">
+            <div class="badge">20 RS</div>
+            <div class="frame medium">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <img src="images/min-white.png" class="frame-outer">
+            </div>
+            <div class="price">400K</div>
+            <div class="size-info">MINIMALIS | 50 x 75 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item" data-category="minimalis" data-name="Minimalis 16 RS (40x60)" data-price="285K">
+            <div class="badge">16 RS</div>
+            <div class="frame small">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <img src="images/min-white.png" class="frame-outer">
+            </div>
+            <div class="price">285K</div>
+            <div class="size-info">MINIMALIS | 40 x 60 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item" data-category="minimalis" data-name="Minimalis 12 RS (30x45)" data-price="150K">
+            <div class="badge">12 RS</div>
+            <div class="frame xsmall">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <img src="images/min-white.png" class="frame-outer">
+            </div>
+            <div class="price">150K</div>
+            <div class="size-info">MINIMALIS | 30 x 45 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+
+        <div class="frame-item" data-category="minimalis" data-name="Minimalis 10 RS (20x30)" data-price="55K">
+            <div class="badge">10 RS</div>
+            <div class="frame xxsmall">
+                <div class="photo"><img src="images/frame-1.jpg"><div class="glass-reflection"></div></div>
+                <img src="images/min-white.png" class="frame-outer">
+            </div>
+            <div class="price">55K</div>
+            <div class="size-info">MINIMALIS | 20 x 30 CM</div>
+            <button class="add-btn">Tambah</button>
+        </div>
+    </div>
+</section>
+
+<script>
+let selectedFrame = "premium-gold.png"; // Default awal premium
+let cart = [];
+
+// 1. Fungsi Ganti Kategori
+function switchCategory(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.frame-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.category === cat);
+    });
+
+    const selPremium = document.getElementById('selector-premium');
+    const selMinimalis = document.getElementById('selector-minimalis');
+    
+    if (cat === 'premium') {
+        selPremium.style.display = 'flex'; 
+        selMinimalis.style.display = 'none';
+        updateFrameImages('premium-gold.png'); 
+        resetActiveSelector(selPremium);
+    } else {
+        selPremium.style.display = 'none';
+        selMinimalis.style.display = 'flex';
+        updateFrameImages('min-white.png'); 
+        resetActiveSelector(selMinimalis);
+    }
+}
+
+function resetActiveSelector(parent) {
+    parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    parent.querySelector('button').classList.add('active');
+}
+
+// 2. Fungsi Update Gambar Frame
+function updateFrameImages(frameFile) {
+    selectedFrame = frameFile;
+    document.querySelectorAll('.frame-outer').forEach(img => { 
+        img.src = "images/" + frameFile; 
+    });
+}
+
+// 3. Logic Klik Tombol Warna
+document.querySelectorAll('.frame-selector button').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const parent = this.parentElement;
+        parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        updateFrameImages(this.dataset.frame);
+    });
+});
+
+// 4. Cart Logic
+document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.onclick = (e) => {
+        const item = e.target.closest('.frame-item');
+        cart.push({ 
+            id: Date.now(), 
+            name: item.dataset.name, 
+            price: item.dataset.price, 
+            frame: selectedFrame 
+        });
+        document.getElementById('count').innerText = cart.length;
+        // Feedback visual sederhana
+        btn.innerText = "Ditambahkan!";
+        setTimeout(() => btn.innerText = "Tambah", 1000);
+    };
+});
+
+const modal = document.getElementById('modalCart');
+document.getElementById('openCart').onclick = () => {
+    const list = document.getElementById('cartList');
+    if(cart.length === 0) { 
+        list.innerHTML = "<p style='text-align:center;'>Keranjang kosong.</p>"; 
+    } else {
+        list.innerHTML = cart.map(i => `
+            <div class="cart-item">
+                <div class="item-info">
+                    <h4>${i.name}</h4>
+                    <p>${i.frame.replace('.png','')} | ${i.price}</p>
+                </div>
+                <div class="remove-item" onclick="removeItem(${i.id})">Hapus</div>
+            </div>
+        `).join('');
+    }
+    modal.style.display = 'flex';
+};
+
+function removeItem(id) {
+    cart = cart.filter(i => i.id !== id);
+    document.getElementById('count').innerText = cart.length;
+    document.getElementById('openCart').onclick();
+}
+
+document.getElementById('closeCart').onclick = () => modal.style.display = 'none';
+
+document.getElementById('sendWA').onclick = () => {
+    if(cart.length === 0) return alert("Pilih produk dahulu");
+    let msg = "Halo Dejede, saya mau pesan:%0A";
+    cart.forEach(i => msg += `- ${i.name} (${i.frame.replace('.png','')}) - ${i.price}%0A`);
+    window.open("https://wa.me/6285236578999?text=" + msg);
+};
+
+// 5. 3D Engine
+document.querySelectorAll('.frame').forEach(frame => {
+    const glass = frame.querySelector('.glass-reflection');
+    let rX = 0, rY = 0, cX = 0, cY = 0;
+    function animate(){
+        cX += (rX - cX) * 0.08; cY += (rY - cY) * 0.08;
+        frame.style.transform = `rotateX(${cX}deg) rotateY(${cY}deg)`;
+        requestAnimationFrame(animate);
+    }
+    animate();
+    frame.addEventListener('mousemove', e => {
+        const r = frame.getBoundingClientRect();
+        rY = ((e.clientX - r.left - r.width/2) / (r.width/2)) * 10;
+        rX = -((e.clientY - r.top - r.height/2) / (r.height/2)) * 10;
+        glass.style.opacity = 1;
+    });
+    frame.addEventListener('mouseleave', () => { rX = 0; rY = 0; glass.style.opacity = 0; });
+});
+</script>
+
+</body>
+</html>
