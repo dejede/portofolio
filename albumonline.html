@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Flipbook 10 Sheets</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --w: 800px;
+    --h: 600px;
+    --speed: 1.3s;
+    --gold: #d4af37;
+    --bg-color: #0d0d0d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    perspective: 2500px;
+}
+
+/* Orientation warning untuk mobile */
+.orientation-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    color: var(--gold);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.orientation-warning p {
+    margin: 20px;
+    font-size: 1.5rem;
+}
+
+/* Stage */
+.stage {
+    position: relative;
+    width: var(--w);
+    height: var(--h);
+    transition: transform var(--speed) cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform-style: preserve-3d;
+}
+
+.stage.is-open {
+    transform: translateX(50%);
+}
+
+/* Book */
+.book {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/* Page */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform var(--speed) cubic-bezier(0.645, 0.045, 0.355, 1);
+    cursor: pointer;
+}
+
+.page.flipped {
+    transform: rotateY(-180deg);
+}
+
+/* Front & Back */
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+}
+
+.back {
+    transform: rotateY(180deg);
+    background: #fdfdfd;
+}
+
+/* Fold Shadow */
+.page .fold-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, transparent 15%, transparent 85%, rgba(0,0,0,0.05) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.spine-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: rgba(0,0,0,0.1);
+    z-index: 11;
+}
+
+/* Cover */
+.cover {
+    background: linear-gradient(135deg, #2c1e12, #111) !important;
+    color: var(--gold);
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #333;
+}
+
+.cover h1 {
+    font-family: 'Playfair Display';
+    font-size: 3.5rem;
+    margin: 0;
+    text-align: center;
+}
+
+.cover p {
+    margin: 15px 0 0 0;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Image */
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 12px;
+}
+
+/* Nav */
+.nav-ui {
+    margin-top: 80px;
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    padding: 12px 35px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+button:hover:not(:disabled) {
+    background: var(--gold);
+    color: black;
+}
+
+button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+/* ============ RESPONSIVE MOBILE ============ */
+@media (max-width: 1024px) {
+    :root {
+        --w: 500px;
+        --h: 370px;
+    }
+
+    .cover h1 {
+        font-size: 2rem;
+    }
+
+    .cover p {
+        font-size: 0.8rem;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .nav-ui {
+        margin-top: 50px;
+        gap: 10px;
+    }
+}
+
+/* Landscape mode untuk mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    :root {
+        --w: 800px;
+        --h: 380px;
+    }
+
+    .nav-ui {
+        margin-top: 30px;
+        gap: 15px;
+    }
+
+    button {
+        padding: 10px 25px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Portrait mode warning - jika screen kecil dan portrait */
+@media (max-width: 768px) and (orientation: portrait) {
+    .orientation-warning {
+        display: flex;
+    }
+
+    .main-content {
+        display: none;
+    }
+}
+
+/* Landscape mode untuk phone - tampilkan album */
+@media (max-width: 768px) and (orientation: landscape) {
+    .orientation-warning {
+        display: none;
+    }
+
+    .main-content {
+        display: flex;
+    }
+
+    :root {
+        --w: 70vw;
+        --h: 70vh;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+
+    .nav-ui {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .cover h1 {
+        font-size: 2.2rem;
+    }
+
+    .cover p {
+        font-size: 0.9rem;
+        margin: 10px 0 0 0;
+    }
+
+    img {
+        padding: 8px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Warning untuk portrait mode di mobile -->
+<div class="orientation-warning">
+    <p>🔄 Putar ke Landscape</p>
+    <p>untuk pengalaman terbaik</p>
+</div>
+
+<!-- Main content -->
+<div class="main-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%;">
+
+<div class="stage" id="stage">
+<div class="book">
+
+<!-- 10 SHEETS -->
+
+<script>
+for(let i=1;i<=10;i++){
+document.write(`
+<div class="page" id="p${i}" style="z-index:${11-i};">
+    <div class="front ${i===1?'cover':''}">
+        <div class="fold-shadow"></div>
+        ${i===1?'<h1>Rama & Sinta</h1><p>The Eternal Wedding</p>':
+        `<img src="https://picsum.photos/1200/900?random=${i*2-1}">`}
+    </div>
+    <div class="back ${i===10?'cover':''}">
+        ${i!==10?'<div class="spine-line"></div>':''}
+        <div class="fold-shadow"></div>
+        ${i===10?'<h1>Thank You</h1><p>Happy Ever After</p>':
+        `<img src="https://picsum.photos/1200/900?random=${i*2}">`}
+    </div>
+</div>
+`);
+}
+</script>
+
+</div>
+</div>
+
+<div class="nav-ui">
+    <button id="prevBtn" onclick="goPrev()">KEMBALI</button>
+    <button id="nextBtn" onclick="goNext()">LANJUT</button>
+    <button onclick="resetBook()">RESET</button>
+</div>
+
+</div>
+
+<script>
+let currentLoc = 1;
+const totalSheets = 10;
+const stage = document.getElementById('stage');
+const nextBtn = document.getElementById('nextBtn');
+const prevBtn = document.getElementById('prevBtn');
+
+function updateButtons(){
+    prevBtn.disabled = (currentLoc === 1);
+    nextBtn.disabled = (currentLoc > totalSheets);
+}
+
+function goNext(){
+    if(currentLoc <= totalSheets){
+        const page = document.getElementById(`p${currentLoc}`);
+        page.classList.add("flipped");
+
+        if(currentLoc === 1) stage.classList.add("is-open");
+
+        setTimeout(()=>{
+            page.style.zIndex = currentLoc;
+        },600);
+
+        currentLoc++;
+        updateButtons();
+    }
+}
+
+function goPrev(){
+    if(currentLoc > 1){
+        currentLoc--;
+        const page = document.getElementById(`p${currentLoc}`);
+        page.classList.remove("flipped");
+
+        if(currentLoc === 1) stage.classList.remove("is-open");
+
+        page.style.zIndex = (totalSheets+1) - currentLoc;
+        updateButtons();
+    }
+}
+
+function resetBook() {
+
+    document.querySelectorAll('.page').forEach(p => {
+        p.style.transition = "none";
+    });
+
+    stage.style.transition = "none";
+    stage.classList.remove("is-open");
+
+    for (let i = 1; i <= totalSheets; i++) {
+        const page = document.getElementById(`p${i}`);
+        page.classList.remove("flipped");
+        page.style.zIndex = (totalSheets + 1) - i;
+    }
+
+    currentLoc = 1;
+    updateButtons();
+
+    setTimeout(() => {
+        document.querySelectorAll('.page').forEach(p => {
+            p.style.transition = "";
+        });
+        stage.style.transition = "";
+    }, 50);
+}
+
+document.addEventListener("click",e=>{
+    if(e.target.closest(".page")){
+        const p = e.target.closest(".page");
+        if(p.classList.contains("flipped")) goPrev();
+        else goNext();
+    }
+});
+
+// Detect orientation change
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100);
+});
+
+updateButtons();
+</script>
+
+</body>
+</html>
