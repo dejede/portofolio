@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>dejede photo & video - Data Sender</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            /* Palette Sage Green Modern */
+            --primary-color: #606c38;
+            --primary-hover: #283618;
+            --bg-color: #f4f6f0;
+            --card-bg: #ffffff;
+            --text-main: #2c3531;
+            --text-muted: #6b705c;
+            --border-color: #e2e8f0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px; /* Dikurangi sedikit agar lebih pas di layar HP */
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 450px;
+            padding: 32px 24px; /* Padding dioptimalkan untuk ruang HP */
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(96, 108, 56, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        /* Container Logo PNG Ukuran Sedang */
+        .logo-box {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 8px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 21px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            text-transform: lowercase;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-main);
+            background-color: #fafbfa;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.25s ease;
+            -webkit-appearance: none; /* Mencegah style bawaan iOS */
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(96, 108, 56, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #a0aec0;
+        }
+
+        .btn-send {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 24px;
+            box-shadow: 0 4px 12px rgba(96, 108, 56, 0.15);
+            -webkit-tap-highlight-color: transparent; /* Menghilangkan efek warna biru saat di-tap di HP */
+        }
+
+        .btn-send:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-send:active {
+            transform: scale(0.98); /* Efek membal saat ditekan di layar HP */
+        }
+
+        .btn-send img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .disclaimer {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 11px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .disclaimer strong {
+            color: #c08552;
+            font-weight: 600;
+        }
+
+        /* RESPONSIVE ADJUSTMENT UNTUK HP LAYAR KECIL */
+        @media (max-width: 375px) {
+            .container {
+                padding: 24px 16px;
+                border-radius: 18px;
+            }
+            h1 {
+                font-size: 19px;
+            }
+            input[type="text"], .btn-send {
+                font-size: 13px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <!-- Logo Utama Menggunakan PNG -->
+        <div class="logo-box">
+            <img src="images/logo.png" alt="dejede Logo">
+        </div>
+        <h1>dejede photo & video</h1>
+        <p class="subtitle">Sistem Pengiriman Data Foto Siswa</p>
+    </div>
+    
+    <!-- PERBAIKAN: Nomor WA disesuaikan langsung ke format angka internasional yang benar tanpa awalan 08 (langsung 62) -->
+    <input type="hidden" id="nomorWaTujuan" value="6285236578999">
+
+    <div class="form-group">
+        <label for="namaSiswa">Nama Lengkap Siswa</label>
+        <input type="text" id="namaSiswa" placeholder="Masukkan nama lengkap siswa" required autocomplete="off">
+    </div>
+
+    <div class="form-group">
+        <label for="watermark">Nomor / Nama File Watermark</label>
+        <input type="text" id="watermark" placeholder="Contoh: IMG_4521 atau No. 08" required autocomplete="off">
+    </div>
+
+    <div class="form-group">
+        <label for="asalSekolah">Asal Sekolah</label>
+        <input type="text" id="asalSekolah" placeholder="Masukkan asal sekolah siswa" required autocomplete="off">
+    </div>
+
+    <button onclick="kirimKeWhatsApp()" class="btn-send">
+        <!-- Icon Tombol Menggunakan SVG Lokal -->
+        <img src="images/wa-icon.svg" alt="WhatsApp Icon">
+        Kirim Data ke WhatsApp
+    </button>
+    
+    <div class="disclaimer">
+        <strong>Catatan:</strong> Mohon teliti kembali sebelum mengirimkan data nama dan data foto. Segala bentuk kesalahan penulisan, kami <u>dejede</u> tidak bertanggung jawab. Data yang diproses adalah sesuai dengan yang kami terima.
+    </div>
+</div>
+
+<script>
+function kirimKeWhatsApp() {
+    const nomorWA = document.getElementById('nomorWaTujuan').value;
+    const nama = document.getElementById('namaSiswa').value.trim();
+    const watermark = document.getElementById('watermark').value.trim();
+    const sekolah = document.getElementById('asalSekolah').value.trim();
+
+    if (nama === "" || watermark === "" || sekolah === "") {
+        alert("Mohon isi semua data terlebih dahulu!");
+        return;
+    }
+
+    const teksPesan = `ini adalah nama siswa *${nama}* dengan nomor atau watermark *${watermark}* asal sekolah *${sekolah}*`;
+    const pesanSandi = encodeURIComponent(teksPesan);
+    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${nomorWA}&text=${pesanSandi}`;
+
+    window.open(urlWhatsApp, '_blank');
+}
+</script>
+
+</body>
+</html>
