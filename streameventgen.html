@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Brief Form - Dejede Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .section-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-box h3 {
+            margin-top: 0;
+            color: #818cf8;
+            font-size: 16px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        /* --- CUSTOM DATEPICKER / KALENDER PRO STYLING --- */
+        .date-picker-wrapper {
+            position: relative;
+            user-select: none;
+        }
+
+        .date-input-display {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-main);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .date-input-display:hover {
+            border-color: var(--accent);
+        }
+
+        .calendar-popup {
+            position: absolute;
+            top: 105%;
+            left: 0;
+            width: 100%;
+            max-width: 340px;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            z-index: 99;
+            display: none;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+        }
+
+        .calendar-popup.open {
+            display: block;
+        }
+
+        .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .cal-header span {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .cal-btn {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .cal-btn:hover {
+            background: var(--accent);
+        }
+
+        .cal-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .cal-day:hover:not(.empty) {
+            background: rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+        }
+
+        .cal-day.empty {
+            cursor: default;
+        }
+
+        .cal-day.selected {
+            background: var(--accent);
+            color: white;
+            font-weight: 700;
+        }
+
+        .cal-day.today {
+            border: 1px dashed var(--accent);
+        }
+        /* ----------------------------------------------- */
+
+        /* --- CUSTOM SELECT DROPDOWN STYLING --- */
+        .custom-select-wrapper {
+            position: relative;
+            user-select: none;
+        }
+
+        .custom-select {
+            position: relative;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .custom-select:hover {
+            border-color: var(--accent);
+        }
+
+        .custom-options {
+            position: absolute;
+            top: 105%;
+            left: 0;
+            right: 0;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 99;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .custom-options.open {
+            display: block;
+        }
+
+        .custom-option {
+            padding: 10px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+            font-size: 13px;
+            transition: background 0.15s;
+        }
+
+        .custom-option:hover {
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        .dropdown-color-preview {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .mini-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.3);
+            display: inline-block;
+        }
+        /* ------------------------------------- */
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+        .row .form-group {
+            flex: 1;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #fff;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-wa { background-color: #10b981; }
+        .btn-wa:hover { background-color: #059669; }
+
+        .btn-pdf { background-color: var(--accent); }
+        .btn-pdf:hover { background-color: var(--accent-hover); }
+
+        .dynamic-list {
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-add {
+            background-color: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            padding: 8px 14px;
+            border: 1px dashed var(--accent);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .btn-del {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 0 14px;
+            font-weight: bold;
+        }
+
+        #pdf-template {
+            display: none;
+        }
+
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    body {
+        background: #ffffff !important;
+        color: #111 !important;
+        padding: 0 !important;
+    }
+    .container {
+        display: none !important;
+    }
+    #pdf-template {
+        display: block !important;
+        width: 100%;
+        background: #ffffff;
+        color: #111;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        padding: 10mm;
+        box-sizing: border-box;
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>DEJEDE STREAM EVENT</h1>
+    <p class="subtitle">Isi brief acara kamu di bawah ini, beres langsung kirim & cetak report! ✨</p>
+
+    <form id="clientForm">
+        <div class="section-box">
+            <h3>📌 1. Informasi & Tema Acara</h3>
+            <div class="form-group">
+                <label>Nama Acara / Event Utama</label>
+                <input type="text" id="nama_acara" placeholder="Contoh: DEJEDE STUDIO" required>
+            </div>
+            
+            <!-- Custom Pro Calendar Input -->
+            <div class="form-group">
+                <label>Tanggal Acara</label>
+                <div class="date-picker-wrapper">
+                    <div class="date-input-display" id="dateInputDisplay" onclick="toggleCalendar()">
+                        <span id="dateDisplayText">Pilih Tanggal Acara...</span>
+                        <span>📅</span>
+                    </div>
+                    <div class="calendar-popup" id="calendarPopup">
+                        <div class="cal-header">
+                            <button type="button" class="cal-btn" onclick="changeMonth(-1)">❮</button>
+                            <span id="calMonthYearTitle">Bulan Tahun</span>
+                            <button type="button" class="cal-btn" onclick="changeMonth(1)">❯</button>
+                        </div>
+                        <div class="cal-weekdays">
+                            <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+                        </div>
+                        <div class="cal-grid" id="calGridContainer"></div>
+                    </div>
+                </div>
+                <input type="hidden" id="tanggal_acara" required>
+            </div>
+
+            <div class="form-group">
+                <label>Deskripsi Acara (Baris 1 & 2)</label>
+                <input type="text" id="desc_1" placeholder="Deskripsi Acara Baris 1" style="margin-bottom: 8px;">
+                <input type="text" id="desc_2" placeholder="Deskripsi Acara Baris 2">
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>Warna Tema Acara (Eksternal JSON)</label>
+                    <div class="custom-select-wrapper">
+                        <div class="custom-select" id="customSelectTrigger" onclick="toggleDropdown()">
+                            <span id="selected-value-text">Pilih Tema Warna...</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="custom-options" id="customOptionsContainer"></div>
+                    </div>
+                    <input type="hidden" id="warna_tema" value="facebook">
+                </div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h3>🎙️ 2. Manajemen Pembicara</h3>
+            <div id="pembicara-container">
+                <div class="dynamic-list">
+                    <input type="text" placeholder="Nama Pembicara" class="pem-nama">
+                    <input type="text" placeholder="Jabatan / Profesi" class="pem-jabatan">
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="addPembicara()">+ Tambah Pembicara</button>
+        </div>
+
+        <div class="section-box">
+            <h3>✨ 3. Manajemen Pengisi Acara / MC</h3>
+            <div id="pengisi-container">
+                <div class="dynamic-list">
+                    <input type="text" placeholder="Nama Pengisi Acara" class="peng-nama">
+                    <input type="text" placeholder="Deskripsi / Peran" class="peng-desc">
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="addPengisi()">+ Tambah Pengisi Acara</button>
+        </div>
+
+        <div class="section-box">
+            <h3>🌐 4. Sosial Media & Kontak Perusahaan</h3>
+            <div class="row">
+                <div class="form-group">
+                    <label>YouTube Handle</label>
+                    <input type="text" id="sos_yt" placeholder="@namachannel">
+                </div>
+                <div class="form-group">
+                    <label>Facebook Handle</label>
+                    <input type="text" id="sos_fb" placeholder="@namafacebook">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>Instagram Handle</label>
+                    <input type="text" id="sos_ig" placeholder="@namainstagram">
+                </div>
+                <div class="form-group">
+                    <label>TikTok Handle</label>
+                    <input type="text" id="sos_tt" placeholder="@namatiktok">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Nomor WhatsApp Bisnis</label>
+                <input type="text" id="sos_wa" placeholder="+628xxxxxxxxxx">
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn-wa" onclick="sendToWhatsApp()">Kirim ke WhatsApp 📱</button>
+            <button type="button" class="btn-pdf" onclick="downloadPDFReport()">Download PDF Report 📄</button>
+        </div>
+    </form>
+</div>
+
+<!-- ================= TEMPLATE LAPORAN PDF ================= -->
+<div id="pdf-template">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #1e293b; padding-bottom: 10px; margin-bottom: 15px;">
+        <div>
+            <h2 style="margin: 0; color: #1e293b; font-size: 18px; text-transform: uppercase;">DEJEDE STREAM EVENT</h2>
+            <p style="margin: 2px 0 0 0; font-size: 10px; color: #64748b;">Official Client Event Brief Report</p>
+        </div>
+        <div style="text-align: right; font-size: 10px; color: #64748b;">
+            Tanggal Cetak: <span id="report-date"></span>
+        </div>
+    </div>
+
+    <!-- 1. INFORMASI UTAMA ACARA -->
+    <div style="margin-bottom: 12px;">
+        <h4 style="background: #f1f5f9; color: #1e293b; padding: 5px 8px; margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; border-left: 3px solid #6366f1;">1. Informasi Utama Acara</h4>
+        <table style="width: 100%; font-size: 10px; border-collapse: collapse;">
+            <tr><td style="width: 28%; padding: 4px 0; font-weight: bold; color: #475569;">Nama Acara:</td><td style="padding: 4px 0;" id="rep-nama-acara">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">Tanggal Acara:</td><td style="padding: 4px 0;" id="rep-tanggal-acara">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">Deskripsi Baris 1:</td><td style="padding: 4px 0;" id="rep-desc-1">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">Deskripsi Baris 2:</td><td style="padding: 4px 0;" id="rep-desc-2">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">Warna Tema:</td><td style="padding: 4px 0;" id="rep-tema">-</td></tr>
+        </table>
+    </div>
+
+    <!-- 2. MANAJEMEN PEMBICARA -->
+    <div style="margin-bottom: 12px;">
+        <h4 style="background: #f1f5f9; color: #1e293b; padding: 5px 8px; margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; border-left: 3px solid #6366f1;">2. Manajemen Pembicara</h4>
+        <table style="width: 100%; font-size: 10px; border-collapse: collapse;" id="rep-table-pembicara">
+            <tr style="border-bottom: 1px solid #cbd5e1; text-align: left;">
+                <th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pembicara</th>
+                <th style="width: 72%; padding: 4px 0; color: #475569;">Jabatan / Profesi</th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 3. PENGISI ACARA / MC -->
+    <div style="margin-bottom: 12px;">
+        <h4 style="background: #f1f5f9; color: #1e293b; padding: 5px 8px; margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; border-left: 3px solid #6366f1;">3. Pengisi Acara / MC</h4>
+        <table style="width: 100%; font-size: 10px; border-collapse: collapse;" id="rep-table-pengisi">
+            <tr style="border-bottom: 1px solid #cbd5e1; text-align: left;">
+                <th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pengisi Acara</th>
+                <th style="width: 72%; padding: 4px 0; color: #475569;">Deskripsi / Peran</th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 4. SOSIAL MEDIA & KONTAK PERUSAHAAN -->
+    <div style="margin-bottom: 12px;">
+        <h4 style="background: #f1f5f9; color: #1e293b; padding: 5px 8px; margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; border-left: 3px solid #6366f1;">4. Sosial Media & Kontak Perusahaan</h4>
+        <table style="width: 100%; font-size: 10px; border-collapse: collapse;">
+            <tr><td style="width: 28%; padding: 4px 0; font-weight: bold; color: #475569;">YouTube:</td><td style="padding: 4px 0;" id="rep-yt">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">Facebook:</td><td style="padding: 4px 0;" id="rep-fb">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">Instagram:</td><td style="padding: 4px 0;" id="rep-ig">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">TikTok:</td><td style="padding: 4px 0;" id="rep-tt">-</td></tr>
+            <tr><td style="padding: 4px 0; font-weight: bold; color: #475569;">WhatsApp:</td><td style="padding: 4px 0;" id="rep-wa">-</td></tr>
+        </table>
+    </div>
+
+    <div style="margin-top: 20px; text-align: right; font-size: 9px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+        Dokumen ini digenerate secara otomatis oleh sistem Dejede Stream Event.
+    </div>
+</div>
+
+<script>
+    // Data JSON Tema Warna Eksternal
+    const externalThemes = {
+        "facebook": { "c1": "#1877F2", "c2": "#0e5bb5" },
+        "youtube": { "c1": "#FF0000", "c2": "#cc0000" },
+        "instagram": { "c1": "#833ab4", "c2": "#fd1d1d" },
+        "twitter_x": { "c1": "#14171a", "c2": "#657786" },
+        "tiktok": { "c1": "#00f2ea", "c2": "#ff0050" },
+        "twitch": { "c1": "#9146ff", "c2": "#772ce8" },
+        "whatsapp": { "c1": "#25D366", "c2": "#128C7E" },
+        "telegram": { "c1": "#229ED9", "c2": "#1785b8" },
+        "discord": { "c1": "#5865F2", "c2": "#404eed" },
+        "spotify": { "c1": "#1DB954", "c2": "#1aa34a" },
+        "linkedin": { "c1": "#0a66c2", "c2": "#004182" },
+        "pinterest": { "c1": "#E60023", "c2": "#bd001d" },
+        "reddit": { "c1": "#FF4500", "c2": "#cc3700" },
+        "github": { "c1": "#24292e", "c2": "#1b1f23" },
+        "snapchat": { "c1": "#FFFC00", "c2": "#e5df00" },
+        "macos": { "c1": "#333333", "c2": "#000000" },
+        "kde": { "c1": "#3daee9", "c2": "#2980b9" },
+        "gnome": { "c1": "#3584e4", "c2": "#1c71d8" },
+        "windows": { "c1": "#0078d4", "c2": "#005a9e" },
+        "ubuntu": { "c1": "#E95420", "c2": "#77216F" },
+        "arch_linux": { "c1": "#1793d1", "c2": "#0f628c" },
+        "fedora": { "c1": "#294172", "c2": "#1e2f4f" },
+        "android": { "c1": "#3DDC84", "c2": "#228B48" },
+        "neon": { "c1": "#ff007f", "c2": "#9146ff" },
+        "cyberpunk": { "c1": "#fcee0c", "c2": "#00ffcc" },
+        "sunset": { "c1": "#ff5e62", "c2": "#ff9966" },
+        "emerald": { "c1": "#11998e", "c2": "#38ef7d" },
+        "royal_purple": { "c1": "#4e54c8", "c2": "#8f94fb" },
+        "cyber_pink": { "c1": "#ff0844", "c2": "#ffb199" },
+        "midnight": { "c1": "#232526", "c2": "#414345" },
+        "atomic_tangerine": { "c1": "#f12711", "c2": "#f5af19" },
+        "electric_violet": { "c1": "#4776E6", "c2": "#8E54E9" },
+        "lime_punch": { "c1": "#A8FF78", "c2": "#78FFD6" },
+        "neo_tokyo": { "c1": "#F77062", "c2": "#FE5196" },
+        "deep_blue": { "c1": "#6a11cb", "c2": "#2575fc" },
+        "hyper_drive": { "c1": "#00c6ff", "c2": "#0072ff" },
+        "lush_green": { "c1": "#56ab2f", "c2": "#a8e063" },
+        "orange_fun": { "c1": "#fc4a1a", "c2": "#f7b733" },
+        "purple_love": { "c1": "#cc2b5e", "c2": "#753a88" },
+        "stellar": { "c1": "#283c86", "c2": "#45a247" },
+        "crystal_clear": { "c1": "#155799", "c2": "#159957" },
+        "peach_puff": { "c1": "#ED4264", "c2": "#FFEDBC" },
+        "neon_carrot": { "c1": "#ffa751", "c2": "#ffe259" },
+        "aqua_marine": { "c1": "#1A2980", "c2": "#26D0CE" },
+        "cherry_blossom": { "c1": "#FBD3E9", "c2": "#BB377D" },
+        "fiery_red": { "c1": "#EB5757", "c2": "#000000" },
+        "glowing_matrix": { "c1": "#00FF87", "c2": "#60EFFF" },
+        "dark_velvet": { "c1": "#2c3e50", "c2": "#3498db" },
+        "pastel_dream": { "c1": "#b993d6", "c2": "#8ca6db" },
+        "golden_hour": { "c1": "#f9d423", "c2": "#ff4e50" }
+    };
+
+    // --- LOGIC CUSTOM PRO CALENDAR ---
+    let currentCalDate = new Date();
+    let selectedDateString = "";
+
+    function toggleCalendar() {
+        const popup = document.getElementById('calendarPopup');
+        popup.classList.toggle('open');
+        if (popup.classList.contains('open')) {
+            renderCalendar();
+        }
+    }
+
+    function changeMonth(direction) {
+        currentCalDate.setMonth(currentCalDate.getMonth() + direction);
+        renderCalendar();
+    }
+
+    function renderCalendar() {
+        const year = currentCalDate.getFullYear();
+        const month = currentCalDate.getMonth();
+
+        const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        document.getElementById('calMonthYearTitle').innerText = `${monthNames[month]} ${year}`;
+
+        const firstDayIndex = new Date(year, month, 1).getDay();
+        const totalDays = new Date(year, month + 1, 0).getDate();
+
+        const gridContainer = document.getElementById('calGridContainer');
+        gridContainer.innerHTML = '';
+
+        // Spasi kosong sebelum hari pertama dalam minggu tersebut
+        for (let i = 0; i < firstDayIndex; i++) {
+            const emptyCell = document.createElement('div');
+            emptyCell.className = 'cal-day empty';
+            gridContainer.appendChild(emptyCell);
+        }
+
+        const todayObj = new Date();
+
+        for (let day = 1; day <= totalDays; day++) {
+            const dayCell = document.createElement('div');
+            dayCell.className = 'cal-day';
+            dayCell.innerText = day;
+
+            // Format YYYY-MM-DD dengan padding nol jika diperlukan
+            const formattedMonth = String(month + 1).padStart(2, '0');
+            const formattedDay = String(day).padStart(2, '0');
+            const dateStr = `${year}-${formattedMonth}-${formattedDay}`;
+
+            if (year === todayObj.getFullYear() && month === todayObj.getMonth() && day === todayObj.getDate()) {
+                dayCell.classList.add('today');
+            }
+
+            if (selectedDateString === dateStr) {
+                dayCell.classList.add('selected');
+            }
+
+            dayCell.onclick = (e) => {
+                e.stopPropagation();
+                selectDate(dateStr, day, monthNames[month], year);
+            };
+
+            gridContainer.appendChild(dayCell);
+        }
+    }
+
+    function selectDate(dateStr, day, monthName, year) {
+        selectedDateString = dateStr;
+        document.getElementById('tanggal_acara').value = dateStr;
+        document.getElementById('dateDisplayText').innerHTML = `<span style="color:var(--text-main); font-weight:600;">${day} ${monthName} ${year}</span>`;
+        document.getElementById('calendarPopup').classList.remove('open');
+        renderCalendar();
+    }
+    // ------------------------------------
+
+    // Inisialisasi Custom Dropdown
+    window.addEventListener('DOMContentLoaded', () => {
+        const optionsContainer = document.getElementById('customOptionsContainer');
+        optionsContainer.innerHTML = '';
+
+        let firstKey = "";
+        let firstVal = null;
+
+        let index = 0;
+        for (const [key, val] of Object.entries(externalThemes)) {
+            if (index === 0) {
+                firstKey = key;
+                firstVal = val;
+            }
+
+            const formattedName = key.replace(/_/g, ' ').toUpperCase();
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'custom-option';
+            optionDiv.innerHTML = `
+                <div class="dropdown-color-preview">
+                    <span class="mini-dot" style="background: ${val.c1};"></span>
+                    <span class="mini-dot" style="background: ${val.c2};"></span>
+                </div>
+                <span>${formattedName} <small style="color:var(--text-muted);">(${val.c1} / ${val.c2})</small></span>
+            `;
+
+            optionDiv.onclick = () => {
+                selectTheme(key, val, formattedName);
+            };
+
+            optionsContainer.appendChild(optionDiv);
+            index++;
+        }
+
+        if (firstKey) {
+            selectTheme(firstKey, firstVal, firstKey.replace(/_/g, ' ').toUpperCase());
+        }
+
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.custom-select-wrapper')) {
+                document.getElementById('customOptionsContainer').classList.remove('open');
+            }
+            if (!e.target.closest('.date-picker-wrapper')) {
+                document.getElementById('calendarPopup').classList.remove('open');
+            }
+        });
+    });
+
+    function toggleDropdown() {
+        document.getElementById('customOptionsContainer').classList.toggle('open');
+    }
+
+    function selectTheme(key, val, formattedName) {
+        document.getElementById('warna_tema').value = key;
+        document.getElementById('selected-value-text').innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span class="mini-dot" style="background: ${val.c1}; width:16px; height:16px; display:inline-block; border-radius:50%; border:1px solid rgba(255,255,255,0.4);"></span>
+                <span class="mini-dot" style="background: ${val.c2}; width:16px; height:16px; display:inline-block; border-radius:50%; border:1px solid rgba(255,255,255,0.4);"></span>
+                <span><b>${formattedName}</b></span>
+            </div>
+        `;
+        document.getElementById('customOptionsContainer').classList.remove('open');
+    }
+
+    function addPembicara() {
+        const container = document.getElementById('pembicara-container');
+        const div = document.createElement('div');
+        div.className = 'dynamic-list';
+        div.innerHTML = `
+            <input type="text" placeholder="Nama Pembicara" class="pem-nama">
+            <input type="text" placeholder="Jabatan / Profesi" class="pem-jabatan">
+            <button type="button" class="btn-del" onclick="this.parentElement.remove()">✕</button>
+        `;
+        container.appendChild(div);
+    }
+
+    function addPengisi() {
+        const container = document.getElementById('pengisi-container');
+        const div = document.createElement('div');
+        div.className = 'dynamic-list';
+        div.innerHTML = `
+            <input type="text" placeholder="Nama Pengisi Acara" class="peng-nama">
+            <input type="text" placeholder="Deskripsi / Peran" class="peng-desc">
+            <button type="button" class="btn-del" onclick="this.parentElement.remove()">✕</button>
+        `;
+        container.appendChild(div);
+    }
+
+    function gatherDataText() {
+        const namaAcara = document.getElementById('nama_acara').value || '-';
+        const tglAcara = document.getElementById('tanggal_acara').value || '-';
+        const desc1 = document.getElementById('desc_1').value || '-';
+        const desc2 = document.getElementById('desc_2').value || '-';
+        
+        const temaKey = document.getElementById('warna_tema').value;
+        const temaData = externalThemes[temaKey] || { c1: '-', c2: '-' };
+        const warnaTemaText = `${temaKey.toUpperCase()} (c1: ${temaData.c1}, c2: ${temaData.c2})`;
+        
+        let pembicaraList = "";
+        document.querySelectorAll('#pembicara-container .dynamic-list').forEach((el) => {
+            const nama = el.querySelector('.pem-nama').value;
+            const jabatan = el.querySelector('.pem-jabatan').value;
+            if(nama) pembicaraList += `\n  - ${nama} (${jabatan})`;
+        });
+
+        let pengisiList = "";
+        document.querySelectorAll('#pengisi-container .dynamic-list').forEach((el) => {
+            const nama = el.querySelector('.peng-nama').value;
+            const desc = el.querySelector('.peng-desc').value;
+            if(nama) pengisiList += `\n  - ${nama} - ${desc}`;
+        });
+
+        const yt = document.getElementById('sos_yt').value || '-';
+        const fb = document.getElementById('sos_fb').value || '-';
+        const ig = document.getElementById('sos_ig').value || '-';
+        const tt = document.getElementById('sos_tt').value || '-';
+        const wa = document.getElementById('sos_wa').value || '-';
+
+        let text = "*REPORT DATA ACARA KLIEN - DEJEDE STREAM*\n";
+        text += "-----------------------------------\n";
+        text += "*1. INFO UTAMA*\n";
+        text += `- Nama Acara: ${namaAcara}\n`;
+        text += `- Tanggal Acara: ${tglAcara}\n`;
+        text += `- Deskripsi 1: ${desc1}\n`;
+        text += `- Deskripsi 2: ${desc2}\n`;
+        text += `- Tema Warna: ${warnaTemaText}\n\n`;
+        
+        text += `*2. PEMBICARA:*${pembicaraList || '\n  (Tidak ada)'}\n\n`;
+        text += `*3. PENGISI ACARA / MC:*${pengisiList || '\n  (Tidak ada)'}\n\n`;
+        
+        text += "*4. SOSIAL MEDIA & KONTAK*\n";
+        text += `- YouTube: ${yt}\n`;
+        text += `- Facebook: ${fb}\n`;
+        text += `- Instagram: ${ig}\n`;
+        text += `- TikTok: ${tt}\n`;
+        text += `- WhatsApp: ${wa}`;
+
+        return encodeURIComponent(text);
+    }
+
+    function sendToWhatsApp() {
+        const text = gatherDataText();
+        const adminPhone = "6285236578999"; 
+        const url = `https://wa.me/${adminPhone}?text=${text}`;
+        window.open(url, '_blank');
+    }
+
+    function downloadPDFReport() {
+        document.getElementById('report-date').innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        
+        // --- BAGIAN 1: INFORMASI UTAMA ACARA ---
+        document.getElementById('rep-nama-acara').innerHTML = `: ${document.getElementById('nama_acara').value || '-'}`;
+        document.getElementById('rep-tanggal-acara').innerHTML = `: ${document.getElementById('tanggal_acara').value || '-'}`;
+        document.getElementById('rep-desc-1').innerHTML = `: ${document.getElementById('desc_1').value || '-'}`;
+        document.getElementById('rep-desc-2').innerHTML = `: ${document.getElementById('desc_2').value || '-'}`;
+        
+        // --- WARNA TEMA ---
+        const selectTema = document.getElementById('warna_tema');
+        const temaKey = selectTema ? selectTema.value : '';
+        
+        let c1 = '#6366f1', c2 = '#ec4899'; 
+        if (typeof externalThemes !== 'undefined' && externalThemes[temaKey]) {
+            c1 = externalThemes[temaKey].c1 || c1;
+            c2 = externalThemes[temaKey].c2 || c2;
+        }
+
+        document.getElementById('rep-tema').innerHTML = `: <b>${temaKey ? temaKey.toUpperCase() : '-'}</b> &nbsp;&nbsp;` +
+            `<span style="display:inline-block; width:12px; height:12px; background-color:${c1}; border:1px solid #94a3b8; border-radius:2px; vertical-align:middle; margin-right:3px;"></span><span style="font-size:9px; color:#475569; vertical-align:middle; margin-right:6px;">(${c1})</span>` +
+            `<span style="display:inline-block; width:12px; height:12px; background-color:${c2}; border:1px solid #94a3b8; border-radius:2px; vertical-align:middle; margin-right:3px;"></span><span style="font-size:9px; color:#475569; vertical-align:middle;">(${c2})</span>`;
+
+        // --- BAGIAN 4: SOSIAL MEDIA & KONTAK ---
+        document.getElementById('rep-yt').innerHTML = `: ${document.getElementById('sos_yt').value || '-'}`;
+        document.getElementById('rep-fb').innerHTML = `: ${document.getElementById('sos_fb').value || '-'}`;
+        document.getElementById('rep-ig').innerHTML = `: ${document.getElementById('sos_ig').value || '-'}`;
+        document.getElementById('rep-tt').innerHTML = `: ${document.getElementById('sos_tt').value || '-'}`;
+        document.getElementById('rep-wa').innerHTML = `: ${document.getElementById('sos_wa').value || '-'}`;
+
+        // --- BAGIAN 2: TABEL PEMBICARA ---
+        const tablePem = document.getElementById('rep-table-pembicara');
+        tablePem.innerHTML = `<tr style="border-bottom: 1px solid #cbd5e1; text-align: left;"><th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pembicara</th><th style="width: 72%; padding: 4px 0; color: #475569;">Jabatan / Profesi</th></tr>`;
+        document.querySelectorAll('#pembicara-container .dynamic-list').forEach((el) => {
+            const nama = el.querySelector('.pem-nama').value;
+            const jabatan = el.querySelector('.pem-jabatan').value;
+            if(nama) {
+                tablePem.innerHTML += `<tr><td style="width: 28%; padding: 4px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; color: #475569;">: ${nama}</td><td style="width: 72%; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">: ${jabatan || '-'}</td></tr>`;
+            }
+        });
+
+        // --- BAGIAN 3: TABEL PENGISI ACARA ---
+        const tablePeng = document.getElementById('rep-table-pengisi');
+        tablePeng.innerHTML = `<tr style="border-bottom: 1px solid #cbd5e1; text-align: left;"><th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pengisi Acara</th><th style="width: 72%; padding: 4px 0; color: #475569;">Deskripsi / Peran</th></tr>`;
+        document.querySelectorAll('#pengisi-container .dynamic-list').forEach((el) => {
+            const nama = el.querySelector('.peng-nama').value;
+            const desc = el.querySelector('.peng-desc').value;
+            if(nama) {
+                tablePeng.innerHTML += `<tr><td style="width: 28%; padding: 4px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; color: #475569;">: ${nama}</td><td style="width: 72%; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">: ${desc || '-'}</td></tr>`;
+            }
+        });
+
+        window.print();
+    }
+</script>
+
+</body>
+</html>
