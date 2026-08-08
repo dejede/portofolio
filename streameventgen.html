@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Brief Form - Dejede Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
+<style>
         :root {
             --bg-color: #0f172a;
             --card-bg: #1e293b;
@@ -682,6 +682,7 @@
         const gridContainer = document.getElementById('calGridContainer');
         gridContainer.innerHTML = '';
 
+        // Spasi kosong sebelum hari pertama dalam minggu tersebut
         for (let i = 0; i < firstDayIndex; i++) {
             const emptyCell = document.createElement('div');
             emptyCell.className = 'cal-day empty';
@@ -695,6 +696,7 @@
             dayCell.className = 'cal-day';
             dayCell.innerText = day;
 
+            // Format YYYY-MM-DD dengan padding nol jika diperlukan
             const formattedMonth = String(month + 1).padStart(2, '0');
             const formattedDay = String(day).padStart(2, '0');
             const dateStr = `${year}-${formattedMonth}-${formattedDay}`;
@@ -860,61 +862,69 @@
         text += `- Facebook: ${fb}\n`;
         text += `- Instagram: ${ig}\n`;
         text += `- TikTok: ${tt}\n`;
-        text += `- WhatsApp: ${wa}\n`;
+        text += `- WhatsApp: ${wa}`;
 
-        return text;
+        return encodeURIComponent(text);
     }
 
     function sendToWhatsApp() {
         const text = gatherDataText();
-        const targetWA = document.getElementById('sos_wa').value.replace(/[^0-9]/g, '') || '';
-        const encoded = encodeURIComponent(text);
-        const url = targetWA ? `https://wa.me/${targetWA}?text=${encoded}` : `https://api.whatsapp.com/send?text=${encoded}`;
+        const adminPhone = "6285236578999"; 
+        const url = `https://wa.me/${adminPhone}?text=${text}`;
         window.open(url, '_blank');
     }
 
     function downloadPDFReport() {
-        const now = new Date();
-        document.getElementById('report-date').innerText = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-
-        document.getElementById('rep-nama-acara').innerText = document.getElementById('nama_acara').value || '-';
-        document.getElementById('rep-tanggal-acara').innerText = document.getElementById('tanggal_acara').value || '-';
-        document.getElementById('rep-desc-1').innerText = document.getElementById('desc_1').value || '-';
-        document.getElementById('rep-desc-2').innerText = document.getElementById('desc_2').value || '-';
+        document.getElementById('report-date').innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
         
-        const temaKey = document.getElementById('warna_tema').value;
-        const temaData = externalThemes[temaKey] || { c1: '-', c2: '-' };
-        document.getElementById('rep-tema').innerText = `${temaKey.toUpperCase()} (${temaData.c1} / ${temaData.c2})`;
+        // --- BAGIAN 1: INFORMASI UTAMA ACARA ---
+        document.getElementById('rep-nama-acara').innerHTML = `: ${document.getElementById('nama_acara').value || '-'}`;
+        document.getElementById('rep-tanggal-acara').innerHTML = `: ${document.getElementById('tanggal_acara').value || '-'}`;
+        document.getElementById('rep-desc-1').innerHTML = `: ${document.getElementById('desc_1').value || '-'}`;
+        document.getElementById('rep-desc-2').innerHTML = `: ${document.getElementById('desc_2').value || '-'}`;
+        
+        // --- WARNA TEMA ---
+        const selectTema = document.getElementById('warna_tema');
+        const temaKey = selectTema ? selectTema.value : '';
+        
+        let c1 = '#6366f1', c2 = '#ec4899'; 
+        if (typeof externalThemes !== 'undefined' && externalThemes[temaKey]) {
+            c1 = externalThemes[temaKey].c1 || c1;
+            c2 = externalThemes[temaKey].c2 || c2;
+        }
 
-        const repPembicara = document.getElementById('rep-table-pembicara');
-        repPembicara.innerHTML = `<tr style="border-bottom: 1px solid #cbd5e1; text-align: left;"><th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pembicara</th><th style="width: 72%; padding: 4px 0; color: #475569;">Jabatan / Profesi</th></tr>`;
+        document.getElementById('rep-tema').innerHTML = `: <b>${temaKey ? temaKey.toUpperCase() : '-'}</b> &nbsp;&nbsp;` +
+            `<span style="display:inline-block; width:12px; height:12px; background-color:${c1}; border:1px solid #94a3b8; border-radius:2px; vertical-align:middle; margin-right:3px;"></span><span style="font-size:9px; color:#475569; vertical-align:middle; margin-right:6px;">(${c1})</span>` +
+            `<span style="display:inline-block; width:12px; height:12px; background-color:${c2}; border:1px solid #94a3b8; border-radius:2px; vertical-align:middle; margin-right:3px;"></span><span style="font-size:9px; color:#475569; vertical-align:middle;">(${c2})</span>`;
+
+        // --- BAGIAN 4: SOSIAL MEDIA & KONTAK ---
+        document.getElementById('rep-yt').innerHTML = `: ${document.getElementById('sos_yt').value || '-'}`;
+        document.getElementById('rep-fb').innerHTML = `: ${document.getElementById('sos_fb').value || '-'}`;
+        document.getElementById('rep-ig').innerHTML = `: ${document.getElementById('sos_ig').value || '-'}`;
+        document.getElementById('rep-tt').innerHTML = `: ${document.getElementById('sos_tt').value || '-'}`;
+        document.getElementById('rep-wa').innerHTML = `: ${document.getElementById('sos_wa').value || '-'}`;
+
+        // --- BAGIAN 2: TABEL PEMBICARA ---
+        const tablePem = document.getElementById('rep-table-pembicara');
+        tablePem.innerHTML = `<tr style="border-bottom: 1px solid #cbd5e1; text-align: left;"><th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pembicara</th><th style="width: 72%; padding: 4px 0; color: #475569;">Jabatan / Profesi</th></tr>`;
         document.querySelectorAll('#pembicara-container .dynamic-list').forEach((el) => {
             const nama = el.querySelector('.pem-nama').value;
             const jabatan = el.querySelector('.pem-jabatan').value;
             if(nama) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td style="padding: 4px 0; border-bottom: 1px solid #f1f5f9;">${nama}</td><td style="padding: 4px 0; border-bottom: 1px solid #f1f5f9;">${jabatan || '-'}</td>`;
-                repPembicara.appendChild(tr);
+                tablePem.innerHTML += `<tr><td style="width: 28%; padding: 4px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; color: #475569;">: ${nama}</td><td style="width: 72%; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">: ${jabatan || '-'}</td></tr>`;
             }
         });
 
-        const repPengisi = document.getElementById('rep-table-pengisi');
-        repPengisi.innerHTML = `<tr style="border-bottom: 1px solid #cbd5e1; text-align: left;"><th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pengisi Acara</th><th style="width: 72%; padding: 4px 0; color: #475569;">Deskripsi / Peran</th></tr>`;
+        // --- BAGIAN 3: TABEL PENGISI ACARA ---
+        const tablePeng = document.getElementById('rep-table-pengisi');
+        tablePeng.innerHTML = `<tr style="border-bottom: 1px solid #cbd5e1; text-align: left;"><th style="width: 28%; padding: 4px 0; color: #475569;">Nama Pengisi Acara</th><th style="width: 72%; padding: 4px 0; color: #475569;">Deskripsi / Peran</th></tr>`;
         document.querySelectorAll('#pengisi-container .dynamic-list').forEach((el) => {
             const nama = el.querySelector('.peng-nama').value;
             const desc = el.querySelector('.peng-desc').value;
             if(nama) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td style="padding: 4px 0; border-bottom: 1px solid #f1f5f9;">${nama}</td><td style="padding: 4px 0; border-bottom: 1px solid #f1f5f9;">${desc || '-'}</td>`;
-                repPengisi.appendChild(tr);
+                tablePeng.innerHTML += `<tr><td style="width: 28%; padding: 4px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; color: #475569;">: ${nama}</td><td style="width: 72%; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">: ${desc || '-'}</td></tr>`;
             }
         });
-
-        document.getElementById('rep-yt').innerText = document.getElementById('sos_yt').value || '-';
-        document.getElementById('rep-fb').innerText = document.getElementById('sos_fb').value || '-';
-        document.getElementById('rep-ig').innerText = document.getElementById('sos_ig').value || '-';
-        document.getElementById('rep-tt').innerText = document.getElementById('sos_tt').value || '-';
-        document.getElementById('rep-wa').innerText = document.getElementById('sos_wa').value || '-';
 
         window.print();
     }
