@@ -1,5 +1,4 @@
-
-const externalQuotes = {
+const quoteData = {
   "opens": [
     "Cinta adalah bahasa sunyi yang hanya dimengerti oleh dua hati.",
     "Di antara jutaan langkah, takdir menuntun mereka ke arah yang sama.",
