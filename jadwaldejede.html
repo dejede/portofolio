@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal & Pembayaran Dejede Photo & Video</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+<style>
+    body {
+        background-color: #0b0f19;
+        color: #f1f5f9;
+        font-family: 'Inter', sans-serif;
+    }
+    .custom-card {
+        background: #111827;
+        border: 1px solid #1e293b;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .custom-input {
+        width: 100%;
+        background-color: #0b0f19;
+        border: 1px solid #334155;
+        border-radius: 0.5rem;
+        padding: 0.45rem 0.7rem;
+        font-size: 0.8rem;
+        color: #ffffff;
+        transition: all 0.2s ease;
+    }
+    .custom-input:focus {
+        outline: none;
+        border-color: #06b6d4;
+        box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.15);
+    }
+
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #334155;
+        border-top: none;
+        z-index: 99;
+        top: 100%;
+        left: 0;
+        right: 0;
+        border-radius: 0 0 0.5rem 0.5rem;
+        overflow-y: auto;
+        max-height: 160px;
+        background-color: #111827;
+        box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.5);
+    }
+    .autocomplete-items div {
+        padding: 7px 10px;
+        cursor: pointer;
+        background-color: #111827;
+        border-bottom: 1px solid #1e293b;
+        font-size: 0.8rem;
+        color: #cbd5e1;
+    }
+    .autocomplete-items div:hover {
+        background-color: #1e293b;
+        color: #22d3ee;
+    }
+
+@media (max-width: 768px) {
+    body {
+        font-size: 10px;
+    }
+    .custom-card {
+        padding: 0.75rem !important;
+        border-radius: 0.5rem;
+    }
+    
+    /* Penyesuaian Tabel untuk Mobile */
+    table th, table td {
+        padding: 3px 6px !important;
+        font-size: 9px !important;
+    }
+    
+    /* Memastikan teks dalam tabel tetap rapi di layar kecil */
+    table .font-semibold {
+        font-size: 9px !important;
+    }
+    table .text-xs {
+        font-size: 8px !important;
+    }
+	/* Mengecilkan badge status di mobile */
+    td button.px-2.5.py-1 {
+        padding: 1px 4px !important;
+        font-size: 8px !important;
+        border-radius: 4px !important;
+        line-height: 1 !important;
+        min-width: 45px; /* Memastikan teks tidak terpotong */
+    }
+    /* Penyesuaian Input */
+    .custom-input {
+        padding: 6px 10px !important;
+        font-size: 9px !important;
+        border-radius: 6px !important;
+    }
+
+    /* Penyesuaian Tombol Aksi di Tabel */
+    .aksi-col button {
+        padding: 4px 6px !important;
+    }
+    .aksi-col i {
+        font-size: 8px !important;
+    }
+    
+    /* Penyesuaian Header Tabel agar tidak terlalu lebar */
+    .p-3.5 {
+        padding: 4px 5px !important;
+    }
+}
+
+    .flatpickr-calendar {
+        background: #111827 !important;
+        border: 1px solid #334155 !important;
+        border-radius: 0.75rem !important;
+        color: #f1f5f9 !important;
+        box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.7) !important;
+        width: 250px !important;
+        padding: 6px !important;
+    }
+    .flatpickr-months { background: transparent !important; color: #f1f5f9 !important; padding: 2px 0 !important; }
+    .flatpickr-month { color: #f1f5f9 !important; fill: #f1f5f9 !important; height: 28px !important; }
+    .flatpickr-current-month { font-size: 90% !important; padding-top: 1px !important; }
+    .flatpickr-current-month .flatpickr-monthDropdown-months { background: #1a2333 !important; color: #f1f5f9 !important; border: 1px solid #334155 !important; font-weight: bold; }
+    .flatpickr-weekdays { background: transparent !important; height: 22px !important; }
+    span.flatpickr-weekday { color: #06b6d4 !important; font-weight: 700 !important; font-size: 0.65rem !important; }
+    .flatpickr-days { width: 238px !important; }
+    .dayContainer { width: 238px !important; min-width: 238px !important; max-width: 238px !important; }
+    .flatpickr-day { color: #e2e8f0 !important; border-radius: 0.3rem !important; font-weight: 500; height: 26px !important; line-height: 26px !important; max-width: 30px !important; flex: 0 0 14.2857143% !important; font-size: 0.75rem !important; }
+    .flatpickr-day.flatpickr-disabled, .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: #475569 !important; }
+    .flatpickr-day:hover { background: #1e293b !important; border-color: #1e293b !important; color: #22d3ee !important; }
+    .flatpickr-day.selected, .flatpickr-day.selected:hover { background: #06b6d4 !important; border-color: #06b6d4 !important; color: #ffffff !important; font-weight: bold; }
+    .flatpickr-time { border-top: 1px solid #1e293b !important; color: #f1f5f9 !important; height: 36px !important; line-height: 36px !important; }
+    .flatpickr-time input { color: #f1f5f9 !important; background: #1a2333 !important; border-radius: 0.3rem; font-size: 0.8rem !important; height: 24px !important; }
+    .flatpickr-am-pm { color: #f1f5f9 !important; }
+    .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month { color: #f1f5f9 !important; fill: #f1f5f9 !important; top: 2px !important; }
+</style>
+</head>
+<body class="min-h-screen p-4 md:p-6">
+    <div id="captureArea" class="max-w-6xl mx-auto space-y-6">
+        
+<!-- Header (Ramping & Minimalis di Mobile) -->
+        <div class="custom-card p-3.5 md:p-6 flex flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-2.5">
+                <div class="bg-cyan-500/10 p-1 md:p-1.5 rounded-lg md:rounded-xl border border-cyan-500/25 flex items-center justify-center shrink-0 w-9 h-9 md:w-12 md:h-12 overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/dejede/portofolio/main/images/logo.png" alt="Logo Dejede" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <h1 class="text-sm md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent leading-tight">DEJEDE PHOTO & VIDEO</h1>
+                    <p class="text-[10px] md:text-xs text-slate-400 font-medium">Tempursari, Lumajang, Jawa Timur</p>
+                </div>
+            </div>
+<a href="https://wa.me/6285236578999" target="_blank" class="bg-slate-900/80 hover:bg-slate-800 px-2.5 py-1.5 md:px-4 md:py-2.5 rounded-lg md:rounded-xl border border-slate-800 text-right flex items-center gap-2 shadow-inner shrink-0 transition">
+                <i class="fa-brands fa-whatsapp text-emerald-400 text-sm md:text-lg"></i>
+                <p class="text-cyan-400 font-mono text-xs md:text-sm font-semibold tracking-wide">085236578999</p>
+            </a>
+        </div>
+
+        <!-- Panel Input Jadwal & Tugas -->
+        <div class="custom-card p-4 md:p-6 space-y-4 data-html2canvas-ignore">
+            <div class="flex items-center gap-2 text-cyan-400 font-semibold text-sm border-b border-slate-800/60 pb-3">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>Tambah / Edit Jadwal & Custom Honor Kru</span>
+            </div>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+    <div>
+        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Tanggal Acara</label>
+        <input type="text" id="inputWaktu" placeholder="Pilih Tanggal" class="custom-input">
+    </div>
+    <div>
+        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Nama Tugas / Acara</label>
+        <input type="text" id="inputTugas" placeholder="Cth: Wedding Rian" class="custom-input">
+    </div>
+<div>
+    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Jam Datang (Absen)</label>
+    <input type="text" id="inputJamDatang" placeholder="Pilih Jam" class="custom-input">
+</div>
+    <div class="relative">
+        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Lokasi / Dusun / Desa</label>
+        <input type="text" id="inputLokasi" placeholder="Pilih Lokasi..." class="custom-input" autocomplete="off">
+        <div id="lokasiList" class="autocomplete-items"></div>
+    </div>
+</div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 pt-1">
+                <div class="relative">
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Nama Kru / Petugas</label>
+                    <input type="text" id="inputKru" placeholder="Pilih Nama Kru..." class="custom-input" autocomplete="off">
+                    <div id="kruList" class="autocomplete-items"></div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Jenis Layanan</label>
+                    <select id="selectLayanan" class="custom-input">
+                        <option value="Foto">Foto</option>
+                        <option value="Video">Video</option>
+                        <option value="Video Cinematic">Video Cinematic</option>
+                        <option value="Foto Majalah (Magazin)">Foto Magazine</option>
+                    </select>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Nominal Honor (Bebas / K)</label>
+                    <input type="number" id="inputHonor" placeholder="Cth: 100 atau 50000" class="custom-input">
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-2 gap-4">
+                <input type="text" id="inputKet" placeholder="Keterangan tambahan (Opsional)" class="custom-input md:w-2/3">
+                <button onclick="tambahBaris()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-cyan-600/20 transition flex items-center justify-center gap-2 w-full md:w-auto">
+                    <i class="fa-solid fa-plus"></i> Tambah ke Sistem
+                </button>
+            </div>
+        </div>
+
+<div class="custom-card p-3 md:p-5 flex flex-col justify-between gap-3 md:gap-4">
+            <div>
+                <label class="block text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Backup / Restore</label>
+                <p class="text-[10px] md:text-xs text-slate-400">Simpan/muat file data manual.</p>
+            </div>
+            <div class="flex gap-2 w-full">
+                <!-- Tombol Simpan Manual (Download JSON) -->
+                <button onclick="downloadJSON()" class="flex-1 bg-sky-600 hover:bg-sky-500 text-white px-2 py-1.5 rounded-lg font-bold text-[10px] shadow-md transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-download"></i> Save
+                </button>
+                <!-- Tombol Load Manual (Upload JSON) -->
+                <button onclick="document.getElementById('importFileJson').click()" class="flex-1 bg-teal-600 hover:bg-teal-500 text-white px-2 py-1.5 rounded-lg font-bold text-[10px] shadow-md transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-upload"></i> Load
+                </button>
+                <!-- Input file tersembunyi untuk membaca file JSON -->
+                <input type="file" id="importFileJson" accept=".json" class="hidden" onchange="importJSON(event)">
+            </div>
+        </div>
+
+
+        <!-- Tabel Jadwal & Rincian Honor -->
+        <div class="custom-card overflow-hidden">
+            <div class="p-4 px-6 border-b border-slate-800 flex justify-between items-center text-sm">
+                <span class="font-semibold text-slate-300 flex items-center gap-2">
+                    <i class="fa-solid fa-table-list text-purple-400"></i> Rekap Jadwal & Pembayaran Kru
+                </span>
+                <span id="counterJadwal" class="text-xs text-slate-400 font-mono">Total: 0 Data</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-[#1a2333] text-slate-400 text-xs uppercase font-semibold">
+                        <tr>
+                            <th class="p-3.5 pl-6">NO</th>
+                            <th class="p-3.5">WAKTU</th>
+                            <th class="p-3.5 text-center">JAM DATANG</th>
+                            <th class="p-3.5">ACARA / LOKASI</th>
+                            <th class="p-3.5">NAMA KRU</th>
+                            <th class="p-3.5">LAYANAN</th>
+                            <th class="p-3.5">HONOR (IDR)</th>
+                            <th class="p-3.5 text-center">STATUS</th>
+                            <th class="p-3.5 text-center pr-6 aksi-col">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyJadwal" class="text-sm divide-y divide-slate-800/60">
+                        <tr><td colspan="9" class="p-8 text-center text-slate-500 italic">Belum ada data jadwal atau pembayaran.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footnote -->
+        <div class="custom-card px-6 py-4 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400 gap-2">
+            <p><i class="fa-solid fa-circle-info text-cyan-400 mr-1.5"></i> Data tersimpan otomatis di browser Anda.</p>
+            <p class="font-mono text-cyan-400/80">Dejede Photo &amp; Video Management System © 2026</p>
+        </div>
+    </div>
+
+<!-- Panel Tombol Kontrol Bawah -->
+    <div class="max-w-6xl mx-auto mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div class="custom-card p-3 md:p-5 flex flex-col justify-between gap-3 md:gap-4">
+            <div>
+                <label class="block text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Kirim ke WhatsApp</label>
+                <select id="selectNomor" class="custom-input"></select>
+            </div>
+            <button onclick="kirimWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 md:px-4 py-1.5 md:py-2.5 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm shadow-md md:shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-1.5 md:gap-2 w-full">
+                <i class="fa-brands fa-whatsapp text-sm md:text-lg"></i> Kirim Laporan WA
+            </button>
+        </div>
+
+        <div class="custom-card p-3 md:p-5 flex flex-col justify-between gap-3 md:gap-4">
+            <div>
+                <label class="block text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Export Gambar</label>
+                <p class="text-[10px] md:text-xs text-slate-400">Simpan rekap ke format JPEG.</p>
+            </div>
+            <button onclick="saveToJPEG()" class="w-full bg-purple-600 hover:bg-purple-500 text-white px-2.5 md:px-4 py-1.5 md:py-2.5 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm shadow-md md:shadow-lg shadow-purple-600/20 transition flex items-center justify-center gap-1.5 md:gap-2">
+                <i class="fa-solid fa-file-image text-sm md:text-lg"></i> Simpan JPEG
+            </button>
+        </div>
+
+        <div class="custom-card p-3 md:p-5 flex flex-col justify-between gap-3 md:gap-4">
+            <div>
+                <label class="block text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Reset Data</label>
+                <p class="text-[10px] md:text-xs text-slate-400">Hapus seluruh data tersimpan.</p>
+            </div>
+            <button onclick="resetData()" class="w-full bg-rose-600 hover:bg-rose-500 text-white px-2.5 md:px-4 py-1.5 md:py-2.5 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm shadow-md md:shadow-lg shadow-rose-600/20 transition flex items-center justify-center gap-1.5 md:gap-2">
+                <i class="fa-solid fa-trash-can text-sm md:text-lg"></i> Hapus Semua
+            </button>
+        </div>
+
+        <div class="custom-card p-3 md:p-5 flex flex-col justify-between gap-3 md:gap-4">
+            <div>
+                <label class="block text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">File Kalender (.ics)</label>
+                <p class="text-[10px] md:text-xs text-slate-400">Unduh pengingat alarm kru.</p>
+            </div>
+            <button onclick="downloadFileICS()" class="w-full bg-amber-600 hover:bg-amber-500 text-white px-2.5 md:px-4 py-1.5 md:py-2.5 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm shadow-md md:shadow-lg shadow-amber-600/20 transition flex items-center justify-center gap-1.5 md:gap-2">
+                <i class="fa-solid fa-file-arrow-down text-sm md:text-lg"></i> Download .ICS
+            </button>
+        </div>
+		
+		
+		
+    </div>
+    </div>
+
+    <script>
+        const databaseKru = ["Budi", "Adi", "Rian", "Siska", "Dedi", "Joko"];
+
+        const databaseLokasi = [
+            "Desa Bulurejo", "Dusun Bulurejo - Bulurejo", "Dusun Karang Menjangan - Bulurejo", "Dusun Umbulsari - Bulurejo",
+            "Desa Kaliuling", "Dusun Krajan - Kaliuling", "Dusun Iburaja - Kaliuling", "Dusun Kalirejo - Kaliuling", "Dusun Rojopolo - Kaliuling", "Dusun Tamansari - Kaliuling",
+            "Desa Pundungsari", "Dusun Krajan - Pundungsari", "Dusun Sukorejo - Pundungsari", "Dusun Sukosari - Pundungsari",
+            "Desa Purorejo", "Dusun Purorejo - Purorejo", "Dusun Pasirejo - Purorejo", "Dusun Sukosari - Purorejo", "Dusun Umbulrejo - Purorejo",
+            "Desa Tegalrejo", "Dusun Tegalrejo - Tegalrejo", "Dusun Tegalbanteng - Tegalrejo", "Dusun Tegalsari - Tegalrejo",
+            "Desa Tempurejo", "Dusun Tempurejo - Tempurejo", "Dusun Sumoroto - Tempurejo",
+            "Desa Tempursari", "Dusun Krajan - Tempursari", "Dusun Tempursari - Tempursari", "Dusun Ngrawan - Tempursari", "Dusun Langkapan - Tempursari",
+            "Pronojiwo", "Dampit", "Lumajang", "Senduro", "Yosowilangun", "Tempeh"
+        ];
+
+        const daftarNomor = [
+            { nama: "Budi", nomor: "+6282231305639" },
+            { nama: "Adi", nomor: "+6285236578999" }
+        ];
+
+        let dataJadwal = [];
+
+        // Fungsi Helper untuk format Hari - Tanggal - Bulan (Singkatan) - Tahun[cite: 1]
+        function formatTanggalIndo(dateString) {
+            if (!dateString) return '-';
+            // Bersihkan jika ada waktu tambahan di string
+            let cleanDate = dateString.split(' ')[0];
+            let parts = cleanDate.split('-');
+            if (parts.length !== 3) return dateString;
+
+            let year = parts[0];
+            let monthIndex = parseInt(parts[1], 10) - 1;
+            let day = parts[2];
+
+            const namaBulanSingkat = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+            
+            // Buat objek Date untuk mendapatkan nama Hari
+            let d = new Date(year, monthIndex, day);
+            if (isNaN(d.getTime())) return dateString;
+
+            let opsiHari = { weekday: 'long' };
+            let namaHari = d.toLocaleDateString('id-ID', opsiHari);
+            let bulanStr = namaBulanSingkat[monthIndex] || parts[1];
+
+            return `${namaHari}, ${day}-${bulanStr}-${year}`;
+        }
+
+        function formatRupiah(angka) {
+            let num = Number(angka) || 0;
+            if (num > 0 && num < 1000) {
+                num = num * 1000;
+            }
+            return "Rp " + num.toLocaleString('id-ID');
+        }
+
+document.addEventListener("DOMContentLoaded", () => {
+    try {
+        flatpickr("#inputWaktu", {
+            dateFormat: "Y-m-d",
+            defaultDate: new Date()
+        });
+
+        flatpickr("#inputJamDatang", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            defaultDate: new Date()
+        });
+    } catch (e) {
+        console.error("Gagal memuat picker:", e);
+    }
+
+    const savedData = localStorage.getItem('dejede_data_db_tempursari');
+    if (savedData) {
+        try {
+            dataJadwal = JSON.parse(savedData);
+        } catch(e) {
+            dataJadwal = [];
+        }
+    }
+    renderTabel();
+
+            const select = document.getElementById('selectNomor');
+            if (select) {
+                select.innerHTML = "";
+                daftarNomor.forEach(item => {
+                    let opt = document.createElement('option');
+                    opt.value = item.nomor;
+                    opt.textContent = `${item.nama} - ${item.nomor}`;
+                    select.appendChild(opt);
+                });
+            }
+
+            setupAutocomplete("inputKru", "kruList", databaseKru);
+            setupAutocomplete("inputLokasi", "lokasiList", databaseLokasi);
+
+            document.addEventListener("click", function (e) {
+                if (!e.target.closest('#inputKru') && !e.target.closest('#kruList')) {
+                    document.getElementById('kruList').innerHTML = '';
+                }
+                if (!e.target.closest('#inputLokasi') && !e.target.closest('#lokasiList')) {
+                    document.getElementById('lokasiList').innerHTML = '';
+                }
+            });
+        });
+
+        function setupAutocomplete(inputId, listId, arrData) {
+            const inputElem = document.getElementById(inputId);
+            const listElem = document.getElementById(listId);
+
+            inputElem.addEventListener("input", function () {
+                const val = this.value;
+                listElem.innerHTML = "";
+                if (!val) { return; }
+
+                arrData.forEach(item => {
+                    if (item.toLowerCase().includes(val.toLowerCase())) {
+                        const itemDiv = document.createElement("div");
+                        itemDiv.innerHTML = item.replace(new RegExp(val, "gi"), (match) => `<strong>${match}</strong>`);
+                        itemDiv.addEventListener("click", function () {
+                            inputElem.value = item;
+                            listElem.innerHTML = "";
+                        });
+                        listElem.appendChild(itemDiv);
+                    }
+                });
+            });
+
+            inputElem.addEventListener("focus", function () {
+                listElem.innerHTML = "";
+                arrData.forEach(item => {
+                    const itemDiv = document.createElement("div");
+                    itemDiv.innerHTML = item;
+                    itemDiv.addEventListener("click", function () {
+                        inputElem.value = item;
+                        listElem.innerHTML = "";
+                    });
+                    listElem.appendChild(itemDiv);
+                });
+            });
+        }
+
+        function simpanKeLocalStorage() {
+            localStorage.setItem('dejede_data_db_tempursari', JSON.stringify(dataJadwal));
+        }
+
+        let editIndex = -1;
+
+        function tambahBaris() {
+            const waktu = document.getElementById('inputWaktu').value;
+            const tugas = document.getElementById('inputTugas').value.trim();
+            const lokasi = document.getElementById('inputLokasi').value.trim();
+            const kru = document.getElementById('inputKru').value.trim();
+            const jamDatang = document.getElementById('inputJamDatang').value.trim() || "-";
+            const layananNama = document.getElementById('selectLayanan').value;
+            
+            let rawHonor = Number(document.getElementById('inputHonor').value) || 0;
+            let honor = (rawHonor > 0 && rawHonor < 1000) ? rawHonor * 1000 : rawHonor;
+            
+            const ket = document.getElementById('inputKet').value.trim();
+            
+            if(!waktu || !tugas || !kru) { 
+                alert("Tanggal/Waktu, Nama Tugas, dan Nama Kru wajib diisi!"); 
+                return; 
+            }
+
+            let dataObj = { 
+                waktu, tugas, lokasi, kru, 
+                layananNama,
+                jamDatang,
+                honor,
+                status: 'Pending',
+                ket 
+            };
+
+            if (editIndex > -1) {
+                dataJadwal[editIndex] = dataObj;
+                editIndex = -1; 
+            } else {
+                dataJadwal.push(dataObj);
+            }
+            
+            simpanKeLocalStorage();
+            
+            document.getElementById('inputTugas').value = '';
+            document.getElementById('inputLokasi').value = '';
+            document.getElementById('inputKru').value = '';
+            document.getElementById('inputJamDatang').value = '';
+            document.getElementById('inputHonor').value = '';
+            document.getElementById('inputKet').value = '';
+            
+            renderTabel();
+        }
+
+        function editBaris(index) {
+            const item = dataJadwal[index];
+            editIndex = index;
+
+            document.getElementById('inputWaktu').value = item.waktu;
+            document.getElementById('inputTugas').value = item.tugas;
+            document.getElementById('inputJamDatang').value = item.jamDatang || '';
+            document.getElementById('inputLokasi').value = item.lokasi;
+            document.getElementById('inputKru').value = item.kru;
+            document.getElementById('selectLayanan').value = item.layananNama;
+            document.getElementById('inputHonor').value = item.honor;
+            document.getElementById('inputKet').value = item.ket;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleStatus(index) {
+            dataJadwal[index].status = dataJadwal[index].status === 'Pending' ? 'Lunas' : 'Pending';
+            simpanKeLocalStorage();
+            renderTabel();
+        }
+
+        function renderTabel() {
+            const tbody = document.getElementById('tbodyJadwal');
+            const totalHonorUnit = dataJadwal.reduce((acc, item) => acc + (Number(item.honor) || 0), 0);
+            
+            document.getElementById('counterJadwal').innerHTML = `
+                <span class="mr-3">Total: ${dataJadwal.length} Data</span>
+                <span class="text-emerald-400 font-bold font-mono">Total Honor: Rp ${totalHonorUnit.toLocaleString('id-ID')}</span>
+            `;
+
+            if (dataJadwal.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" class="p-8 text-center text-slate-500 italic">Belum ada data jadwal atau pembayaran.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = dataJadwal.map((item, i) => `
+                <tr class="hover:bg-slate-900/40 transition">
+                    <td class="p-3.5 pl-6 text-cyan-400 font-mono">${i + 1}</td>
+                    <td class="p-3.5 text-slate-300 font-mono text-xs">${formatTanggalIndo(item.waktu)}</td>
+                    <td class="p-3.5 text-center font-bold text-amber-400 font-mono text-xs">${item.jamDatang || '-'}</td>
+                    <td class="p-3.5">
+                        <div class="font-semibold text-white">${item.tugas}</div>
+                        <div class="text-xs text-slate-400">${item.lokasi || '-'}</div>
+                    </td>
+                    <td class="p-3.5 font-medium text-cyan-200">${item.kru}</td>
+                    <td class="p-3.5 text-slate-300 text-xs">${item.layananNama}</td>
+                    <td class="p-3.5 font-mono text-emerald-400 font-bold">Rp ${Number(item.honor).toLocaleString('id-ID')}</td>
+                    <td class="p-3.5 text-center">
+<button onclick="toggleStatus(${i})" class="px-2.5 py-1 rounded-full text-xs font-bold transition ${item.status === 'Lunas' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/10 text-amber-400 border border-amber-500/30'}">
+    <span class="hidden md:inline">${item.status}</span>
+    <span class="md:hidden">${item.status === 'Lunas' ? 'Lunas' : 'Pending'}</span>
+</button>
+                    </td>
+                    <td class="p-3.5 text-center pr-6 aksi-col flex gap-2 justify-center">
+                        <button onclick="editBaris(${i})" class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 p-2 rounded-lg transition" title="Edit">
+                            <i class="fa-solid fa-pen-to-square text-xs"></i>
+                        </button>
+                        <button onclick="dataJadwal.splice(${i},1); simpanKeLocalStorage(); renderTabel();" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 p-2 rounded-lg transition" title="Hapus">
+                            <i class="fa-solid fa-trash text-xs"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function resetData() {
+            if(confirm("Yakin ingin menghapus seluruh data jadwal dan pembayaran?")) {
+                dataJadwal = [];
+                localStorage.removeItem('dejede_data_db_tempursari');
+                renderTabel();
+            }
+        }
+
+function kirimWhatsApp() {
+    let selectElem = document.getElementById('selectNomor');
+    if (!selectElem || !selectElem.value) {
+        alert("Nomor tujuan WhatsApp belum dipilih!");
+        return;
+    }
+    let nomor = selectElem.value.replace(/\D/g, '');
+    if (dataJadwal.length === 0) {
+        alert("Data laporan kosong!");
+        return;
+    }
+
+    const namaBulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+
+    let teksPesan = "--- JADWAL PENUGASAN KRU ---\nDEJEDE PHOTO & VIDEO\n\n";
+    
+    dataJadwal.forEach((item, i) => {
+        let tanggalParts = item.waktu.split(' ')[0].split('-'); 
+        let tahun = tanggalParts[0];
+        let bulanIndex = parseInt(tanggalParts[1]) - 1;
+        let hari = tanggalParts[2];
+        
+        let formatTanggal = tahun + "-" + namaBulan[bulanIndex] + "-" + hari;
+        
+        let baris = (i + 1) + ". " + formatTanggal + " | JAM DATANG : " + (item.jamDatang || '-') + " | " + item.tugas + " - " + item.lokasi;
+        teksPesan += baris + "\n";
+    });
+    
+    teksPesan += "\nTerima kasih!";
+
+    let urlWA = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(teksPesan);
+    window.open(urlWA, '_blank');
+}
+
+function downloadFileICS() {
+    if (dataJadwal.length === 0) {
+        alert("Belum ada data jadwal untuk diunduh ke kalender!");
+        return;
+    }
+
+    let icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Dejede Management//Jadwal Kru//ID\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
+
+    dataJadwal.forEach((item) => {
+        let tanggalPart = item.waktu.split(' ')[0].replace(/-/g, '');
+        
+        let jamPart = "080000";
+        if (item.jamDatang) {
+            let cleanJam = item.jamDatang.replace(':', '');
+            if (cleanJam.length === 4) {
+                jamPart = cleanJam + "00";
+            }
+        }
+
+        let startDateTime = `${tanggalPart}T${jamPart}`;
+        
+        let summaryText = (item.tugas || 'Acara') + " - " + (item.lokasi || '-');
+        let summary = encodeICSString(summaryText);
+        
+        let descriptionText = (item.tugas || '-') + " - " + (item.lokasi || '-') + " | Jam Datang: " + (item.jamDatang || '-');
+        let description = encodeICSString(descriptionText);
+        let location = encodeICSString(item.lokasi || '-');
+
+        icsContent += "BEGIN:VEVENT\n";
+        icsContent += `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z\n`;
+        icsContent += `DTSTART:${startDateTime}\n`;
+        icsContent += `DTEND:${startDateTime}\n`; 
+        icsContent += `SUMMARY:${summary}\n`;
+        icsContent += `DESCRIPTION:${description}\n`;
+        icsContent += `LOCATION:${location}\n`;
+        icsContent += "BEGIN:VALARM\nTRIGGER:-PT30M\nACTION:DISPLAY\nDESCRIPTION:Pengingat Tugas Dejede\nEND:VALARM\n";
+        icsContent += "END:VEVENT\n";
+    });
+
+    icsContent += "END:VCALENDAR";
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    
+    const tglSekarang = new Date().toISOString().split('T')[0];
+    link.download = `Jadwal-Kru-Dejede-${tglSekarang}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function encodeICSString(str) {
+    if (!str) return "";
+    return str.replace(/[\\;,]/g, function(match) {
+        return '\\' + match;
+    }).replace(/\n/g, '\\n');
+}
+
+function saveToJPEG() {
+    if (dataJadwal.length === 0) {
+        alert("Belum ada data untuk disimpan!");
+        return;
+    }
+
+    const printTbody = document.getElementById('printTbody');
+    printTbody.innerHTML = dataJadwal.map((item, i) => `
+        <tr style="border-bottom: 1px solid #1e293b;">
+            <td style="padding: 8px; color: #22d3ee; font-family: monospace;">${i + 1}</td>
+            <td style="padding: 8px; color: #cbd5e1; font-family: monospace;">${formatTanggalIndo(item.waktu)}</td>
+            <td style="padding: 8px; text-align: center; color: #fbbf24; font-weight: bold; font-family: monospace;">${item.jamDatang || '-'}</td>
+            <td style="padding: 8px;">
+                <div style="font-weight: bold; color: #ffffff;">${item.tugas}</div>
+                <div style="color: #94a3b8; font-size: 11px;">${item.lokasi || '-'}</div>
+            </td>
+        </tr>
+    `).join('');
+
+    const printArea = document.getElementById('printArea');
+    printArea.style.display = 'block';
+
+    html2canvas(printArea, {
+        backgroundColor: '#0b0f19',
+        scale: 2,
+        useCORS: true,
+        logging: false
+    }).then(canvas => {
+        printArea.style.display = 'none';
+
+        const image = canvas.toDataURL('image/jpeg', 0.95);
+        const link = document.createElement('a');
+        const tglSekarang = new Date().toISOString().split('T')[0];
+        link.download = `Rekap-Jadwal-${tglSekarang}.jpg`;
+        link.href = image;
+        link.click();
+    }).catch(err => {
+        printArea.style.display = 'none';
+        console.error("Gagal mengeksport JPEG:", err);
+        alert("Terjadi kesalahan saat menyimpan gambar!");
+    });
+}
+
+// Fungsi untuk menyimpan data secara manual ke file .json
+function downloadJSON() {
+    if (dataJadwal.length === 0) {
+        alert("Tidak ada data jadwal untuk disimpan!");
+        return;
+    }
+
+    let dataStr = JSON.stringify(dataJadwal, null, 2);
+    let blob = new Blob([dataStr], { type: "application/json;charset=utf-8" });
+    let link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    
+    // Format nama file berdasarkan tanggal hari ini
+    let tglSekarang = new Date().toISOString().split('T')[0];
+    link.download = `Backup-Jadwal-Dejede-${tglSekarang}.json`;
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Fungsi untuk memuat/membuka data secara manual dari file .json
+function importJSON(event) {
+    let file = event.target.files[0];
+    if (!file) return;
+
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            let parsedData = JSON.parse(e.target.result);
+            if (Array.isArray(parsedData)) {
+                if (confirm(`Berhasil membaca file! Muat ${parsedData.length} data ke dalam sistem? (Data lama akan digantikan atau ditambahkan)`)) {
+                    dataJadwal = parsedData;
+                    simpanKeLocalStorage(); // Perbarui penyimpanan browser
+                    renderTabel();         // Tampilkan ulang tabel
+                    alert("Data berhasil dimuat!");
+                }
+            } else {
+                alert("Format file JSON tidak valid!");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Gagal membaca file JSON. Pastikan filenya benar.");
+        }
+        // Reset input file agar bisa memilih file yang sama di kemudian hari jika diperlukan
+        event.target.value = "";
+    };
+    reader.readAsText(file);
+}
+
+    </script>
+	
+<!-- Area tersembunyi khusus untuk render gambar JPEG yang bersih -->
+<div id="printArea" style="display:none; width: 600px; background: #111827; color: #f1f5f9; padding: 24px; font-family: 'Inter', sans-serif; border: 1px solid #1e293b; border-radius: 12px;">
+    <div style="text-align: center; margin-bottom: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 12px;">
+        <h2 style="color: #22d3ee; font-size: 18px; font-weight: bold; margin: 0;">REKAP JADWAL & PENUGASAN</h2>
+        <p style="color: #94a3b8; font-size: 12px; margin: 4px 0 0 0;">DEJEDE PHOTO & VIDEO</p>
+    </div>
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+        <thead>
+            <tr style="background: #1a2333; color: #94a3b8; border-bottom: 1px solid #334155;">
+                <th style="padding: 8px;">NO</th>
+                <th style="padding: 8px;">WAKTU</th>
+                <th style="padding: 8px; text-align: center;">JAM DATANG</th>
+                <th style="padding: 8px;">ACARA / LOKASI</th>
+            </tr>
+        </thead>
+        <tbody id="printTbody">
+            <!-- Data akan diisi otomatis oleh JavaScript -->
+        </tbody>
+    </table>
+    <div style="margin-top: 20px; text-align: right; font-size: 10px; color: #64748b;">
+        Dejede Management System © 2026
+    </div>
+</div>	
+	
+</body>
+</html>
