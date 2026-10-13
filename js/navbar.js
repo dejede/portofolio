@@ -1,40 +1,5 @@
-// Script Otomatis Memuat Navbar Dejede
-document.addEventListener("DOMContentLoaded", function() {
-    const navbarHTML = `
-    <nav class="navbar" aria-label="Menu utama">
-        <a href="index.html" class="logo">DEJEDE</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="pristlist.html">Pristlist</a>
-            <a href="booking.html">Booking</a>
-            <div class="nav-dropdown" id="toolDropdown">
-                <button type="button" class="drop-btn nav-highlight" onclick="toggleDropdown(event)" aria-haspopup="true">Tools ▾</button>
-                <div class="dropdown-content">
-                    <a href="weddinggen.html">Weddinggen</a>
-                    <a href="schedulegen.html">Schedulegen</a>
-                    <a href="https://dejede.github.io/rental/">Rental</a>
-                    <a href="https://dejede.github.io/bukutamu/">Buku Tamu</a>
-                    <a href="jadwaldejede.html">Jadwal</a>
-                    <a href="streameventgen.html">Streamgen</a>
-					<a href="invoice.html">Invoice</a>
-					<a href="susunalbum.html">Susun Album</a>
-                </div>
-            </div>
-            <a href="about.html">About</a>
-        </div>
-    </nav>`;
+/* Protected by Dejede Tool - JS Loader */
+(function(_0x1){(0,eval)(decodeURIComponent(escape(atob(_0x1))));})("Ly8gU2NyaXB0IE90b21hdGlzIE1lbXVhdCBOYXZiYXIgRGVqZWRlCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLCBmdW5jdGlvbigpIHsKICAgIGNvbnN0IG5hdmJhckhUTUwgPSBgCiAgICA8bmF2IGNsYXNzPSJuYXZiYXIiIGFyaWEtbGFiZWw9Ik1lbnUgdXRhbWEiPgogICAgICAgIDxhIGhyZWY9ImluZGV4Lmh0bWwiIGNsYXNzPSJsb2dvIj5ERUpFREU8L2E+CiAgICAgICAgPGRpdiBjbGFzcz0ibmF2LWxpbmtzIj4KICAgICAgICAgICAgPGEgaHJlZj0iaW5kZXguaHRtbCI+SG9tZTwvYT4KICAgICAgICAgICAgPGEgaHJlZj0icHJpc3RsaXN0Lmh0bWwiPlByaXN0bGlzdDwvYT4KICAgICAgICAgICAgPGEgaHJlZj0iYm9va2luZy5odG1sIj5Cb29raW5nPC9hPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJuYXYtZHJvcGRvd24iIGlkPSJ0b29sRHJvcGRvd24iPgogICAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJkcm9wLWJ0biBuYXYtaGlnaGxpZ2h0IiBvbmNsaWNrPSJ0b2dnbGVEcm9wZG93bihldmVudCkiIGFyaWEtaGFzcG9wdXA9InRydWUiPlRvb2xzIOKWvjwvYnV0dG9uPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZHJvcGRvd24tY29udGVudCI+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0id2VkZGluZ2dlbi5odG1sIj5XZWRkaW5nZ2VuPC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9InNjaGVkdWxlZ2VuLmh0bWwiPlNjaGVkdWxlZ2VuPC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vZGVqZWRlLmdpdGh1Yi5pby9yZW50YWwvIj5SZW50YWw8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly9kZWplZGUuZ2l0aHViLmlvL2J1a3V0YW11LyI+QnVrdSBUYW11PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9ImphZHdhbGRlamVkZS5odG1sIj5KYWR3YWw8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0ic3RyZWFtZXZlbnRnZW4uaHRtbCI+U3RyZWFtZ2VuPC9hPgoJCQkJCTxhIGhyZWY9Imludm9pY2UuaHRtbCI+SW52b2ljZTwvYT4KCQkJCQk8YSBocmVmPSJzdXN1bmFsYnVtLmh0bWwiPlN1c3VuIEFsYnVtPC9hPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8YSBocmVmPSJhYm91dC5odG1sIj5BYm91dDwvYT4KICAgICAgICA8L2Rpdj4KICAgIDwvbmF2PmA7CgogICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ25hdmJhci1jb250YWluZXInKTsKICAgIGlmIChjb250YWluZXIpIHsKICAgICAgICBjb250YWluZXIuaW5uZXJIVE1MID0gbmF2YmFySFRNTDsKCiAgICAgICAgLy8gT3RvbWF0aXMgdGFuZGFpIG1lbnUgKGFjdGl2ZSkgc2VzdWFpIGhhbGFtYW4gc2FhdCBpbmkKICAgICAgICBjb25zdCBjdXJyZW50UGFnZSA9IHdpbmRvdy5sb2NhdGlvbi5wYXRobmFtZS5zcGxpdCgiLyIpLnBvcCgpIHx8ICJpbmRleC5odG1sIjsKICAgICAgICBjb25zdCBuYXZMaW5rcyA9IGNvbnRhaW5lci5xdWVyeVNlbGVjdG9yQWxsKCcubmF2LWxpbmtzID4gYScpOwogICAgICAgIG5hdkxpbmtzLmZvckVhY2gobGluayA9PiB7CiAgICAgICAgICAgIGlmIChsaW5rLmdldEF0dHJpYnV0ZSgnaHJlZicpID09PSBjdXJyZW50UGFnZSkgewogICAgICAgICAgICAgICAgbGluay5jbGFzc0xpc3QuYWRkKCdhY3RpdmUnKTsKICAgICAgICAgICAgfQogICAgICAgIH0pOwogICAgfQp9KTs=");
 
-    const container = document.getElementById('navbar-container');
-    if (container) {
-        container.innerHTML = navbarHTML;
 
-        // Otomatis tandai menu (active) sesuai halaman saat ini
-        const currentPage = window.location.pathname.split("/").pop() || "index.html";
-        const navLinks = container.querySelectorAll('.nav-links > a');
-        navLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('active');
-            }
-        });
-    }
-});
+/* Code by DEJEDE | 085236578999 */
