@@ -72,6 +72,35 @@
     return loc ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(loc) : '';
   }
 
+  /* isi otomatis Lokasi Utama dari koordinat (OpenStreetMap Nominatim, tanpa API key) */
+  let lastGeoKey = '';
+  function fillLocationFromCoords(c) {
+    if (!c || $('lokasi').value.trim()) return;           /* jangan timpa yang sudah diketik */
+    const key = c.lat + ',' + c.lng;
+    if (key === lastGeoKey) return;
+    lastGeoKey = key;
+
+    fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=17&accept-language=id&lat=' +
+      encodeURIComponent(c.lat) + '&lon=' + encodeURIComponent(c.lng))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || $('lokasi').value.trim()) return;
+        const a = d.address || {};
+        const parts = [
+          d.name && d.name !== (a.road || '') ? d.name : '',
+          a.village || a.hamlet || a.suburb || a.neighbourhood,
+          a.city_district || a.municipality,
+          a.county || a.city || a.town,
+          a.state
+        ].filter(Boolean);
+        const uniq = parts.filter(function (p, i) { return parts.indexOf(p) === i; });
+        if (!uniq.length) return;
+        $('lokasi').value = uniq.join(', ');
+        updateMap();
+      })
+      .catch(function () { lastGeoKey = ''; /* gagal: biarkan kosong, isi manual */ });
+  }
+
   function updateMap() {
     const box = $('mapBox');
     const frame = $('mapFrame');
@@ -80,6 +109,7 @@
     const loc = $('lokasi').value.trim();
     const c = parseCoords(link);
     const q = c ? (c.lat + ',' + c.lng) : loc;
+    if (c) fillLocationFromCoords(c);
 
     if (!q) { box.hidden = true; frame.removeAttribute('src'); return; }
 
@@ -435,8 +465,33 @@
     window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(getWAContent()), '_blank', 'noopener');
   }
 
+  /* ===== NAMA KLIEN: huruf pertama tiap kata otomatis kapital ===== */
+  function titleCase(str) {
+    return str.toLowerCase().replace(/(^|[\s\-\/&.(])(\p{L})/gu, function (m, sep, ch) {
+      return sep + ch.toUpperCase();
+    });
+  }
+
+  function initNameCase() {
+    const input = $('pengantin');
+
+    input.addEventListener('input', function (e) {
+      if (e.isComposing) return;
+      const fixed = titleCase(input.value);
+      if (fixed === input.value) return;
+      const pos = input.selectionStart;                 /* panjang teks tidak berubah, kursor aman */
+      input.value = fixed;
+      try { input.setSelectionRange(pos, pos); } catch (err) { /* abaikan */ }
+    });
+
+    input.addEventListener('blur', function () {
+      input.value = titleCase(input.value.replace(/\s+/g, ' ').trim());
+    });
+  }
+
   /* ===== INIT ===== */
   initVendors();
+  initNameCase();
   $('rundownTable').classList.add('hide-hari');
   initDayCells();
 
