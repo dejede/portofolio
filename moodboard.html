@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alur Moodboard Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600&family=Gilda+Display&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf4f2;--card:#fff;--ink:#2d2225;--mut:#85727a;--line:#ead9dc;--acc:#b4566b;--accfg:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-t=sage]{--bg:#f0f3ed;--card:#fff;--ink:#222b25;--mut:#6c7a70;--line:#dbe3d8;--acc:#4f7a62}
+:root[data-t=emas]{--bg:#f6f0e2;--card:#fffdf7;--ink:#2b2418;--mut:#7d7258;--line:#e5dac0;--acc:#8f6a1c}
+:root[data-t=malam]{--bg:#17151d;--card:#211f2a;--ink:#f0ebe6;--mut:#a39cab;--line:#38354a;--acc:#d9b26a;--accfg:#1b1608}
+@media (prefers-color-scheme:dark){:root:not([data-t]){--bg:#17151d;--card:#211f2a;--ink:#f0ebe6;--mut:#a39cab;--line:#38354a;--acc:#d9b26a;--accfg:#1b1608}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:150px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Bricolage Grotesque",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px 8px}
+.r1{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#ttl{flex:1 1 220px;min-width:0;font:400 26px "Gilda Display",serif;color:var(--ink);background:transparent;border:0;border-bottom:1px dashed var(--line);padding:2px 0}
+#ttl::placeholder{color:var(--mut)}
+.seg,.thm{display:flex;gap:4px;align-items:center}
+button,.btn{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+button:hover,.btn:hover{border-color:var(--mut)}
+button:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+[aria-pressed=true]{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+.pri{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-weight:600}
+.sw{width:22px;height:22px;padding:0;border-radius:50%}
+.sw[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px}
+#sv{font-size:12px;color:var(--mut)}
+#step{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px}
+#step button{white-space:nowrap}
+#step button small{opacity:.7;margin-left:4px}
+#step button.cur{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+main{max-width:1000px;margin:0 auto;padding:18px 16px 60px;display:grid;gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.hd{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.hd h2{font:400 20px/1.1 "Gilda Display",serif;margin:0 0 2px;color:var(--acc)}
+.hd p{margin:0;color:var(--mut);max-width:56ch;font-size:12px;line-height:1.35}
+.pal{display:flex;gap:3px;flex-shrink:0}
+.tt{flex:1;min-width:0}
+.gh{border:0;background:transparent;padding:0 4px;font-size:22px;line-height:1;cursor:grab;touch-action:none;color:var(--mut)}
+.gh:active{cursor:grabbing}
+.card.mv{position:relative;z-index:5;opacity:.92;box-shadow:0 14px 34px rgba(0,0,0,.28);user-select:none;-webkit-user-select:none}
+.card.ov-t{box-shadow:0 -4px 0 var(--acc)}.card.ov-b{box-shadow:0 4px 0 var(--acc)}.pal i{width:9px;height:9px;border-radius:50%;border:1px solid var(--line)}
+.more>summary,.tip>summary{cursor:pointer;font-size:13px;color:var(--mut);margin-top:8px}.tip>summary{font-size:12px}.more[open]>summary{margin-bottom:2px}
+.col{position:relative;border-radius:12px;background:var(--bg);min-height:150px;margin:14px 0}
+.ph{position:absolute;overflow:hidden;border-radius:8px;cursor:grab}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.free .ph{touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.rz{position:absolute;right:5px;bottom:5px;width:18px;height:18px;border-radius:50%;background:var(--acc);border:2px solid #fff;cursor:nwse-resize;display:none}
+.ph.on .rz{display:block}
+.ph{background:var(--card)}
+.pa{position:absolute;inset:auto 0 0 0;display:none;gap:4px;justify-content:center;flex-wrap:wrap;padding:18px 6px 6px;background:linear-gradient(transparent,rgba(0,0,0,.6));z-index:3}
+.pa button{padding:1px 9px;font-size:13px}
+.ph.adj .pa{display:flex}.ph.adj .pc{display:none!important}
+.ph.adj{touch-action:none;cursor:move;outline:2px solid var(--acc);outline-offset:-2px}
+.rs{position:absolute;right:0;bottom:0;width:28px;height:28px;cursor:nwse-resize;display:none;z-index:4;touch-action:none;background:linear-gradient(135deg,transparent 50%,var(--acc) 50%)}
+.ph.on .rs{display:block}.ph.adj .rs{display:none!important}
+.pc{position:absolute;inset:auto 0 0 0;display:none;gap:4px;justify-content:center;padding:18px 6px 6px;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.ph:hover .pc,.ph.on .pc{display:flex}
+.pc button{padding:1px 9px;font-size:13px}
+.em{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--mut);border:2px dashed var(--line);border-radius:12px;padding:12px;pointer-events:none}
+.tl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.tl .sp{flex:1}
+h3{font-size:14px;margin:18px 0 8px}h3 small{color:var(--mut);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;padding:4px 11px}
+.add,.nt{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-top:8px}
+.nt{min-height:64px;resize:vertical;margin-top:14px}
+.foot{display:flex;gap:8px;flex-wrap:wrap}.foot input{flex:1 1 200px;font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;z-index:50;overflow:auto;padding:16px;text-align:center}
+#ov.on{display:block}#ov img{max-width:min(100%,900px);border-radius:8px;background:#fff}
+#ov p{color:#fff;margin:10px auto;max-width:460px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="r1">
+    <input id="ttl" placeholder="Nama Pasangan, Contoh : Adi &amp; Nina" aria-label="Judul">
+    <div class="seg" id="seg"></div>
+    <div class="thm" id="thm" aria-label="Tema warna"></div>
+    <button id="expAll" class="pri">Ekspor semua</button><span id="sv"></span>
+  </div>
+  <div id="step"></div>
+</div>
+<main id="main"></main>
+<div id="ov"><p>Klik kanan (atau tekan lama di HP) pada gambar untuk menyimpan.</p><img id="ovimg" alt="Hasil moodboard"><p><button id="ovx" class="pri">Tutup</button></p></div>
+
+<script>
+const $=s=>document.querySelector(s),esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PRE={
+nikah:{n:'Pernikahan',st:[
+{n:'Bride preparation',d:'Persiapan pengantin: rias, busana, dan momen tenang bersama keluarga sebelum hari besar.',p:['#f4dcd6','#e8b4b8','#c9a27a','#fbf5ef'],s:['Detail cincin dan perhiasan','Kebaya atau gaun tergantung dekat jendela','Close-up proses makeup','Flatlay aksesori, parfum, sepatu','Ibu merapikan veil atau kerudung','Tawa bersama bridesmaid','Surat atau hadiah untuk pasangan','Potret solo bride siap berangkat']},
+{n:'Akad nikah',d:'Momen sakral: ijab kabul, doa, dan haru keluarga. Suasana hangat, tenang, dan bersih.',p:['#f6f1e7','#d8c9a3','#7c8c6e','#ffffff'],s:['Kedatangan mempelai pria','Tangan berjabat saat ijab kabul','Mas kawin dan Al-Qur’an tertata','Penandatanganan buku nikah','Doa bersama keluarga','Pemasangan cincin','Sungkem kepada orang tua','Reaksi haru orang tua','Potret pertama berdua sebagai pasangan sah']},
+{n:'Temu pengantin',d:'Prosesi adat saat kedua mempelai dipertemukan: penyambutan, ritual, dan tradisi keluarga.',p:['#8c1d2c','#d4a017','#3b2a20','#f3e3c3'],s:['Penyambutan dan kirab','Prosesi adat khas daerah','Detail umbul-umbul dan dekorasi','Suap-suapan atau dulangan','Sungkeman dan cium tangan','Ekspresi tamu dan keluarga','Berjalan bergandengan menuju pelaminan','Potret berdua di singgasana']},
+{n:'Resepsi',d:'Pesta bersama tamu: dekorasi, entrance, foto keluarga, dan momen candid sepanjang acara.',p:['#2c2a3a','#c9a45c','#f1dfe0','#ffffff'],s:['Dekorasi pelaminan dan meja','Entrance pengantin','Potong kue atau toast','Foto keluarga besar per kelompok','Foto bersama sahabat','Pose couple di panggung','Salaman dan ucapan tamu','Detail hidangan dan bunga','Candid tawa dan dansa']}]},
+tunang:{n:'Pertunangan',st:[
+{n:'Bride preparation',d:'Persiapan sebelum acara lamaran: rias, busana, dan seserahan yang ditata rapi.',p:['#f3e9e4','#d9a7a0','#a9b8a0','#fffaf5'],s:['Proses makeup dan hijab atau hairdo','Dress atau kebaya siap pakai','Seserahan tertata dengan hiasan','Kotak cincin dan bunga','Close-up detail aksesori','Potret solo sebelum acara']},
+{n:'Dokumentasi acara',d:'Rangkaian acara pertunangan dari kedatangan keluarga sampai tukar cincin.',p:['#e7d6c8','#a9b8a0','#c58b8b','#ffffff'],s:['Kedatangan keluarga pihak pria','Penyampaian maksud lamaran','Tukar cincin','Penyerahan seserahan','Doa bersama','Foto kedua keluarga','Detail dekorasi dan hantaran','Candid tamu dan keluarga']},
+{n:'Pose',d:'Sesi foto berdua: santai, hangat, dan dekat. Cocok untuk save the date atau pre-wedding.',p:['#f3e9e4','#b98b82','#6b7a8f','#ffffff'],s:['Berdiri bergandengan','Menunjukkan cincin','Berhadapan, dahi menempel','Berjalan bersama dari belakang','Duduk dekat sambil berbisik','Tawa candid','Half-body saling menatap','Pose bersama seserahan']}]},
+prewed:{n:'Prewedding',st:[
+{n:'Konsep dan busana',d:'Tentukan cerita, warna, dan lokasi sebelum hari pemotretan supaya hasil foto terasa satu nuansa.',p:['#e9dccf','#b5a58f','#7d8f7a','#ffffff'],s:['Referensi warna busana berdua','Flatlay busana dan props','Detail cincin dan aksesori','Referensi lokasi dan cahaya','Makeup dan hair do ringan','Barang personal untuk cerita (kamera, buku, kopi)']},
+{n:'Outdoor golden hour',d:'Foto luar ruangan saat cahaya hangat sore: alami, bergerak, dan penuh tawa.',p:['#f2b880','#e8896a','#7a8f6d','#fff3e0'],s:['Berjalan bergandengan di jalan setapak','Siluet saat matahari terbenam','Berlari kecil dan tawa lepas','Pelukan dari belakang','Duduk santai di padang atau pantai','Kain atau veil tertiup angin','Half-body saling menatap','Potret solo masing-masing']},
+{n:'Studio atau indoor',d:'Pose lebih terarah dengan cahaya lembut: klasik, elegan, dan fokus pada ekspresi.',p:['#d9d2cc','#8a7f78','#2b2a2e','#ffffff'],s:['Berdiri klasik dan duduk di kursi','Dahi menempel dan mata terpejam','Close-up tangan dan cincin','Dansa pelan berdua','Siluet backlight','Potret formal full-body']},
+{n:'Candid dan detail',d:'Momen spontan dan detail kecil yang membuat cerita kalian terasa personal.',p:['#f1e3d3','#c58b6f','#8fa3ad','#ffffff'],s:['Tawa spontan','Aktivitas favorit berdua','Cium kening','Detail tangan dan kaki','Bersama hewan peliharaan atau props personal','Foto untuk save the date']}]}
+};
+const THEMES={blush:'#b4566b',sage:'#4f7a62',emas:'#8f6a1c',malam:'#d9b26a'};
+let uid=0,S=null,active=0,drag=null,tm;
+const mk=src=>{const i=new Image();i.onload=()=>{try{P().st.forEach(layCol)}catch(e){}};i.src=src;return i};
+const mkSt=p=>({id:++uid,n:p.n,d:p.d,p:p.p,sh:p.s.map(t=>({t,d:0})),ph:[],mode:'mosaik',note:''});
+const fresh=()=>({t:'nikah',th:'',P:{}});
+try{S=JSON.parse(localStorage.getItem('wmb2')||'null');if(S)Object.values(S.P).forEach(p=>p.st.forEach(s=>{uid=Math.max(uid,s.id);if(s.mode==='bebas')s.mode='mosaik';s.ph.forEach(h=>h.im=mk(h.src))}))}catch(e){S=null}
+if(!S)S=fresh();Object.keys(PRE).forEach(k=>{if(!S.P[k])S.P[k]={title:'',st:PRE[k].st.map(mkSt)}});
+const P=()=>S.P[S.t],getS=id=>P().st.find(s=>s.id===id);
+
+function save(){clearTimeout(tm);tm=setTimeout(()=>{try{localStorage.setItem('wmb2',JSON.stringify(S,(k,v)=>k==='im'?undefined:v));$('#sv').textContent='Tersimpan'}catch(e){$('#sv').textContent='Penyimpanan penuh, ekspor dulu'}},400)}
+function commit(){const y=scrollY;render();scrollTo(0,y);save()}
+
+function lay(n,mode,W,ph){
+  const g=8,r=[];if(!n)return{r,H:0};
+  if(mode==='bebas'){let m=0;ph.forEach(h=>{const w=h.fw*W,hh=w*(h.ratio||1.25);r.push({x:h.fx*W,y:h.fy*W,w,h:hh,rot:h.rot||0});m=Math.max(m,h.fy*W+hh)});return{r,H:Math.max(.55*W,m+.04*W)}}
+  {const c=ph.c||3,cw=(W-g*(c-1))/c,ch=cw*(ph.cr||1.25);let m=0;ph.forEach(p=>{const gx=p.gx||0,gy=p.gy||0,cs=p.cs||1,rs=p.rs||1;r.push({x:gx*(cw+g),y:gy*(ch+g),w:cs*cw+(cs-1)*g,h:rs*ch+(rs-1)*g});m=Math.max(m,gy+rs)});return{r,H:m*(ch+g)-g,cw,ch,c}}
+  if(0){const big=mode==='mosaik'&&n>=3,c=big?(W>620?4:3):(n===1?1:n<=4?2:3),cw=(W-g*(c-1))/c,ch=big?cw:cw*(c===1?.62:1.25),occ={};let m=0;
+    for(let i=0;i<n;i++){const p=ph[i],cs=Math.min(c,p.cs||(big&&i===0?2:1)),rs=Math.min(6,p.rs||(big&&i===0?2:1));let x=0,y=0;
+      out:for(y=0;;y++){for(x=0;x+cs<=c;x++){let ok=1;for(let a=0;a<rs&&ok;a++)for(let b=0;b<cs;b++)if(occ[(y+a)+','+(x+b)]){ok=0;break}if(ok)break out}}
+      for(let a=0;a<rs;a++)for(let b=0;b<cs;b++)occ[(y+a)+','+(x+b)]=1;
+      r.push({x:x*(cw+g),y:y*(ch+g),w:cs*cw+(cs-1)*g,h:rs*ch+(rs-1)*g});m=Math.max(m,y+rs)}
+    return{r,H:m*(ch+g)-g,cw,ch,c}}
+  if(0){
+    const c=W>620?4:3,cw=(W-g*(c-1))/c,occ={};let m=0;
+    const put=(x,y,w,h)=>{for(let a=0;a<h;a++)for(let b=0;b<w;b++)occ[(y+a)+','+(x+b)]=1;r.push({x:x*(cw+g),y:y*(cw+g),w:w*cw+g*(w-1),h:h*cw+g*(h-1)});m=Math.max(m,y+h)};
+    put(0,0,2,2);
+    for(let i=1;i<n;i++){let x=0,y=0;out:for(y=0;;y++){for(x=0;x<c;x++){if(!occ[y+','+x])break out}}put(x,y,1,1)}
+    return{r,H:m*(cw+g)-g};
+  }
+  const c=n===1?1:n<=4?2:3,cw=(W-g*(c-1))/c,ch=cw*(c===1?.62:1.25);
+  for(let i=0;i<n;i++)r.push({x:(i%c)*(cw+g),y:Math.floor(i/c)*(ch+g),w:cw,h:ch});
+  return{r,H:Math.ceil(n/c)*(ch+g)-g};
+}
+function place(w,h,p){const ra=p.ratio||1.25,s0=Math.max(w,h/ra),zmin=Math.min(w,h/ra)/s0,z=p.fit?zmin:Math.min(4,Math.max(zmin,p.zm||1)),dw=s0*z,dh=s0*ra*z;return{dw,dh,l:(w-dw)*(p.ox??.5),t:(h-dh)*(p.oy??.5),z,zmin}}
+function fitImg(im,w,h,p){const q=place(w,h,p);Object.assign(im.style,{position:'absolute',left:q.l+'px',top:q.t+'px',width:q.dw+'px',height:q.dh+'px',objectFit:'fill'})}
+function ensN(s,W){
+  if(s.mode==='bebas')return;
+  if(!s.c)s.c=W>620?4:3;
+  s.cr=s.mode==='mosaik'?1:1.25;
+  if(s.ph.some(h=>h.gx==null)){
+    const occ={};s.ph.forEach(h=>{if(h.gx!=null)for(let a=0;a<h.rs;a++)for(let b=0;b<h.cs;b++)occ[(h.gy+a)+','+(h.gx+b)]=1});
+    s.ph.forEach((h,i)=>{if(h.gx!=null)return;const big=s.mode==='mosaik'&&i===0,cs=Math.min(s.c,h.cs||(big?2:1)),rs=h.rs||(big?2:1);let x=0,y=0;
+      out:for(y=0;;y++){for(x=0;x+cs<=s.c;x++){let ok=1;for(let a=0;a<rs&&ok;a++)for(let b=0;b<cs;b++)if(occ[(y+a)+','+(x+b)]){ok=0;break}if(ok)break out}}
+      for(let a=0;a<rs;a++)for(let b=0;b<cs;b++)occ[(y+a)+','+(x+b)]=1;h.gx=x;h.gy=y;h.cs=cs;h.rs=rs})}
+  s.ph.c=s.c;s.ph.cr=s.cr;
+}
+function ens(s,W){ensN(s,W||900);s.ph.forEach((h,i)=>{if(!h.ratio&&h.im.naturalWidth)h.ratio=h.im.naturalHeight/h.im.naturalWidth;if(s.mode==='bebas'&&h.fw==null){h.fw=.28;h.fx=.03+(i%3)*.325;h.fy=.03+Math.floor(i/3)*.42;h.z=i+1;h.rot=0}})}
+function layCol(s){
+  const el=document.querySelector('.col[data-sid="'+s.id+'"]');if(!el)return;
+  ens(s,el.clientWidth);const{r,H}=lay(s.ph.length,s.mode,el.clientWidth,s.ph);el.style.height=(H||170)+'px';el.innerHTML='';el.className='col'+(s.mode==='bebas'?' free':'');
+  if(!s.ph.length){el.innerHTML='<div class="em">Seret foto ke sini, tempel dengan Ctrl+V,<br>atau pakai tombol Tambah foto</div>';return}
+  s.ph.forEach((h,i)=>{
+    const d=document.createElement('div');d.className='ph';d.draggable=s.mode!=='bebas';d.dataset.i=i;
+    Object.assign(d.style,{left:r[i].x+'px',top:r[i].y+'px',width:r[i].w+'px',height:r[i].h+'px',transform:r[i].rot?'rotate('+r[i].rot+'deg)':'',zIndex:h.z||0});
+    const fr=s.mode==='bebas';d.innerHTML='<img alt="" src="'+h.src+'"><div class="pc">'+(fr?'<button data-a="rl" aria-label="Putar kiri">↺</button><button data-a="rr" aria-label="Putar kanan">↻</button>':'<button data-a="l" aria-label="Geser maju">◀</button><button data-a="r" aria-label="Geser mundur">▶</button><button data-a="adj" aria-label="Atur posisi foto">✥ Atur</button>')+'<button data-a="x" aria-label="Hapus foto">✕</button></div>'+(fr?'<div class="rz"></div>':'<div class="pa"><button data-a="zo" aria-label="Perkecil">−</button><button data-a="zi" aria-label="Perbesar">+</button><button data-a="pas">Pas</button><button data-a="isi">Isi</button><button data-a="ok">Selesai</button></div><div class="rs" title="Tarik untuk ubah ukuran kotak"></div>');fitImg(d.firstChild,r[i].w,r[i].h,h);
+    el.appendChild(d)});
+}
+function card(s){
+  const dn=s.sh.filter(x=>x.d).length;
+  return `<section class="card" id="c${s.id}" data-sid="${s.id}">
+<div class="hd"><button class="gh" aria-label="Pindahkan bab, seret atau tekan panah atas bawah" title="Seret untuk memindahkan bab">⠿</button><div class="tt"><h2>${esc(s.n)}</h2><p>${esc(s.d)}</p></div><div class="pal">${s.p.map(c=>'<i style="background:'+c+'"></i>').join('')}</div></div>
+<div class="col" data-sid="${s.id}"></div>
+<details class="tip"><summary>Tips mengatur foto</summary><small style="color:var(--mut)">Klik dua kali foto (atau tombol ✥ Atur) untuk menggeser dan zoom di dalam kotaknya. Pas menampilkan foto utuh tanpa terpotong. Sentuh foto lalu tarik segitiga di pojok kanan bawah untuk membesarkan atau mengecilkan kotaknya; kotak lain tidak ikut berubah, dan ukuran berhenti kalau mentok kotak di sebelahnya. Seret foto ke kotak lain untuk menukar, atau ke ruang kosong untuk memindah. Rapikan menyusun ulang tanpa mengubah ukuran; Mosaik atau Grid mengembalikan semuanya ke bawaan.</small></details>
+<div class="tl"><label class="btn pri" for="f${s.id}">Tambah foto</label><input id="f${s.id}" data-f="${s.id}" type="file" accept="image/*" multiple hidden>
+<button data-a="mode" data-m="mosaik" aria-pressed="${s.mode==='mosaik'}">Mosaik</button><button data-a="mode" data-m="grid" aria-pressed="${s.mode==='grid'}">Grid</button><button data-a="tidy">Rapikan</button>
+${s.mode==='bebas'?'<button data-a="rst">Susun ulang</button><small style="color:var(--mut)">Seret foto untuk geser, tarik titik di pojok untuk ubah ukuran.</small>':''}<span class="sp"></span><button data-a="exp">Ekspor kolase</button><button data-a="del">Hapus bab</button></div>
+<details class="more" data-d="${s.id}"${s.open?' open':''}><summary>Daftar shot ${dn}/${s.sh.length} dan catatan mood</summary><h3>Daftar shot <small>${dn} dari ${s.sh.length} terambil</small></h3>
+<div class="chips">${s.sh.map((x,k)=>'<button class="chip" data-a="shot" data-k="'+k+'" aria-pressed="'+!!x.d+'">'+esc(x.t)+'</button>').join('')}</div>
+<input class="add" placeholder="Tambah ide shot sendiri, lalu tekan Enter" aria-label="Tambah shot">
+<textarea class="nt" data-n="${s.id}" placeholder="Catatan mood: warna, props, lagu, referensi...">${esc(s.note)}</textarea></details></section>`}
+function render(){
+  const p=P();$('#ttl').value=p.title;
+  $('#seg').innerHTML=Object.entries(PRE).map(([k,v])=>'<button data-t="'+k+'" aria-pressed="'+(k===S.t)+'">'+v.n+'</button>').join('');
+  $('#thm').innerHTML=Object.entries(THEMES).map(([k,c])=>'<button class="sw" data-th="'+k+'" style="background:'+c+'" aria-label="Tema '+k+'" aria-pressed="'+(k===S.th)+'"></button>').join('');
+  $('#step').innerHTML=p.st.map((s,i)=>'<button data-go="'+s.id+'" class="'+(i===active?'cur':'')+'">'+(i+1)+'. '+esc(s.n)+'<small>'+s.ph.length+'</small></button>').join('');
+  $('#main').innerHTML=p.st.map(card).join('')+'<div class="foot"><input id="nb" placeholder="Nama bab baru, mis. Sungkeman atau Prewedding" aria-label="Nama bab"><button id="ab">Tambah bab</button></div>';
+  p.st.forEach(layCol);
+}
+function addFiles(s,fs){
+  [...fs].filter(f=>f.type.startsWith('image/')).forEach(f=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{
+    const k=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
+    const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
+    const src=c.toDataURL('image/jpeg',.82);s.ph.push({src,im:mk(src),ratio:c.height/c.width});commit()};im.src=r.result};r.readAsDataURL(f)});
+}
+document.addEventListener('click',e=>{
+  const t=e.target,b=t.closest('[data-a],[data-t],[data-th],[data-go],#ab,#expAll'),ph=t.closest('.ph');
+  if(ph&&!(b&&b.dataset.a)){if(!ph.parentNode.classList.contains('free')&&!t.closest('.rs'))ph.classList.toggle('on');return}
+  if(!b)return;
+  if(b.dataset.t){S.t=b.dataset.t;active=0;render();save();return}
+  if(b.dataset.th){S.th=b.dataset.th;document.documentElement.dataset.t=S.th;render();save();return}
+  if(b.dataset.go){document.getElementById('c'+b.dataset.go).scrollIntoView({behavior:'smooth'});return}
+  if(b.id==='expAll'){exportStages(P().st);return}
+  if(b.id==='ab'){const v=$('#nb').value.trim();if(v){P().st.push(mkSt({n:v,d:'Bab tambahan dari kamu sendiri.',p:['#e8d8d0','#c9a27a','#9aa89a','#fff'],s:[]}));commit()}return}
+  const sc=t.closest('[data-sid]'),s=sc&&getS(+sc.dataset.sid),a=b.dataset.a;if(!s)return;
+  if(a==='mode'){s.mode=b.dataset.m;delete s.c;s.ph.forEach(h=>{['gx','gy','cs','rs'].forEach(k=>delete h[k])});commit()}
+  else if(a==='shot'){s.sh[+b.dataset.k].d^=1;commit()}
+  else if(a==='exp')exportStages([s]);
+  else if(a==='del'){if(b.dataset.arm){P().st=P().st.filter(x=>x!==s);commit()}else{b.dataset.arm=1;b.textContent='Yakin hapus?';setTimeout(()=>{delete b.dataset.arm;b.textContent='Hapus bab'},3000)}}
+  else if(['adj','ok','zi','zo','pas','isi'].includes(a)){const ph=t.closest('.ph'),h=s.ph[+ph.dataset.i];
+    if(a==='adj'){ph.classList.add('adj');ph.draggable=false}
+    else if(a==='ok'){ph.classList.remove('adj');ph.draggable=true;save()}
+    else{const w=ph.offsetWidth,hh=ph.offsetHeight,p=place(w,hh,h);
+      if(a==='pas')h.fit=1;else if(a==='isi'){h.fit=0;h.zm=1;h.ox=h.oy=.5}
+      else{h.fit=0;h.zm=Math.min(4,Math.max(p.zmin,p.z*(a==='zi'?1.2:1/1.2)))}
+      fitImg(ph.firstChild,w,hh,h);save()}}
+  else if(a==='tidy'){s.ph.forEach(h=>{delete h.gx;delete h.gy});commit()}
+  else if(a==='rst'){s.ph.forEach(h=>{delete h.fw;h.rot=0});commit()}
+  else if(a==='rl'||a==='rr'){const ph=t.closest('.ph'),h=s.ph[+ph.dataset.i];h.rot=(h.rot||0)+(a==='rl'?-5:5);ph.style.transform='rotate('+h.rot+'deg)';save()}
+  else{const i=+t.closest('.ph').dataset.i,j=a==='l'?i-1:a==='r'?i+1:i;
+    if(a==='x')s.ph.splice(i,1);else if(j>=0&&j<s.ph.length)swapBox(s.ph[i],s.ph[j]);commit()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('add')){const v=e.target.value.trim(),s=getS(+e.target.closest('[data-sid]').dataset.sid);if(v){s.sh.push({t:v,d:0});commit()}}});
+document.addEventListener('input',e=>{const t=e.target;if(t.id==='ttl'){P().title=t.value;save()}else if(t.dataset.n){getS(+t.dataset.n).note=t.value;save()}});
+document.addEventListener('change',e=>{const f=e.target.dataset.f;if(f){addFiles(getS(+f),e.target.files);e.target.value=''}});
+document.addEventListener('paste',e=>{const s=P().st[active];const fs=[...(e.clipboardData?.items||[])].filter(i=>i.type.startsWith('image/')).map(i=>i.getAsFile());if(s&&fs.length)addFiles(s,fs)});
+document.addEventListener('dragstart',e=>{const ph=e.target.closest&&e.target.closest('.ph');if(ph)drag={sid:+ph.parentNode.dataset.sid,i:+ph.dataset.i}});
+document.addEventListener('dragover',e=>e.preventDefault());
+document.addEventListener('drop',e=>{
+  e.preventDefault();const col=e.target.closest&&e.target.closest('.col');if(!col)return;
+  const s=getS(+col.dataset.sid),f=[...e.dataTransfer.files];
+  if(f.length){addFiles(s,f);return}
+  if(drag){const src=getS(drag.sid),a=src.ph[drag.i],t=e.target.closest('.ph');drag=null;
+    if(src!==s){src.ph.splice(src.ph.indexOf(a),1);['gx','gy','cs','rs'].forEach(k=>delete a[k]);s.ph.push(a)}
+    else if(t){const b=s.ph[+t.dataset.i];if(b!==a)swapBox(a,b)}
+    else{const L=lay(s.ph.length,s.mode,col.clientWidth,s.ph),R=col.getBoundingClientRect(),gx=Math.max(0,Math.min(L.c-a.cs,Math.floor((e.clientX-R.left)/(L.cw+8)))),gy=Math.max(0,Math.floor((e.clientY-R.top)/(L.ch+8)));
+      if(!s.ph.some(o=>o!==a&&o.gx<gx+a.cs&&o.gx+o.cs>gx&&o.gy<gy+a.rs&&o.gy+o.rs>gy)){a.gx=gx;a.gy=gy}}
+    commit()}
+});
+document.addEventListener('pointerdown',e=>{
+  const ph=e.target.closest&&e.target.closest('.free .ph');if(!ph||e.target.closest('button'))return;
+  const col=ph.parentNode,s=getS(+col.dataset.sid),h=s.ph[+ph.dataset.i],W=col.clientWidth,rz=e.target.classList.contains('rz');
+  col.querySelectorAll('.ph.on').forEach(p=>p.classList.remove('on'));ph.classList.add('on');
+  h.z=Math.max(0,...s.ph.map(p=>p.z||0))+1;ph.style.zIndex=h.z;
+  const sx=e.clientX,sy=e.clientY,ox=h.fx,oy=h.fy,ow=h.fw;ph.setPointerCapture(e.pointerId);
+  const mv=m=>{const dx=(m.clientX-sx)/W,dy=(m.clientY-sy)/W;
+    if(rz){h.fw=Math.max(.08,Math.min(1.2,ow+dx));ph.style.width=h.fw*W+'px';ph.style.height=h.fw*W*(h.ratio||1.25)+'px'}
+    else{h.fx=Math.max(-.1,Math.min(.95,ox+dx));h.fy=Math.max(0,oy+dy);ph.style.left=h.fx*W+'px';ph.style.top=h.fy*W+'px'}};
+  const up=()=>{ph.removeEventListener('pointermove',mv);ph.removeEventListener('pointerup',up);col.style.height=lay(s.ph.length,'bebas',W,s.ph).H+'px';save()};
+  ph.addEventListener('pointermove',mv);ph.addEventListener('pointerup',up);
+});
+function swapBox(a,b){['gx','gy','cs','rs'].forEach(k=>{const t=a[k];a[k]=b[k];b[k]=t})}
+function pos(s,el){const L=lay(s.ph.length,s.mode,el.clientWidth,s.ph);el.style.height=(L.H||170)+'px';
+  el.querySelectorAll('.ph').forEach(d=>{const i=+d.dataset.i,r=L.r[i];Object.assign(d.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'});fitImg(d.firstChild,r.w,r.h,s.ph[i])})}
+document.addEventListener('pointerdown',e=>{
+  const hd=e.target.closest&&e.target.closest('.rs');if(!hd)return;
+  const ph=hd.parentNode,col=ph.parentNode,s=getS(+col.dataset.sid),i=+ph.dataset.i,h=s.ph[i],g=8;
+  e.preventDefault();hd.setPointerCapture(e.pointerId);
+  const L=lay(s.ph.length,s.mode,col.clientWidth,s.ph),uw=L.cw+g,uh=L.ch+g,r=L.r[i],c0=Math.round((r.w+g)/uw),r0=Math.round((r.h+g)/uh),sx=e.clientX,sy=e.clientY;
+  const mv=m=>{const cs=Math.max(1,Math.min(L.c-h.gx,Math.round(c0+(m.clientX-sx)/uw))),rs=Math.max(1,Math.min(6,Math.round(r0+(m.clientY-sy)/uh)));
+    const ok=(a,b)=>!s.ph.some((o,k)=>k!==i&&o.gx<h.gx+a&&o.gx+o.cs>h.gx&&o.gy<h.gy+b&&o.gy+o.rs>h.gy);let cs2=cs,rs2=rs;if(!ok(cs,rs)){if(ok(cs,h.rs))rs2=h.rs;else if(ok(h.cs,rs))cs2=h.cs;else return}
+    if(cs2!==h.cs||rs2!==h.rs){h.cs=cs2;h.rs=rs2;pos(s,col)}};
+  const up=()=>{hd.removeEventListener('pointermove',mv);hd.removeEventListener('pointerup',up);save()};
+  hd.addEventListener('pointermove',mv);hd.addEventListener('pointerup',up);
+});
+document.addEventListener('dblclick',e=>{const ph=e.target.closest&&e.target.closest('.ph');if(ph&&!ph.parentNode.classList.contains('free')){ph.classList.add('adj');ph.draggable=false}});
+document.addEventListener('pointerdown',e=>{
+  const ph=e.target.closest&&e.target.closest('.ph.adj');if(!ph||e.target.closest('button'))return;
+  const s=getS(+ph.parentNode.dataset.sid),h=s.ph[+ph.dataset.i],w=ph.offsetWidth,hh=ph.offsetHeight,p0=place(w,hh,h),sx=e.clientX,sy=e.clientY,ox=h.ox??.5,oy=h.oy??.5;
+  ph.setPointerCapture(e.pointerId);
+  const mv=m=>{const a=w-p0.dw,b=hh-p0.dh;
+    if(Math.abs(a)>1)h.ox=Math.max(0,Math.min(1,ox+(m.clientX-sx)/a));
+    if(Math.abs(b)>1)h.oy=Math.max(0,Math.min(1,oy+(m.clientY-sy)/b));
+    fitImg(ph.firstChild,w,hh,h)};
+  const up=()=>{ph.removeEventListener('pointermove',mv);ph.removeEventListener('pointerup',up);save()};
+  ph.addEventListener('pointermove',mv);ph.addEventListener('pointerup',up);
+});
+document.addEventListener('wheel',e=>{
+  const ph=e.target.closest&&e.target.closest('.ph.adj');if(!ph)return;e.preventDefault();
+  const s=getS(+ph.parentNode.dataset.sid),h=s.ph[+ph.dataset.i],w=ph.offsetWidth,hh=ph.offsetHeight,p=place(w,hh,h);
+  h.fit=0;h.zm=Math.min(4,Math.max(p.zmin,p.z*(e.deltaY<0?1.1:1/1.1)));fitImg(ph.firstChild,w,hh,h);save();
+},{passive:false});
+document.addEventListener('toggle',e=>{const d=e.target;if(d.dataset&&d.dataset.d){const s=getS(+d.dataset.d);if(s)s.open=d.open}},true);
+document.addEventListener('pointerdown',e=>{
+  const gh=e.target.closest&&e.target.closest('.gh');if(!gh)return;
+  const card=gh.closest('.card'),cards=[...document.querySelectorAll('.card')],from=cards.indexOf(card),s0=scrollY,y0=e.clientY;
+  const mids=cards.map(c=>{const r=c.getBoundingClientRect();return r.top+scrollY+r.height/2}),oth=cards.filter(c=>c!==card);
+  e.preventDefault();gh.setPointerCapture(e.pointerId);card.classList.add('mv');
+  let ly=y0,to=from;
+  const upd=()=>{const tr=ly-y0+(scrollY-s0);card.style.transform='translateY('+tr+'px)';
+    const mid=mids[from]+tr;to=0;mids.forEach((m,k)=>{if(k!==from&&m<mid)to++});
+    oth.forEach(c=>c.classList.remove('ov-t','ov-b'));
+    if(to!==from){if(to<oth.length)oth[to].classList.add('ov-t');else oth[oth.length-1].classList.add('ov-b')}};
+  const tick=setInterval(()=>{if(ly<150)scrollBy(0,-12);else if(ly>innerHeight-70)scrollBy(0,12);upd()},30);
+  const mv=m=>{ly=m.clientY;upd()};
+  const up=()=>{clearInterval(tick);gh.removeEventListener('pointermove',mv);gh.removeEventListener('pointerup',up);gh.removeEventListener('pointercancel',up);
+    card.classList.remove('mv');card.style.transform='';oth.forEach(c=>c.classList.remove('ov-t','ov-b'));
+    if(to!==from){const st=P().st,[m]=st.splice(from,1);st.splice(to,0,m);active=to;commit()}};
+  gh.addEventListener('pointermove',mv);gh.addEventListener('pointerup',up);gh.addEventListener('pointercancel',up);
+});
+document.addEventListener('keydown',e=>{
+  const gh=e.target.closest&&e.target.closest('.gh');if(!gh||(e.key!=='ArrowUp'&&e.key!=='ArrowDown'))return;
+  e.preventDefault();const id=+gh.closest('.card').dataset.sid,st=P().st,i=st.findIndex(s=>s.id===id),j=i+(e.key==='ArrowUp'?-1:1);
+  if(j<0||j>=st.length)return;[st[i],st[j]]=[st[j],st[i]];commit();const n=document.querySelector('#c'+id+' .gh');if(n)n.focus();
+});
+let raf=0;
+function onScroll(){cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{
+  const cs=[...document.querySelectorAll('.card')];let a=cs.findIndex(c=>c.getBoundingClientRect().bottom>170);if(a<0)a=cs.length-1;
+  if(a!==active){active=a;document.querySelectorAll('#step button').forEach((b,i)=>b.classList.toggle('cur',i===a))}})}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',()=>P().st.forEach(layCol));
+
+/* ekspor */
+const rr=(x,a,b,w,h,r)=>{x.beginPath();x.roundRect?x.roundRect(a,b,w,h,r):x.rect(a,b,w,h)};
+function cover(x,im,X,Y,w,h){const a=im.width/im.height,b=w/h;let sw=im.width,sh=im.height,sx=0,sy=0;if(a>b){sw=sh*b;sx=(im.width-sw)/2}else{sh=sw/b;sy=(im.height-sh)/2}x.drawImage(im,sx,sy,sw,sh,X,Y,w,h)}
+function exportStages(L){
+  const cs=getComputedStyle(document.documentElement),g=k=>cs.getPropertyValue(k).trim(),W=1200,M=24,IW=W-2*M,top=L.length>1?84:0;
+  const bl=L.map(s=>{ens(s,IW);const l=lay(s.ph.length,s.mode,IW,s.ph);return{s,l,h:56+l.H+M}});
+  const H=top+bl.reduce((a,b)=>a+b.h,0)+M/2,D=document.createElement('canvas');D.width=W;D.height=H;
+  const x=D.getContext('2d');x.fillStyle=g('--bg');x.fillRect(0,0,W,H);x.textBaseline='top';
+  let y=0;
+  if(top){x.fillStyle=g('--ink');x.font='400 34px "Gilda Display",serif';x.fillText(P().title||PRE[S.t].n,M,28);y=top}
+  bl.forEach(b=>{
+    x.fillStyle=g('--acc');x.font='400 24px "Gilda Display",serif';x.fillText(b.s.n,M,y+14);
+    b.s.p.forEach((c,i)=>{x.fillStyle=c;x.beginPath();x.arc(W-M-6-i*16,y+27,5,0,7);x.fill()});
+    b.l.r.map((r,i)=>i).sort((p,q)=>(b.s.ph[p].z||0)-(b.s.ph[q].z||0)).forEach(i=>{const r=b.l.r[i],im=b.s.ph[i].im;if(!im.complete)return;const X=M+r.x,Y=y+56+r.y;x.save();x.translate(X+r.w/2,Y+r.h/2);x.rotate((r.rot||0)*Math.PI/180);x.translate(-r.w/2,-r.h/2);rr(x,0,0,r.w,r.h,10);x.fillStyle=g('--card');x.fill();x.clip();const q=place(r.w,r.h,b.s.ph[i]);x.drawImage(im,q.l,q.t,q.dw,q.dh);x.restore()});
+    y+=b.h});
+  try{$('#ovimg').src=D.toDataURL('image/jpeg',.9);$('#ov').classList.add('on')}catch(e){$('#sv').textContent='Gagal membuat gambar'}
+}
+$('#ovx').onclick=()=>$('#ov').classList.remove('on');
+if(S.th)document.documentElement.dataset.t=S.th;
+render();
+</script>
+
+<script src="js/backtohomepage.js"></script>
+</body>
+</html>
