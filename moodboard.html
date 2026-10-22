@@ -15,7 +15,7 @@
 html{scroll-padding-top:150px}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Bricolage Grotesque",system-ui,sans-serif}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px 8px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line);padding:7px 14px 5px}
 .r1{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 #ttl{flex:1 1 220px;min-width:0;font:400 26px "Gilda Display",serif;color:var(--ink);background:transparent;border:0;border-bottom:1px dashed var(--line);padding:2px 0}
 #ttl::placeholder{color:var(--mut)}
@@ -32,17 +32,42 @@ button:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visib
 #step button{white-space:nowrap}
 #step button small{opacity:.7;margin-left:4px}
 #step button.cur{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
-main{max-width:1000px;margin:0 auto;padding:18px 16px 60px;display:grid;gap:22px}
+main{max-width:1000px;margin:0 auto;padding:14px 14px 50px;display:grid;gap:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
 .hd{display:flex;justify-content:space-between;gap:12px;align-items:center}
 .hd h2{font:400 20px/1.1 "Gilda Display",serif;margin:0 0 2px;color:var(--acc)}
-.hd p{margin:0;color:var(--mut);max-width:56ch;font-size:12px;line-height:1.35}
+.hd p{margin:0;color:var(--mut);max-width:100%;font-size:12px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pal{display:flex;gap:3px;flex-shrink:0}
 .tt{flex:1;min-width:0}
 .gh{border:0;background:transparent;padding:0 4px;font-size:22px;line-height:1;cursor:grab;touch-action:none;color:var(--mut)}
 .gh:active{cursor:grabbing}
 .card.mv{position:relative;z-index:5;opacity:.92;box-shadow:0 14px 34px rgba(0,0,0,.28);user-select:none;-webkit-user-select:none}
-.card.ov-t{box-shadow:0 -4px 0 var(--acc)}.card.ov-b{box-shadow:0 4px 0 var(--acc)}.pal i{width:9px;height:9px;border-radius:50%;border:1px solid var(--line)}
+.card.ov-t{box-shadow:0 -4px 0 var(--acc)}.card.ov-b{box-shadow:0 4px 0 var(--acc)}
+.tipb{position:relative;width:24px;height:24px;padding:0;border-radius:50%;font-size:13px;color:var(--mut)}
+.tipb::after{content:attr(data-tip);position:absolute;left:0;top:30px;width:max-content;max-width:min(240px,70vw);background:var(--ink);color:var(--card);padding:7px 10px;border-radius:8px;font-size:12px;font-weight:400;line-height:1.4;text-align:left;white-space:normal;z-index:40;display:none}
+.tipb:hover::after,.tipb:focus-visible::after,.tipb.open::after{display:block}
+@media (max-width:640px){
+ html{scroll-padding-top:112px}
+ body{font-size:14px}
+ .top{padding:5px 10px 3px}
+ .r1{gap:6px}
+ #ttl{flex:1 1 100%;font-size:19px}
+ .seg button,#expAll{padding:3px 9px;font-size:12px}
+ .sw{width:18px;height:18px}
+ #sv{font-size:10px}
+ #step{padding:5px 0 1px;gap:4px}
+ #step button{padding:3px 9px;font-size:12px}
+ main{padding:8px 8px 40px;gap:10px}
+ .card{padding:8px;border-radius:12px}
+ .hd h2{font-size:17px}.hd p{display:none}
+ .pal i{width:8px;height:8px}
+ .col{margin:8px 0}
+ .tl{gap:4px}.tl .btn,.tl button:not(.tipb){padding:3px 9px;font-size:12px}
+ .pc button,.pa button{padding:1px 6px;font-size:12px}
+ .chip{font-size:12px;padding:3px 9px}
+ .add,.nt{font-size:13px;padding:6px 8px}
+ .more>summary{font-size:12px}
+}.pal i{width:9px;height:9px;border-radius:50%;border:1px solid var(--line)}
 .more>summary,.tip>summary{cursor:pointer;font-size:13px;color:var(--mut);margin-top:8px}.tip>summary{font-size:12px}.more[open]>summary{margin-bottom:2px}
 .col{position:relative;border-radius:12px;background:var(--bg);min-height:150px;margin:14px 0}
 .ph{position:absolute;overflow:hidden;border-radius:8px;cursor:grab}
@@ -57,12 +82,12 @@ main{max-width:1000px;margin:0 auto;padding:18px 16px 60px;display:grid;gap:22px
 .ph.adj{touch-action:none;cursor:move;outline:2px solid var(--acc);outline-offset:-2px}
 .rs{position:absolute;right:0;bottom:0;width:28px;height:28px;cursor:nwse-resize;display:none;z-index:4;touch-action:none;background:linear-gradient(135deg,transparent 50%,var(--acc) 50%)}
 .ph.on .rs{display:block}.ph.adj .rs{display:none!important}
-.pc{position:absolute;inset:auto 0 0 0;display:none;gap:4px;justify-content:center;padding:18px 6px 6px;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.pc{position:absolute;inset:auto 0 0 0;display:none;flex-wrap:wrap;gap:4px;justify-content:center;padding:18px 6px 6px;background:linear-gradient(transparent,rgba(0,0,0,.6))}
 .ph:hover .pc,.ph.on .pc{display:flex}
 .pc button{padding:1px 9px;font-size:13px}
 .em{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--mut);border:2px dashed var(--line);border-radius:12px;padding:12px;pointer-events:none}
 .tl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.tl .sp{flex:1}
-h3{font-size:14px;margin:18px 0 8px}h3 small{color:var(--mut);font-weight:400}
+h3{font-size:13px;margin:10px 0 6px}h3 small{color:var(--mut);font-weight:400}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:13px;padding:4px 11px}
 .add,.nt{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-top:8px}
@@ -76,7 +101,7 @@ h3{font-size:14px;margin:18px 0 8px}h3 small{color:var(--mut);font-weight:400}
 <body>
 <div class="top">
   <div class="r1">
-    <input id="ttl" placeholder="Nama Pasangan, Contoh : Adi &amp; Nina" aria-label="Judul">
+    <input id="ttl" placeholder="Nama pasangan, mis. Rani &amp; Dimas" aria-label="Judul">
     <div class="seg" id="seg"></div>
     <div class="thm" id="thm" aria-label="Tema warna"></div>
     <button id="expAll" class="pri">Ekspor semua</button><span id="sv"></span>
@@ -154,7 +179,7 @@ function ens(s,W){ensN(s,W||900);s.ph.forEach((h,i)=>{if(!h.ratio&&h.im.naturalW
 function layCol(s){
   const el=document.querySelector('.col[data-sid="'+s.id+'"]');if(!el)return;
   ens(s,el.clientWidth);const{r,H}=lay(s.ph.length,s.mode,el.clientWidth,s.ph);el.style.height=(H||170)+'px';el.innerHTML='';el.className='col'+(s.mode==='bebas'?' free':'');
-  if(!s.ph.length){el.innerHTML='<div class="em">Seret foto ke sini, tempel dengan Ctrl+V,<br>atau pakai tombol Tambah foto</div>';return}
+  if(!s.ph.length){el.innerHTML='<div class="em">Seret, tempel, atau tambah foto</div>';return}
   s.ph.forEach((h,i)=>{
     const d=document.createElement('div');d.className='ph';d.draggable=s.mode!=='bebas';d.dataset.i=i;
     Object.assign(d.style,{left:r[i].x+'px',top:r[i].y+'px',width:r[i].w+'px',height:r[i].h+'px',transform:r[i].rot?'rotate('+r[i].rot+'deg)':'',zIndex:h.z||0});
@@ -166,20 +191,20 @@ function card(s){
   return `<section class="card" id="c${s.id}" data-sid="${s.id}">
 <div class="hd"><button class="gh" aria-label="Pindahkan bab, seret atau tekan panah atas bawah" title="Seret untuk memindahkan bab">⠿</button><div class="tt"><h2>${esc(s.n)}</h2><p>${esc(s.d)}</p></div><div class="pal">${s.p.map(c=>'<i style="background:'+c+'"></i>').join('')}</div></div>
 <div class="col" data-sid="${s.id}"></div>
-<details class="tip"><summary>Tips mengatur foto</summary><small style="color:var(--mut)">Klik dua kali foto (atau tombol ✥ Atur) untuk menggeser dan zoom di dalam kotaknya. Pas menampilkan foto utuh tanpa terpotong. Sentuh foto lalu tarik segitiga di pojok kanan bawah untuk membesarkan atau mengecilkan kotaknya; kotak lain tidak ikut berubah, dan ukuran berhenti kalau mentok kotak di sebelahnya. Seret foto ke kotak lain untuk menukar, atau ke ruang kosong untuk memindah. Rapikan menyusun ulang tanpa mengubah ukuran; Mosaik atau Grid mengembalikan semuanya ke bawaan.</small></details>
-<div class="tl"><label class="btn pri" for="f${s.id}">Tambah foto</label><input id="f${s.id}" data-f="${s.id}" type="file" accept="image/*" multiple hidden>
+
+<div class="tl"><label class="btn pri" for="f${s.id}">Tambah foto</label><button class="tipb" data-tip="Klik 2× foto: geser dan zoom isi. Tarik segitiga di pojok untuk ubah ukuran kotak. Seret foto ke kotak lain untuk menukar." aria-label="Tips mengatur foto">?</button><input id="f${s.id}" data-f="${s.id}" type="file" accept="image/*" multiple hidden>
 <button data-a="mode" data-m="mosaik" aria-pressed="${s.mode==='mosaik'}">Mosaik</button><button data-a="mode" data-m="grid" aria-pressed="${s.mode==='grid'}">Grid</button><button data-a="tidy">Rapikan</button>
 ${s.mode==='bebas'?'<button data-a="rst">Susun ulang</button><small style="color:var(--mut)">Seret foto untuk geser, tarik titik di pojok untuk ubah ukuran.</small>':''}<span class="sp"></span><button data-a="exp">Ekspor kolase</button><button data-a="del">Hapus bab</button></div>
-<details class="more" data-d="${s.id}"${s.open?' open':''}><summary>Daftar shot ${dn}/${s.sh.length} dan catatan mood</summary><h3>Daftar shot <small>${dn} dari ${s.sh.length} terambil</small></h3>
+<details class="more" data-d="${s.id}"${s.open?' open':''}><summary>Shot ${dn}/${s.sh.length} dan catatan</summary><h3>Daftar shot <small>${dn} dari ${s.sh.length} terambil</small></h3>
 <div class="chips">${s.sh.map((x,k)=>'<button class="chip" data-a="shot" data-k="'+k+'" aria-pressed="'+!!x.d+'">'+esc(x.t)+'</button>').join('')}</div>
-<input class="add" placeholder="Tambah ide shot sendiri, lalu tekan Enter" aria-label="Tambah shot">
-<textarea class="nt" data-n="${s.id}" placeholder="Catatan mood: warna, props, lagu, referensi...">${esc(s.note)}</textarea></details></section>`}
+<input class="add" placeholder="Tambah ide shot, lalu Enter" aria-label="Tambah shot">
+<textarea class="nt" data-n="${s.id}" placeholder="Catatan mood...">${esc(s.note)}</textarea></details></section>`}
 function render(){
   const p=P();$('#ttl').value=p.title;
   $('#seg').innerHTML=Object.entries(PRE).map(([k,v])=>'<button data-t="'+k+'" aria-pressed="'+(k===S.t)+'">'+v.n+'</button>').join('');
   $('#thm').innerHTML=Object.entries(THEMES).map(([k,c])=>'<button class="sw" data-th="'+k+'" style="background:'+c+'" aria-label="Tema '+k+'" aria-pressed="'+(k===S.th)+'"></button>').join('');
   $('#step').innerHTML=p.st.map((s,i)=>'<button data-go="'+s.id+'" class="'+(i===active?'cur':'')+'">'+(i+1)+'. '+esc(s.n)+'<small>'+s.ph.length+'</small></button>').join('');
-  $('#main').innerHTML=p.st.map(card).join('')+'<div class="foot"><input id="nb" placeholder="Nama bab baru, mis. Sungkeman atau Prewedding" aria-label="Nama bab"><button id="ab">Tambah bab</button></div>';
+  $('#main').innerHTML=p.st.map(card).join('')+'<div class="foot"><input id="nb" placeholder="Nama bab baru" aria-label="Nama bab"><button id="ab">Tambah bab</button></div>';
   p.st.forEach(layCol);
 }
 function addFiles(s,fs){
@@ -190,6 +215,7 @@ function addFiles(s,fs){
 }
 document.addEventListener('click',e=>{
   const t=e.target,b=t.closest('[data-a],[data-t],[data-th],[data-go],#ab,#expAll'),ph=t.closest('.ph');
+  const tp=t.closest('.tipb');document.querySelectorAll('.tipb.open').forEach(x=>{if(x!==tp)x.classList.remove('open')});if(tp){tp.classList.toggle('open');return}
   if(ph&&!(b&&b.dataset.a)){if(!ph.parentNode.classList.contains('free')&&!t.closest('.rs'))ph.classList.toggle('on');return}
   if(!b)return;
   if(b.dataset.t){S.t=b.dataset.t;active=0;render();save();return}
@@ -325,7 +351,5 @@ $('#ovx').onclick=()=>$('#ov').classList.remove('on');
 if(S.th)document.documentElement.dataset.t=S.th;
 render();
 </script>
-
-<script src="js/backtohomepage.js"></script>
 </body>
 </html>
