@@ -1,5 +1,42 @@
-/* Protected by Dejede Tool - JS Loader */
-(function(_0x1){(0,eval)(decodeURIComponent(escape(atob(_0x1))));})("Ly8gU2NyaXB0IE90b21hdGlzIE1lbXVhdCBOYXZiYXIgRGVqZWRlCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLCBmdW5jdGlvbigpIHsKICAgIGNvbnN0IG5hdmJhckhUTUwgPSBgCiAgICA8bmF2IGNsYXNzPSJuYXZiYXIiIGFyaWEtbGFiZWw9Ik1lbnUgdXRhbWEiPgogICAgICAgIDxhIGhyZWY9ImluZGV4Lmh0bWwiIGNsYXNzPSJsb2dvIj5ERUpFREU8L2E+CiAgICAgICAgPGRpdiBjbGFzcz0ibmF2LWxpbmtzIj4KICAgICAgICAgICAgPGEgaHJlZj0iaW5kZXguaHRtbCI+SG9tZTwvYT4KICAgICAgICAgICAgPGEgaHJlZj0icHJpc3RsaXN0Lmh0bWwiPlByaXN0bGlzdDwvYT4KICAgICAgICAgICAgPGEgaHJlZj0iYm9va2luZy5odG1sIj5Cb29raW5nPC9hPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJuYXYtZHJvcGRvd24iIGlkPSJ0b29sRHJvcGRvd24iPgogICAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJkcm9wLWJ0biBuYXYtaGlnaGxpZ2h0IiBvbmNsaWNrPSJ0b2dnbGVEcm9wZG93bihldmVudCkiIGFyaWEtaGFzcG9wdXA9InRydWUiPlRvb2xzIOKWvjwvYnV0dG9uPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZHJvcGRvd24tY29udGVudCI+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0id2VkZGluZ2dlbi5odG1sIj5XZWRkaW5nZ2VuPC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9InNjaGVkdWxlZ2VuLmh0bWwiPlNjaGVkdWxlZ2VuPC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vZGVqZWRlLmdpdGh1Yi5pby9yZW50YWwvIj5SZW50YWw8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly9kZWplZGUuZ2l0aHViLmlvL2J1a3V0YW11LyI+QnVrdSBUYW11PC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9ImphZHdhbGRlamVkZS5odG1sIj5KYWR3YWw8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0ic3RyZWFtZXZlbnRnZW4uaHRtbCI+U3RyZWFtZ2VuPC9hPgoJCQkJCTxhIGhyZWY9Imludm9pY2UuaHRtbCI+SW52b2ljZTwvYT4KCQkJCQk8YSBocmVmPSJzdXN1bmFsYnVtLmh0bWwiPlN1c3VuIEFsYnVtPC9hPgoJCQkJCTxhIGhyZWY9ImFsYnVtb25saW5lLmh0bWwiPkFsYnVtIE9ubGluZTwvYT4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPGEgaHJlZj0iYWJvdXQuaHRtbCI+QWJvdXQ8L2E+CiAgICAgICAgPC9kaXY+CiAgICA8L25hdj5gOwoKICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCduYXZiYXItY29udGFpbmVyJyk7CiAgICBpZiAoY29udGFpbmVyKSB7CiAgICAgICAgY29udGFpbmVyLmlubmVySFRNTCA9IG5hdmJhckhUTUw7CgogICAgICAgIC8vIE90b21hdGlzIHRhbmRhaSBtZW51IChhY3RpdmUpIHNlc3VhaSBoYWxhbWFuIHNhYXQgaW5pCiAgICAgICAgY29uc3QgY3VycmVudFBhZ2UgPSB3aW5kb3cubG9jYXRpb24ucGF0aG5hbWUuc3BsaXQoIi8iKS5wb3AoKSB8fCAiaW5kZXguaHRtbCI7CiAgICAgICAgY29uc3QgbmF2TGlua3MgPSBjb250YWluZXIucXVlcnlTZWxlY3RvckFsbCgnLm5hdi1saW5rcyA+IGEnKTsKICAgICAgICBuYXZMaW5rcy5mb3JFYWNoKGxpbmsgPT4gewogICAgICAgICAgICBpZiAobGluay5nZXRBdHRyaWJ1dGUoJ2hyZWYnKSA9PT0gY3VycmVudFBhZ2UpIHsKICAgICAgICAgICAgICAgIGxpbmsuY2xhc3NMaXN0LmFkZCgnYWN0aXZlJyk7CiAgICAgICAgICAgIH0KICAgICAgICB9KTsKICAgIH0KfSk7");
+// Script Otomatis Memuat Navbar Dejede
+document.addEventListener("DOMContentLoaded", function() {
+    const navbarHTML = `
+    <nav class="navbar" aria-label="Menu utama">
+        <a href="index.html" class="logo">DEJEDE</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="pristlist.html">Pristlist</a>
+            <a href="booking.html">Booking</a>
+            <div class="nav-dropdown" id="toolDropdown">
+                <button type="button" class="drop-btn nav-highlight" onclick="toggleDropdown(event)" aria-haspopup="true">Tools ▾</button>
+                <div class="dropdown-content">
+                    <a href="weddinggen.html">Weddinggen</a>
+                    <a href="schedulegen.html">Schedulegen</a>
+                    <a href="https://dejede.github.io/rental/">Rental</a>
+                    <a href="https://dejede.github.io/bukutamu/">Buku Tamu</a>
+                    <a href="jadwaldejede.html">Jadwal</a>
+                    <a href="streameventgen.html">Streamgen</a>
+					<a href="invoice.html">Invoice</a>
+					<a href="susunalbum.html">Susun Album</a>
+					<a href="albumonline.html">Album Online</a>
+					<a href="moodboard.html">Moodboard</a>
+                </div>
+            </div>
+            <a href="about.html">About</a>
+        </div>
+    </nav>`;
 
+    const container = document.getElementById('navbar-container');
+    if (container) {
+        container.innerHTML = navbarHTML;
 
-/* Code by DEJEDE | 085236578999 */
+        // Otomatis tandai menu (active) sesuai halaman saat ini
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const navLinks = container.querySelectorAll('.nav-links > a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    }
+});
