@@ -1,42 +1,4 @@
-// Script Otomatis Memuat Navbar Dejede
-document.addEventListener("DOMContentLoaded", function() {
-    const navbarHTML = `
-    <nav class="navbar" aria-label="Menu utama">
-        <a href="index.html" class="logo">DEJEDE</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="pristlist.html">Pristlist</a>
-            <a href="booking.html">Booking</a>
-            <div class="nav-dropdown" id="toolDropdown">
-                <button type="button" class="drop-btn nav-highlight" onclick="toggleDropdown(event)" aria-haspopup="true">Tools ▾</button>
-                <div class="dropdown-content">
-                    <a href="weddinggen.html">Weddinggen</a>
-                    <a href="schedulegen.html">Schedulegen</a>
-                    <a href="https://dejede.github.io/rental/">Rental</a>
-                    <a href="https://dejede.github.io/bukutamu/">Buku Tamu</a>
-                    <a href="jadwaldejede.html">Jadwal</a>
-                    <a href="streameventgen.html">Streamgen</a>
-					<a href="invoice.html">Invoice</a>
-					<a href="susunalbum.html">Susun Album</a>
-					<a href="albumonline.html">Album Online</a>
-					<a href="moodboard.html">Moodboard</a>
-                </div>
-            </div>
-            <a href="about.html">About</a>
-        </div>
-    </nav>`;
+/* Protected by Dejede Tool - JS Loader */
+(function(_0x1){(0,eval)(decodeURIComponent(escape(atob(_0x1))));})("Ly8gU2NyaXB0IE90b21hdGlzIE1lbXVhdCBOYXZiYXIgRGVqZWRlCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLCBmdW5jdGlvbigpIHsKICAgIC8vIFdhcm5hIHNvZnQgdW50dWsgbWVudSBkcm9wZG93biBUb29scwogICAgaWYgKCFkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbmF2YmFyLXNvZnQtY29sb3JzJykpIHsKICAgICAgICBjb25zdCBzdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3N0eWxlJyk7CiAgICAgICAgc3QuaWQgPSAnbmF2YmFyLXNvZnQtY29sb3JzJzsKICAgICAgICBzdC50ZXh0Q29udGVudCA9IGAKICAgICAgICAubmF2LWRyb3Bkb3duIC5kcm9wZG93bi1jb250ZW50IHsKICAgICAgICAgICAgcGFkZGluZzogNHB4IDAgIWltcG9ydGFudDsKICAgICAgICB9CiAgICAgICAgLm5hdi1kcm9wZG93biAuZHJvcGRvd24tY29udGVudCBhW2NsYXNzXj0iZGQtYyJdIHsKICAgICAgICAgICAgLS1kZC1iZzogIzYzNjZmMTsgLS1kZC1odjogIzRmNDZlNTsKICAgICAgICAgICAgZGlzcGxheTogYmxvY2sgIWltcG9ydGFudDsKICAgICAgICAgICAgd2lkdGg6IGZpdC1jb250ZW50ICFpbXBvcnRhbnQ7CiAgICAgICAgICAgIG1heC13aWR0aDogY2FsYygxMDAlIC0gMTZweCk7CiAgICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWRkLWJnKSAhaW1wb3J0YW50OwogICAgICAgICAgICBjb2xvcjogI2ZmZiAhaW1wb3J0YW50OwogICAgICAgICAgICBtYXJnaW46IDRweCA4cHggIWltcG9ydGFudDsKICAgICAgICAgICAgcGFkZGluZzogNXB4IDEycHggIWltcG9ydGFudDsKICAgICAgICAgICAgYm9yZGVyOiAwICFpbXBvcnRhbnQ7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDEwcHggIWltcG9ydGFudDsKICAgICAgICAgICAgZm9udC13ZWlnaHQ6IDYwMDsKICAgICAgICAgICAgbGluZS1oZWlnaHQ6IDEuMzsKICAgICAgICAgICAgd2hpdGUtc3BhY2U6IG5vd3JhcDsKICAgICAgICAgICAgLXdlYmtpdC10YXAtaGlnaGxpZ2h0LWNvbG9yOiB0cmFuc3BhcmVudDsKICAgICAgICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZCAuMTVzIGVhc2UsIHRyYW5zZm9ybSAuMTVzIGVhc2U7CiAgICAgICAgfQogICAgICAgIC8qIERlc2t0b3A6IHNhYXQga3Vyc29yIGxld2F0ICovCiAgICAgICAgQG1lZGlhIChob3ZlcjogaG92ZXIpIHsKICAgICAgICAgICAgLm5hdi1kcm9wZG93biAuZHJvcGRvd24tY29udGVudCBhW2NsYXNzXj0iZGQtYyJdOmhvdmVyIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWRkLWh2KSAhaW1wb3J0YW50OwogICAgICAgICAgICAgICAgY29sb3I6ICNmZmYgIWltcG9ydGFudDsKICAgICAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCg0cHgpOwogICAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIC8qIE1vYmlsZTogc2FhdCBkaXNlbnR1aCAvIGRpdGVrYW4gLyBmb2t1cyAqLwogICAgICAgIC5uYXYtZHJvcGRvd24gLmRyb3Bkb3duLWNvbnRlbnQgYVtjbGFzc149ImRkLWMiXTphY3RpdmUsCiAgICAgICAgLm5hdi1kcm9wZG93biAuZHJvcGRvd24tY29udGVudCBhW2NsYXNzXj0iZGQtYyJdOmZvY3VzLXZpc2libGUgewogICAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1kZC1odikgIWltcG9ydGFudDsKICAgICAgICAgICAgY29sb3I6ICNmZmYgIWltcG9ydGFudDsKICAgICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDRweCkgc2NhbGUoLjk3KTsKICAgICAgICAgICAgb3V0bGluZTogbm9uZTsKICAgICAgICB9CiAgICAgICAgLm5hdi1kcm9wZG93biAuZHJvcGRvd24tY29udGVudCBhLmRkLWMxICB7IC0tZGQtYmc6I2VjNDg5OTsgLS1kZC1odjojYmUxODVkOyB9IC8qIHBpbmsgKi8KICAgICAgICAubmF2LWRyb3Bkb3duIC5kcm9wZG93bi1jb250ZW50IGEuZGQtYzIgIHsgLS1kZC1iZzojM2I4MmY2OyAtLWRkLWh2OiMxZDRlZDg7IH0gLyogYmlydSAqLwogICAgICAgIC5uYXYtZHJvcGRvd24gLmRyb3Bkb3duLWNvbnRlbnQgYS5kZC1jMyAgeyAtLWRkLWJnOiMyMmEzNWE7IC0tZGQtaHY6IzE1ODAzZDsgfSAvKiBoaWphdSAqLwogICAgICAgIC5uYXYtZHJvcGRvd24gLmRyb3Bkb3duLWNvbnRlbnQgYS5kZC1jNCAgeyAtLWRkLWJnOiNmOTczMTY7IC0tZGQtaHY6I2MyNDEwYzsgfSAvKiBvcmFueWUgKi8KICAgICAgICAubmF2LWRyb3Bkb3duIC5kcm9wZG93bi1jb250ZW50IGEuZGQtYzUgIHsgLS1kZC1iZzojYTg1NWY3OyAtLWRkLWh2OiM3ZTIyY2U7IH0gLyogdW5ndSAqLwogICAgICAgIC5uYXYtZHJvcGRvd24gLmRyb3Bkb3duLWNvbnRlbnQgYS5kZC1jNiAgeyAtLWRkLWJnOiMwZWE1YzY7IC0tZGQtaHY6IzBlNzQ5MDsgfSAvKiBjeWFuICovCiAgICAgICAgLm5hdi1kcm9wZG93biAuZHJvcGRvd24tY29udGVudCBhLmRkLWM3ICB7IC0tZGQtYmc6I2Q0YTAxNzsgLS1kZC1odjojYTE2MjA3OyB9IC8qIGt1bmluZyAqLwogICAgICAgIC5uYXYtZHJvcGRvd24gLmRyb3Bkb3duLWNvbnRlbnQgYS5kZC1jOCAgeyAtLWRkLWJnOiNlZjQ0NDQ7IC0tZGQtaHY6I2I5MWMxYzsgfSAvKiBtZXJhaCAqLwogICAgICAgIC5uYXYtZHJvcGRvd24gLmRyb3Bkb3duLWNvbnRlbnQgYS5kZC1jOSAgeyAtLWRkLWJnOiMxNGI4YTY7IC0tZGQtaHY6IzBmNzY2ZTsgfSAvKiB0b3NjYSAqLwogICAgICAgIC5uYXYtZHJvcGRvd24gLmRyb3Bkb3duLWNvbnRlbnQgYS5kZC1jMTAgeyAtLWRkLWJnOiM2MzY2ZjE7IC0tZGQtaHY6IzQzMzhjYTsgfSAvKiBpbmRpZ28gKi8KICAgICAgICBgOwogICAgICAgIGRvY3VtZW50LmhlYWQuYXBwZW5kQ2hpbGQoc3QpOwogICAgICAgIC8vIEFnYXIgZWZlayA6YWN0aXZlIChzZW50dWhhbikgYmVyZnVuZ3NpIGRpIGlPUyBTYWZhcmkKICAgICAgICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCd0b3VjaHN0YXJ0JywgZnVuY3Rpb24oKXt9LCB7cGFzc2l2ZTogdHJ1ZX0pOwogICAgfQoKICAgIGNvbnN0IG5hdmJhckhUTUwgPSBgCiAgICA8bmF2IGNsYXNzPSJuYXZiYXIiIGFyaWEtbGFiZWw9Ik1lbnUgdXRhbWEiPgogICAgICAgIDxhIGhyZWY9ImluZGV4Lmh0bWwiIGNsYXNzPSJsb2dvIj5ERUpFREU8L2E+CiAgICAgICAgPGRpdiBjbGFzcz0ibmF2LWxpbmtzIj4KICAgICAgICAgICAgPGEgaHJlZj0iaW5kZXguaHRtbCI+SG9tZTwvYT4KICAgICAgICAgICAgPGEgaHJlZj0icHJpc3RsaXN0Lmh0bWwiPlByaXN0bGlzdDwvYT4KICAgICAgICAgICAgPGEgaHJlZj0iYm9va2luZy5odG1sIj5Cb29raW5nPC9hPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJuYXYtZHJvcGRvd24iIGlkPSJ0b29sRHJvcGRvd24iPgogICAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzPSJkcm9wLWJ0biBuYXYtaGlnaGxpZ2h0IiBvbmNsaWNrPSJ0b2dnbGVEcm9wZG93bihldmVudCkiIGFyaWEtaGFzcG9wdXA9InRydWUiPlRvb2xzIOKWvjwvYnV0dG9uPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iZHJvcGRvd24tY29udGVudCI+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0id2VkZGluZ2dlbi5odG1sIiBjbGFzcz0iZGQtYzEiPldlZGRpbmdnZW48L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0ic2NoZWR1bGVnZW4uaHRtbCIgY2xhc3M9ImRkLWMyIj5TY2hlZHVsZWdlbjwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJodHRwczovL2RlamVkZS5naXRodWIuaW8vcmVudGFsLyIgY2xhc3M9ImRkLWMzIj5SZW50YWw8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly9kZWplZGUuZ2l0aHViLmlvL2J1a3V0YW11LyIgY2xhc3M9ImRkLWM0Ij5CdWt1IFRhbXU8L2E+CiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iamFkd2FsZGVqZWRlLmh0bWwiIGNsYXNzPSJkZC1jNSI+SmFkd2FsPC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9InN0cmVhbWV2ZW50Z2VuLmh0bWwiIGNsYXNzPSJkZC1jNiI+U3RyZWFtZ2VuPC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imludm9pY2UuaHRtbCIgY2xhc3M9ImRkLWM3Ij5JbnZvaWNlPC9hPgogICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9InN1c3VuYWxidW0uaHRtbCIgY2xhc3M9ImRkLWM4Ij5TdXN1biBBbGJ1bTwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJhbGJ1bW9ubGluZS5odG1sIiBjbGFzcz0iZGQtYzkiPkFsYnVtIE9ubGluZTwvYT4KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJtb29kYm9hcmQuaHRtbCIgY2xhc3M9ImRkLWMxMCI+TW9vZGJvYXJkPC9hPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8YSBocmVmPSJhYm91dC5odG1sIj5BYm91dDwvYT4KICAgICAgICA8L2Rpdj4KICAgIDwvbmF2PmA7CgogICAgY29uc3QgY29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ25hdmJhci1jb250YWluZXInKTsKICAgIGlmIChjb250YWluZXIpIHsKICAgICAgICBjb250YWluZXIuaW5uZXJIVE1MID0gbmF2YmFySFRNTDsKCiAgICAgICAgLy8gT3RvbWF0aXMgdGFuZGFpIG1lbnUgKGFjdGl2ZSkgc2VzdWFpIGhhbGFtYW4gc2FhdCBpbmkKICAgICAgICBjb25zdCBjdXJyZW50UGFnZSA9IHdpbmRvdy5sb2NhdGlvbi5wYXRobmFtZS5zcGxpdCgiLyIpLnBvcCgpIHx8ICJpbmRleC5odG1sIjsKICAgICAgICBjb25zdCBuYXZMaW5rcyA9IGNvbnRhaW5lci5xdWVyeVNlbGVjdG9yQWxsKCcubmF2LWxpbmtzID4gYScpOwogICAgICAgIG5hdkxpbmtzLmZvckVhY2gobGluayA9PiB7CiAgICAgICAgICAgIGlmIChsaW5rLmdldEF0dHJpYnV0ZSgnaHJlZicpID09PSBjdXJyZW50UGFnZSkgewogICAgICAgICAgICAgICAgbGluay5jbGFzc0xpc3QuYWRkKCdhY3RpdmUnKTsKICAgICAgICAgICAgfQogICAgICAgIH0pOwogICAgfQp9KTs=");
 
-    const container = document.getElementById('navbar-container');
-    if (container) {
-        container.innerHTML = navbarHTML;
-
-        // Otomatis tandai menu (active) sesuai halaman saat ini
-        const currentPage = window.location.pathname.split("/").pop() || "index.html";
-        const navLinks = container.querySelectorAll('.nav-links > a');
-        navLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('active');
-            }
-        });
-    }
-});
+/* Code by DEJEDE | 085236578999 */
